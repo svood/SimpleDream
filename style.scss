@@ -1,0 +1,68 @@
+$mainColor: #c6538c;
+img {
+    width: 100%;
+}
+*:focus {
+    outline: none;
+}
+*:active {
+    outline: none;
+}
+select {
+    text-align-last:center;
+    outline: none;
+}
+
+#size {
+    text-align: center;
+    border: 1px solid #848484;
+    :active {
+        outline: none;
+    }
+   
+}
+label {
+    text-align: center;
+    width: 100%;
+}
+.container {
+    max-width: 90%;
+    width: 90%;
+    margin: 0 auto;
+}
+.cart {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: white;
+}
+input {
+    width: 100%;
+    user-select: none;
+    border-radius: 50px;
+    border: 1px solid $mainColor;
+    transition: all 1s cubic-bezier(0.57, 0.62, 0.11, 1.21);
+    text-align: center;
+    font-weight: 700;
+    color:$mainColor
+}
+
+
+input[type=text]:focus, textarea:focus {
+    border-radius: 1px;
+    user-select: none;
+}
+.addToCart {
+  width: 100%;
+}
+.cardText {
+    text-align: justify;
+}
+.card-title {
+    color: #424242;
+    text-align: center;
+    font-size: 14pt;
+}
+.price {
+    background: none;
+}
