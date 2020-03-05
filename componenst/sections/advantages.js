@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-
+import ModalCall from '../call';
 const Advantages = () => {
     return (
 
@@ -26,7 +26,7 @@ const Advantages = () => {
                         <li>Гигиенична, так как, хорошо поглощает влагу. </li>
                     </ul>
                 </p>
-                <button>Заказать звонок</button>
+                <ModalCall buttonLabel="Заказать звонок" />
             </Col>
         </Row>
 

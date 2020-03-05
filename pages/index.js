@@ -10,6 +10,7 @@ import Header from '../componenst/header';
 import Advantages from '../componenst/sections/advantages';
 import About from '../componenst/sections/about';
 
+
 function HomePage() {
 
     const [cart, setCart] = useState(Array)
@@ -65,10 +66,10 @@ function HomePage() {
     return (
         <Container fluid={true}>
 
-            <Container className="header">
+            {/* <Container className="header">
                 <Header />
 
-            </Container>
+            </Container> */}
 
 
             <Container className="main">
@@ -80,7 +81,7 @@ function HomePage() {
                             {
                                 data.map(function (item, it) {
                                     return (
-                                        <Col sm={12} md={3} className="mt-5">
+                                        <Col sm={12} md={3} className="mt-5" key={`prod_${it}`}>
                                             <Card>
                                                 <ProductModal title={item.title}> <CardImg key={item.article} top width="100%" height="300px" src={item.img[0].src} alt="Card image cap" /></ProductModal>
                                                 <CardBody>
@@ -101,7 +102,7 @@ function HomePage() {
                                                                     <Input type="select" name="select" id="size" onChange={e => changePrice(item.id, e.target.value, item.price, item.startWidth, item.startHeight, it)}>
                                                                         {item.sizes.map(function (data, i) {
                                                                             return (
-                                                                                <option value={data.price} defaultChecked={(i <= 1) ? true : false}>{data.size}</option>
+                                                                                <option value={data.price} defaultChecked={(i <= 1) ? true : false} key={it+data.size}>{data.size}</option>
                                                                             )
                                                                         })}
                                                                         <option value="0">Свой размер</option>
@@ -156,9 +157,15 @@ function HomePage() {
                         </Row>
                     </Col>
                     <Col className="section4 mt-5 mb-5" sm={12}>
-                        <About />   
+                        <About />
                     </Col>
                 </Row>
+
+                <div className="shopingCard">
+                    <span>{cart.length}</span>
+                    <img src='/images/ShoppingCart.svg' />
+                </div>
+
             </Container >
             <Row className="footer"></Row>
 
