@@ -9,7 +9,7 @@ import MainSlider from '../componenst/mainSlider';
 import Header from '../componenst/header';
 import Advantages from '../componenst/sections/advantages';
 import About from '../componenst/sections/about';
-
+import CartModal from '../componenst/cartModal'
 
 function HomePage() {
 
@@ -18,7 +18,7 @@ function HomePage() {
 
     const addToCart = (item, it) => {
         let ProductPriceField = document.getElementById(item.id);
-        cart[cart.length] = { title: item.title, price: totalPrice + Number(ProductPriceField.value) }
+        cart[cart.length] = { title: item.title, price: totalPrice + Number(ProductPriceField.value), id:item.id }
         data[it].price = Number(ProductPriceField.value);
         setCart([...cart])
         console.log(cart)
@@ -102,7 +102,7 @@ function HomePage() {
                                                                     <Input type="select" name="select" id="size" onChange={e => changePrice(item.id, e.target.value, item.price, item.startWidth, item.startHeight, it)}>
                                                                         {item.sizes.map(function (data, i) {
                                                                             return (
-                                                                                <option value={data.price} defaultChecked={(i <= 1) ? true : false} key={it+data.size}>{data.size}</option>
+                                                                                <option value={data.price} defaultChecked={(i <= 1) ? true : false} key={it + data.size}>{data.size}</option>
                                                                             )
                                                                         })}
                                                                         <option value="0">Свой размер</option>
@@ -161,10 +161,10 @@ function HomePage() {
                     </Col>
                 </Row>
 
-                <div className="shopingCard">
-                    <span>{cart.length}</span>
-                    <img src='/images/ShoppingCart.svg' />
-                </div>
+                {cart.length > 0 ?
+                    <CartModal data={cart}/> : null
+                }
+
 
             </Container >
             <Row className="footer"></Row>
