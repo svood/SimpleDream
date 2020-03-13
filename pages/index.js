@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import { Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import Slider from '../componenst/sliderProduct'
 import data from '../data/products'
@@ -11,14 +11,37 @@ import Advantages from '../componenst/sections/advantages';
 import About from '../componenst/sections/about';
 import CartModal from '../componenst/cartModal'
 
+
+
+
+
 function HomePage() {
 
     const [cart, setCart] = useState(Array)
     const [totalPrice, setTotalPrice] = useState(0)
+    const [type,SetType] = useState(2)
+    const AboutRef = useRef(null)
+    const executeScroll = () => scrollToRef(myRef)
+
+    const constSortData  = () => {
+        let newData = [];
+        switch (true) {
+            case type === 2:
+                newData = data;
+            default:
+                data.map(i=>{
+                    if (i.type = type) {
+                        newData.push(i)
+                    }
+                })
+            
+        }
+        return newData;
+    }
 
     const addToCart = (item, it) => {
         let ProductPriceField = document.getElementById(item.id);
-        cart[cart.length] = { title: item.title, price: totalPrice + Number(ProductPriceField.value), id:item.id }
+        cart[cart.length] = { title: item.title, price: totalPrice + Number(ProductPriceField.value), id: item.id }
         data[it].price = Number(ProductPriceField.value);
         setCart([...cart])
         console.log(cart)
@@ -61,27 +84,25 @@ function HomePage() {
     }
 
 
-
-
     return (
         <Container fluid={true}>
-
-            {/* <Container className="header">
-                <Header />
-
-            </Container> */}
-
-
+            <Header />
             <Container className="main">
                 <Row>
-                    <Col className="section1" sm={12}> <MainSlider /> </Col>
+                    {/* <Col className="section1" sm={12}> <MainSlider /> </Col> */}
                     <Col className="section2 mt-5 mb-5" sm={12}> <Advantages /> </Col>
-                    <Col className="section3" sm={12}>
+                    <Col className="section3" sm={12} id="productSection">
+                        <Row>
+                            <button onClick={e=>SetType(2)}>ALL</button>
+                            <button onClick={e=>SetType(1)}>MEN</button>
+                            <button onClick={e=>SetType(0)}>NOT A MEN</button>
+                        </Row>
                         <Row>
                             {
                                 data.map(function (item, it) {
                                     return (
-                                        <Col sm={12} md={3} className="mt-5" key={`prod_${it}`}>
+                                    
+                                    (type === item.type || type === 2)  ?  <Col sm={12} md={3} className="mt-5" key={`prod_${it}`}>
                                             <Card>
                                                 <ProductModal title={item.title}> <CardImg key={item.article} top width="100%" height="300px" src={item.img[0].src} alt="Card image cap" /></ProductModal>
                                                 <CardBody>
@@ -149,20 +170,20 @@ function HomePage() {
                                                     </CardText>
                                                 </CardBody>
                                             </Card>
-                                        </Col>
+                                        </Col> : null
                                     )
                                 })
                             }
 
                         </Row>
                     </Col>
-                    <Col className="section4 mt-5 mb-5" sm={12}>
+                    <Col className="section4 mt-5 mb-5" sm={12} id="aboutSection">
                         <About />
                     </Col>
                 </Row>
 
                 {cart.length > 0 ?
-                    <CartModal data={cart}/> : null
+                    <CartModal data={cart} /> : null
                 }
 
 

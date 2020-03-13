@@ -1,6 +1,7 @@
 const data = [
     {
         id:1,
+        type:0,
         title: 'Простынь на резинке Желтая1',
         subTitle: "Card title",
         article: "00001Прост-5",
@@ -41,6 +42,7 @@ const data = [
     },
     {
         id:2,
+        type:1,
         title: 'Простынь на резинке Желтая1',
         subTitle: "Card title",
         article: "00001Прост-5",
@@ -81,6 +83,7 @@ const data = [
     },
     {
         id:3,
+        type:1,
         title: 'Простынь на резинке Желтая1',
         subTitle: "Card title",
         article: "00001Прост-5",
@@ -121,6 +124,7 @@ const data = [
     },
     {
         id:4,
+        type:0,
         title: 'Простынь на резинке Желтая1',
         subTitle: "Card title",
         article: "00001Прост-5",
@@ -161,6 +165,7 @@ const data = [
     },
     {
         id:5,
+        type:1,
         title: 'Простынь на резинке Желтая1',
         subTitle: "Card title",
         article: "00001Прост-5",
@@ -201,6 +206,7 @@ const data = [
     },
     {
         id:6,
+        type:1,
         title: 'Простынь на резинке Желтая1',
         subTitle: "Card title",
         article: "00001Прост-5",
@@ -241,6 +247,7 @@ const data = [
     },
     {
         id:7,
+        type:0,
         title: 'Простынь на резинке Желтая1',
         subTitle: "Card title",
         article: "00001Прост-5",
@@ -281,6 +288,7 @@ const data = [
     },
     {
         id:8,
+        type:1,
         title: 'Простынь на резинке Желтая1',
         subTitle: "Card title",
         article: "00001Прост-5",

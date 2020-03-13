@@ -11,47 +11,39 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
+  NavbarText,
+  Container
 } from 'reactstrap';
+
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const scrollToId = (id) => {
+    let target = document.getElementById(id);
+    window.scrollTo(0, target.offsetTop)
+  }
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
       <Navbar color="light" light expand="md" className="fixed-top">
-        <NavbarBrand href="/">simple-dream</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText>+38091111111 +38091111111 +38091111111</NavbarText>
-        </Collapse>
+        <Container>
+          <NavbarBrand href="/">simple-dream</NavbarBrand>
+          <NavbarToggler onClick={toggle} />
+          <Collapse isOpen={isOpen} navbar>
+            <Nav className="mr-auto" navbar>
+              <NavItem>
+                <NavLink onClick={e => scrollToId("aboutSection")}>Product</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink onClick={e => scrollToId("productSection")}>Product</NavLink>
+              </NavItem>
+            </Nav>
+            <NavbarText>+38091111111 +38091111111 +38091111111</NavbarText>
+          </Collapse>
+        </Container>
       </Navbar>
     </div>
   );
