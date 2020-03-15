@@ -1,4 +1,8 @@
 $mainColor: #c6538c;
+
+
+
+
 img {
     width: 100%;
 }
@@ -54,10 +58,11 @@ select {
 
 }
 .aboutText {
-    border: 1px solid #dedede;
     box-shadow: 0 0 black;
     text-align: justify;
     padding: 15px;
+    max-height: 20rem;
+    overflow-y: scroll;
 }
 label {
     text-align: center;

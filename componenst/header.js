@@ -35,10 +35,13 @@ const Header = (props) => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink onClick={e => scrollToId("aboutSection")}>Product</NavLink>
+                <NavLink onClick={e => scrollToId("aboutSection")}> Описание</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={e => scrollToId("productSection")}>Product</NavLink>
+                <NavLink onClick={e => scrollToId("productSection")}>Каталог</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink onClick={e => scrollToId("diliverySection")}>Доставка и оплата</NavLink>
               </NavItem>
             </Nav>
             <NavbarText>+38091111111 +38091111111 +38091111111</NavbarText>

@@ -1,7 +1,7 @@
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import {Row, Button, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 
 
 const ModalCall = (props) => {
@@ -15,8 +15,8 @@ const ModalCall = (props) => {
     const toggle = () => setModal(!modal);
 
     return (
-        <div>
-            <Button color="danger" onClick={toggle}>{buttonLabel}</Button>
+        <>
+            <Button color="danger" onClick={toggle}  className="m-auto">{buttonLabel}</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
                 <ModalHeader toggle={toggle}></ModalHeader>
                 <ModalBody>
@@ -32,7 +32,7 @@ const ModalCall = (props) => {
                     <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
                 </ModalFooter>
             </Modal>
-        </div>
+        </>
     );
 }
 

@@ -1,15 +1,17 @@
-import React, { useState, useEffect,useRef } from 'react'
-import { Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import Slider from '../componenst/sliderProduct'
-import data from '../data/products'
-import ProductModal from '../componenst/productModal'
-import cookie from 'react-cookies'
+import React, { useState, useEffect, useRef } from 'react'
+import { ButtonGroup, UncontrolledCollapse, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import Slider from '../componenst/sliderProduct';
+import data from '../data/products';
+import ProductModal from '../componenst/productModal';
+import cookie from 'react-cookies';
 import NumericInput from 'react-numeric-input';
 import MainSlider from '../componenst/mainSlider';
 import Header from '../componenst/header';
 import Advantages from '../componenst/sections/advantages';
 import About from '../componenst/sections/about';
-import CartModal from '../componenst/cartModal'
+import Dilivery from '../componenst/sections/dilivery';
+import CallMe from '../componenst/callMe';
+import CartModal from '../componenst/cartModal';
 
 
 
@@ -19,25 +21,8 @@ function HomePage() {
 
     const [cart, setCart] = useState(Array)
     const [totalPrice, setTotalPrice] = useState(0)
-    const [type,SetType] = useState(2)
-    const AboutRef = useRef(null)
-    const executeScroll = () => scrollToRef(myRef)
+    const [type, SetType] = useState(2)
 
-    const constSortData  = () => {
-        let newData = [];
-        switch (true) {
-            case type === 2:
-                newData = data;
-            default:
-                data.map(i=>{
-                    if (i.type = type) {
-                        newData.push(i)
-                    }
-                })
-            
-        }
-        return newData;
-    }
 
     const addToCart = (item, it) => {
         let ProductPriceField = document.getElementById(item.id);
@@ -47,7 +32,6 @@ function HomePage() {
         console.log(cart)
     }
 
-    const clearCart = () => { setTotalPrice(null) }
 
     const CustomSizeWidth = (id, startWidth, startHeight, defaultPrice, newWidth, it) => {
         let ProductPriceField = document.getElementById(id);
@@ -89,33 +73,45 @@ function HomePage() {
             <Header />
             <Container className="main">
                 <Row>
-                    {/* <Col className="section1" sm={12}> <MainSlider /> </Col> */}
-                    <Col className="section2 mt-5 mb-5" sm={12}> <Advantages /> </Col>
+                    <Col className="mt-5 mb-0" sm={12}>
+                        <h1 className="mt-5 text-center">Детские простынки из сатина</h1>
+                    </Col>
+                    <Col className="section2 mt-2 mb-5" sm={12}> <Advantages /> </Col>
                     <Col className="section3" sm={12} id="productSection">
                         <Row>
-                            <button onClick={e=>SetType(2)}>ALL</button>
-                            <button onClick={e=>SetType(1)}>MEN</button>
-                            <button onClick={e=>SetType(0)}>NOT A MEN</button>
+                            <Col className="mt-5 mb-0" sm={12}>
+                                <h2 className="mt-5 text-center">Каталог детских простынок</h2>
+                            </Col>
+                            <ButtonGroup className="m-auto">
+                                <Button onClick={e => SetType(2)}>ALL</Button>
+                                <Button onClick={e => SetType(1)}>MEN</Button>
+                                <Button onClick={e => SetType(0)}>NOT A MEN</Button>
+                            </ButtonGroup>
                         </Row>
                         <Row>
+
                             {
                                 data.map(function (item, it) {
                                     return (
-                                    
-                                    (type === item.type || type === 2)  ?  <Col sm={12} md={3} className="mt-5" key={`prod_${it}`}>
+
+                                        (type === item.type || type === 2) ? <Col sm={12} md={3} className="mt-5" key={`prod_${it}`}>
                                             <Card>
                                                 <ProductModal title={item.title}> <CardImg key={item.article} top width="100%" height="300px" src={item.img[0].src} alt="Card image cap" /></ProductModal>
                                                 <CardBody>
-                                                    <CardTitle className="mt-2 mb-2">{item.title} </CardTitle>
 
-                                                    <CardSubtitle className=" mb-2 text-center">Материал: {item.material}</CardSubtitle>
 
                                                     <CardText className="cardText mb-3">
-                                                        <div className="mb-3">
-                                                            <input className="price" id={item.id} value={item.price} disabled />
-                                                        </div>
-                                                        <p> {item.text} </p>
-
+                                                        <p className="mt-2 mb-2">{item.title} </p>
+                                                        <p className=" mb-2 text-center"><span>Материал:</span> {item.material}</p>
+                                                        <p className=" mb-2 text-center">
+                                                            <input id={item.id} value={item.price} disabled />
+                                                        </p>
+                                                        <span color="primary" id={`toggler` + item.id} style={{ marginBottom: '1rem' }}>
+                                                            Посмотреть описание простынки
+                                                        </span>
+                                                        <UncontrolledCollapse toggler={`#toggler` + item.id}>
+                                                            <p> {item.text} </p>
+                                                        </UncontrolledCollapse>
                                                         <Row className="mt-3">
                                                             <Col sm={12} md={6}>
                                                                 <FormGroup>
@@ -180,6 +176,12 @@ function HomePage() {
                     <Col className="section4 mt-5 mb-5" sm={12} id="aboutSection">
                         <About />
                     </Col>
+                    <CallMe/>
+                    <Col className="sectio5 mt-5 mb-5" sm={12} id="diliverySection">
+                        <Dilivery />
+                    </Col>
+
+                    
                 </Row>
 
                 {cart.length > 0 ?
