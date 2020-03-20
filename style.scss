@@ -1,8 +1,24 @@
 $mainColor: #c6538c;
+$titleColor:#8642b9;
+$blockTitleColor:#0b1871;
+body {
+    background-image: url('/images/bg.jpg');
+}
+
+
+.section2 {
+    background-color: #f6faff;
+}
 
 
 
 
+
+
+.main {
+    background-color: white;
+    box-shadow: 0 0 15px 0px #ececec;
+}
 img {
     width: 100%;
 }
@@ -23,7 +39,10 @@ select {
     :active {
         outline: none;
     }
-   
+}
+.blockTitle {
+    color:$blockTitleColor;
+    font-size: 14pt;
 }
 .card:hover {
     border: 1px solid #f5d8c7;
@@ -96,7 +115,7 @@ input[type=text]:focus, textarea:focus {
     user-select: none;
 }
 .addToCart {
-  width: 100%;
+    width: 100%;
 }
 .cardText {
     text-align: justify;
@@ -109,3 +128,74 @@ input[type=text]:focus, textarea:focus {
 .price {
     background: none;
 }
+.one {
+    text-align: center;
+}
+  .one span {
+    width: 100%;
+    font-family: 'Righteous', cursive;
+    position: relative;
+    color: $titleColor; 
+    display: inline-block;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    font-size: 2.2em;
+    padding: 11px 60px;
+    margin: 0; 
+    line-height: 1;
+  }
+  .one span:before, .one span:after {
+    content: ""; 
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 100%;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    background: repeating-linear-gradient(180deg, transparent, transparent 2px, $titleColor,  2px, $titleColor 4px);
+  }
+  .one span:before {left: 0;}
+  .one span:after {right: 0;}
+    @media (max-width: 420px) {
+        .one span {font-size: 2em;}
+    }
+.rounded {
+    counter-reset: li;
+    list-style: none;
+    font: 14px "Trebuchet MS", "Lucida Sans";
+    padding: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    width: 75%;
+    margin: 0 auto;
+    }
+    .rounded span {
+        position: relative;
+        display: block;
+        padding: .4em .4em .4em 2em;
+        margin: .5em 0;
+        background: #ffffff;
+        color: #444;
+        text-decoration: none;
+        border-radius: .3em;
+        transition: .3s ease-out;
+        border: 1px solid #4e167757;
+    }
+    .rounded span:hover {background: #E9E4E0;}
+    .rounded span:hover:before {transform: rotate(360deg);}
+    .rounded span:before {
+        content: counter(li);
+        counter-increment: li;
+        position: absolute;
+        left: -1.3em;
+        top: 47%;
+        margin-top: -1.3em;
+        background: #ffffff;
+        height: 2em;
+        width: 2em;
+        line-height: 2em;
+        text-align: center;
+        font-weight: bold;
+        border-radius: 2em;
+        transition: all .3s ease-out;
+        border: 1px solid #8642b9;
+    }

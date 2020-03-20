@@ -73,19 +73,25 @@ function HomePage() {
             <Header />
             <Container className="main">
                 <Row>
-                    <Col className="mt-5 mb-0" sm={12}>
-                        <h1 className="mt-5 text-center">Детские простынки из сатина</h1>
+                    <Col className="mt-5 mb-0 " sm={12}>
+                        <div className="one mt-5">
+                            <span>
+                                <h1>Детские простынки из сатина</h1>
+                            </span>
+                        </div>
                     </Col>
-                    <Col className="section2 mt-2 mb-5" sm={12}> <Advantages /> </Col>
+                    <Col className="section2 mt-2 " sm={12}> <Advantages /> </Col>
                     <Col className="section3" sm={12} id="productSection">
                         <Row>
-                            <Col className="mt-5 mb-0" sm={12}>
-                                <h2 className="mt-5 text-center">Каталог детских простынок</h2>
+                            <Col className="mt-5 mb-0 one" sm={12}>
+                                <span>
+                                    <h2>Каталог детских простынок</h2>
+                                </span>
                             </Col>
-                            <ButtonGroup className="m-auto">
-                                <Button onClick={e => SetType(2)}>ALL</Button>
-                                <Button onClick={e => SetType(1)}>MEN</Button>
-                                <Button onClick={e => SetType(0)}>NOT A MEN</Button>
+                            <ButtonGroup className="mt-5 mr-auto ml-auto" >
+                                <Button color="info" onClick={e => SetType(2)}>Все</Button>
+                                <Button color="info" onClick={e => SetType(1)}>Мальчикам</Button>
+                                <Button color="info" onClick={e => SetType(0)}>Девочкам</Button>
                             </ButtonGroup>
                         </Row>
                         <Row>
@@ -176,12 +182,12 @@ function HomePage() {
                     <Col className="section4 mt-5 mb-5" sm={12} id="aboutSection">
                         <About />
                     </Col>
-                    <CallMe/>
+                    <CallMe />
                     <Col className="sectio5 mt-5 mb-5" sm={12} id="diliverySection">
                         <Dilivery />
                     </Col>
 
-                    
+
                 </Row>
 
                 {cart.length > 0 ?

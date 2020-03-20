@@ -5,27 +5,26 @@ import ModalCall from '../call';
 const Advantages = () => {
     return (
 
-        <Row className="advantages mt-5 border">
+        <Row className="advantages mt-5">
             <Col sm={12} md={6}>
                 <Slider />
             </Col>
             <Col sm={12} md={6} className="p-2">
-                < p className="text-center">Мы используем только <strong>европейский сатин</strong> !</p>
-                <span>
-                    <strong>Главные достоинства нашей ткани:</strong>
-                </span>
-                <ul className="mt-2">
-                    <li>Не кашлатится</li>
-                    <li>Не портится после глажки</li>
-                    <li>Не портится после стирки</li>
-                    <li>Не вызывает алергии</li>
-                    <li>Материя легкая, мягкая, воздушная</li>
-                    <li>Материя не мнется при хранении</li>
-                    <li>Гигиенична, так как, хорошо поглощает влагу. </li>
-                </ul>
-
-                <ModalCall buttonLabel="Заказать звонок" />
+                <p className="text-center blockTitle">Мы используем только <strong>европейский сатин</strong> !</p>
+                <ol className="rounded mt-4">
+                    <li><span>Не кашлатится</span></li>
+                    <li><span>Не портится после глажки</span></li>
+                    <li><span>Не портится после стирки</span></li>
+                    <li><span>Не вызывает алергии</span></li>
+                    <li><span>Материя легкая, мягкая, воздушная</span></li>
+                    <li><span>Материя не мнется при хранении</span></li>
+                    <li><span>Гигиенична, так как, хорошо поглощает влагу</span></li>
+                </ol>
+                <div className="text-center mt-5">
+                    <ModalCall buttonLabel="Заказать звонок" />
+                </div>
             </Col>
+
         </Row>
 
 

@@ -16,7 +16,7 @@ const ModalCall = (props) => {
 
     return (
         <>
-            <Button color="danger" onClick={toggle}  className="m-auto">{buttonLabel}</Button>
+            <Button color="success" onClick={toggle}  className="m-auto">{buttonLabel}</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
                 <ModalHeader toggle={toggle}></ModalHeader>
                 <ModalBody>
