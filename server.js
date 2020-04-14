@@ -46,7 +46,7 @@ app.prepare()
                 'action': 'pay',
                 'amount': req.body.amount,
                 'currency': 'UAH',
-                'description': 'description text',
+                'description': 'SimpleDreams',
                 'order_id': 'order_id_1',
                 'version': '3'
             });
