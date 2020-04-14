@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col } from 'reactstrap';
 import data from '../data/products'
 
@@ -8,44 +8,53 @@ const CartModal = (props) => {
     } = props;
 
     const [modal, setModal] = useState(false);
+    const [cardData, setcardData] = useState([]);
+    useEffect(() => {
+        setcardData([...props.data])
+    });
     const toggle = () => setModal(!modal);
 
-    // const itemData = data.find(item => item.title == "Простынь на резинке Желтая1");
+
+    const removeProduct = (element) => {
+        const newData = [];
+        cardData.forEach(e => {
+            if (e.id !== element.id) {
+                newData.push(e)
+            }
+        });
+        setcardData([...newData])
+    }
 
     const totlalPrice = () => {
         let total = 0;
-        props.data.map(i=>{
+        cardData.map(i => {
             total = total + Number(i.price);
         })
         return total;
     }
     return (
         <div>
-            {console.log(props.data)}
             <div className="shopingCard" onClick={e => setModal(true)}>
-                <span>{props.data.length}</span>
+                <span>{cardData.length}</span>
                 <img src='/images/ShoppingCart.svg' />
             </div>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal isOpen={modal} toggle={toggle} size={'lg'}>
                 <ModalHeader toggle={toggle}>{title}</ModalHeader>
                 <ModalBody>
-
-                    {props.data.map(i => {
+                    {cardData.map(i => {
                         return (
                             <Container>
                                 <Row>
-                                    <Col sm={12} md={3}><img src={ (data.find(item => item.id === i.id)).img[0].src }/></Col>
-                                    <Col sm={12} md={6}>{i.title}</Col>
-                                    <Col sm={12} md={3}>{i.price}</Col>
+                                    <Col sm={12} md={3}>
+                                        <Button onClick={e => removeProduct(i)}>Удалить</Button>
+                                    </Col>
+                                    <Col sm={12} md={6}>Название:{i.title}</Col>
+                                    <Col sm={12} md={3}>Цена: {i.price}</Col>
                                 </Row>
-                                <Row>Всего: {totlalPrice()} </Row>
-                                
                             </Container>
                         )
-
-
                     })}
-
+                    <Row>Всего: {totlalPrice()} </Row>
                 </ModalBody>
             </Modal>
         </div>

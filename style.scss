@@ -1,3 +1,6 @@
+
+
+
 $mainColor: #c6538c;
 $titleColor:#8642b9;
 $blockTitleColor:#0b1871;
@@ -5,16 +8,9 @@ body {
     background-image: url('/images/bg.jpg');
 }
 
-
 .section2 {
     background-color: #f6faff;
 }
-
-
-
-
-
-
 .main {
     background-color: white;
     box-shadow: 0 0 15px 0px #ececec;
@@ -42,7 +38,7 @@ select {
 }
 .blockTitle {
     color:$blockTitleColor;
-    font-size: 14pt;
+    font-size: 19pt;
 }
 .card:hover {
     border: 1px solid #f5d8c7;
@@ -76,13 +72,13 @@ select {
     }
 
 }
-.aboutText {
-    box-shadow: 0 0 black;
-    text-align: justify;
-    padding: 15px;
-    max-height: 20rem;
-    overflow-y: scroll;
-}
+// .aboutText {
+//     box-shadow: 0 0 black;
+//     text-align: justify;
+//     padding: 15px;
+//     max-height: 20rem;
+//     overflow-y: scroll;
+// }
 label {
     text-align: center;
     width: 100%;
@@ -101,14 +97,24 @@ label {
 input {
     width: 100%;
     user-select: none;
-    border-radius: 50px;
-    border: 1px solid $mainColor;
+    border: none;
     transition: all 1s cubic-bezier(0.57, 0.62, 0.11, 1.21);
     text-align: center;
     font-weight: 700;
-    color:$mainColor
+    background: #f1f1f1;
+    color: #616161;
+    margin: 0 auto;
+    display: block;
 }
-
+.cardText {
+    input:after {
+        content: "грн";
+        color: red;
+        width: 30px;
+        height: 23px;
+        display: block;
+    }
+}
 
 input[type=text]:focus, textarea:focus {
     border-radius: 1px;
@@ -131,42 +137,143 @@ input[type=text]:focus, textarea:focus {
 .one {
     text-align: center;
 }
-  .one span {
+.one span {
     width: 100%;
     font-family: 'Righteous', cursive;
     position: relative;
-    color: $titleColor; 
+    color: #8642b933; 
     display: inline-block;
-    border-top: 2px solid;
+    // border-top: 2px solid;
     border-bottom: 2px solid;
     font-size: 2.2em;
     padding: 11px 60px;
     margin: 0; 
     line-height: 1;
-  }
-  .one span:before, .one span:after {
-    content: ""; 
-    position: absolute;
-    top: 0;
-    width: 30px;
-    height: 100%;
-    border-left: 2px solid;
-    border-right: 2px solid;
-    background: repeating-linear-gradient(180deg, transparent, transparent 2px, $titleColor,  2px, $titleColor 4px);
-  }
-  .one span:before {left: 0;}
-  .one span:after {right: 0;}
+    border-color: #8642b933;
+    h1,h2,h3 {
+        color: $titleColor; 
+        font-size: 0.7em;
+    }
+}
+.one span:before, .one span:after {
+    // content: ""; 
+    // position: absolute;
+    // top: 0;
+    // width: 30px;
+    // height: 100%;
+    // border-left: 2px solid;
+    // border-right: 2px solid;
+    // background: repeating-linear-gradient(180deg, transparent, transparent 2px, #8642b933,  2px, #8642b933 4px);
+}
+
+.aboutCartTitle {
+    font-family: 'Righteous', cursive;
+}
+.root-react-component-countdown-timer .border .count {
+ 
+    border:none;
+
+}
+.card:hover {
+    border: none;
+    box-shadow:none;
+}
+.promo {
+    span:first-child {
+        background-color: #ebe8f8;
+        padding: 7px;
+        width: 100%;
+        display: block;
+        text-align: center;
+        color: #8642c9;
+        font-size: 20px;
+        text-transform: uppercase;
+        border-bottom: 1px solid #ceb8e6;
+        background: white;
+        border: 1px solid #8642c9;
+        border-radius: 43px;
+    }
+    p {
+        color: #7d7d7d;
+        text-align: center;
+    }
+}
+.displayedTime {
+    background: transparent;
+    margin-top:24px ;
+}
+.one span:before {left: 0;}
+.one span:after {right: 0;}
     @media (max-width: 420px) {
         .one span {font-size: 2em;}
+}
+.count {
+    background-color: transparent !important;
+}
+.productBlock:hover{
+    border: 1px solid rgb(30, 27, 197);
+}
+.card-img-top {
+    height: 400px;
+    object-fit: cover;
+}
+.close {
+     span {
+        position: absolute;
+        right: 3%;
+        top: 4%;
+     }
+}
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(64, 53, 131);
+}
+.navbar-light .navbar-text {
+    color: #ec0505;
+    font-weight: 700;
+    font-family: sans-serif;
+}
+.navbar-light .navbar-brand {
+    color: rgb(0, 74, 153);
+    font-size: larger;
+    font-family: cursive;
+}
+.CustomInputs {
+    border: 1px solid #e4e4e4; background: #fff; padding: 7px;
+    div:first-child {
+        background: #e4e4e4;
+        padding: 5px;
+        margin-bottom: 14px;
     }
+}
+.hot {
+    position: absolute;
+    top: 3%;
+    background: red;
+    padding: 0 17px 0 17px;
+    color: white;
+}
+.productBlock {
+    img, a, select {
+        cursor: pointer;
+    }
+}
+.itemIitle {
+    color: #4c4c4c;
+    border-left: 1px solid #b9b9b9;
+    padding-left: 1rem;
+}
 .rounded {
     counter-reset: li;
     list-style: none;
     font: 14px "Trebuchet MS", "Lucida Sans";
     padding: 0;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    width: 75%;
+    width: 87%;
     margin: 0 auto;
+    display: block;
+    li {
+        margin-top: 15px;
+    }
     }
     .rounded span {
         position: relative;
@@ -198,4 +305,136 @@ input[type=text]:focus, textarea:focus {
         border-radius: 2em;
         transition: all .3s ease-out;
         border: 1px solid #8642b9;
+    }
+    ol.progtrckr {
+        list-style-type: none;
+        padding: 0;
+      }
+      
+      ol.progtrckr li {
+        display: inline-block;
+        text-align: center;
+        line-height: 4.5rem;
+        cursor: pointer;
+        width: 33%;
+      }
+      
+      ol.progtrckr li span {
+        padding: 0 1.5rem;
+      }
+      
+      @media (max-width: 650px) {
+        .progtrckr li span {
+          display: none;
+        }
+      }
+      .progtrckr em {
+        display: none;
+        font-weight: 700;
+        padding-left: 1rem;
+      }
+      
+      @media (max-width: 650px) {
+        .progtrckr em {
+          display: inline;
+        }
+      }
+      
+      ol.progtrckr li.progtrckr-todo {
+        color: silver;
+        border-bottom: 4px solid silver;
+      }
+      
+      ol.progtrckr li.progtrckr-doing {
+        color: black;
+        border-bottom: 4px solid #CCCCCC;
+      }
+      
+      ol.progtrckr li.progtrckr-done {
+        color: black;
+        border-bottom: 4px solid #5cb85c;
+      }
+      
+      ol.progtrckr li:after {
+        content: "\00a0\00a0";
+      }
+      
+      ol.progtrckr li:before {
+        position: relative;
+        bottom: -3.7rem;
+        float: left;
+        left: 50%;
+      }
+      
+      ol.progtrckr li.progtrckr-todo:before {
+        content: "\039F";
+        color: silver;
+        background-color: white;
+        width: 1.2em;
+        line-height: 1.4em;
+      }
+      
+      ol.progtrckr li.progtrckr-todo:hover:before {
+        color: #ff4500;
+      }
+      
+      ol.progtrckr li.progtrckr-doing:before {
+        content: "\2022";
+        color: white;
+        background-color: #CCCCCC;
+        width: 1.2em;
+        line-height: 1.2em;
+        border-radius: 1.2em;
+      }
+      
+      ol.progtrckr li.progtrckr-doing:hover:before {
+        color: #ff4500;
+      }
+      
+      ol.progtrckr li.progtrckr-done:before {
+        content: "\2713";
+        color: white;
+        background-color: #5cb85c;
+        width: 1.2em;
+        line-height: 1.2em;
+        border-radius: 1.2em;
+      }
+      
+      ol.progtrckr li.progtrckr-done:hover:before {
+        color: #333;
+      }
+    .footer-buttons {
+        margin: 2% auto;
+        display: block;
+        width: fit-content;
+        button {
+            background: #31bf52;
+            border: 1px solid #eea8ff00;
+            margin: 13px;
+            border-radius: 50px;
+            padding: 4px 13px 5px 13px;
+            color: white;
+            font-size: 14pt;
+            box-shadow: 0 0 3px 1px #00000040;
+        }
+    }
+    .infoContent {
+        text-align: justify;
+        border: 1px solid rebeccapurple;
+        border-radius: 16px;
+        padding: 2em;
+        h1 {
+            border-left: 3px solid red;
+            padding-left: 1em;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            color: #004a99;
+        }
+        h3 {
+            font-size: 16pt;
+            color: #004a99;
+        }
+        ul {
+            margin-top: 1em;
+        }
     }

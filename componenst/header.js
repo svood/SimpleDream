@@ -14,14 +14,23 @@ import {
   NavbarText,
   Container
 } from 'reactstrap';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhone } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import { withRedux } from '../lib/redux'
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const scrollToId = (id) => {
-    let target = document.getElementById(id);
-    window.scrollTo(0, target.offsetTop)
+  const mainPageStore = () => {
+    return useSelector(state => ({
+      store: state.mainPage,
+    }), shallowEqual);
+  }; // Store
+  const { store } = mainPageStore();
+
+  const redirectTo = (path) => {
+    window.location.href = path
   }
 
   const toggle = () => setIsOpen(!isOpen);
@@ -35,21 +44,31 @@ const Header = (props) => {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink onClick={e => scrollToId("aboutSection")}> Описание</NavLink>
+                <NavLink onClick={e => redirectTo("/")}>Главная</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={e => scrollToId("productSection")}>Каталог</NavLink>
+                <NavLink onClick={e => redirectTo("/shipment")}>Доставка и Оплата</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={e => scrollToId("diliverySection")}>Доставка и оплата</NavLink>
+                <NavLink onClick={e => redirectTo("/return")}>Обмен и возврат</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink onClick={e => redirectTo("/card")}>Корзина <strong style={{
+                  border: '1px solid red',
+                  borderRadius: '45px',
+                  width: '26px',
+                  textAlign: 'center',
+                  fontSize: '13px',
+                  color: 'red',
+                  padding: '1px 6px 1px 6px'
+                }}>{store.card.length}</strong></NavLink>
               </NavItem>
             </Nav>
-            <NavbarText>+38091111111 +38091111111 +38091111111</NavbarText>
+            <NavbarText><FontAwesomeIcon icon={faPhone} /> +38 (095) 31 40 133 </NavbarText>
           </Collapse>
         </Container>
       </Navbar>
-    </div>
+    </div >
   );
 }
-
-export default Header;
+export default withRedux(Header)

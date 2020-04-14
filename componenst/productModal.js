@@ -11,13 +11,12 @@ const ProductModal = (props) => {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
-    const itemData = data.find(item => item.title == "Простынь на резинке Желтая1");
+    const itemData = data.find(item => item.title == title);
 
     return (
         <div>
-
             <a color="danger" onClick={toggle}>{props.children}</a>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal isOpen={modal} toggle={toggle} size={'lg'}>
                 <ModalHeader toggle={toggle}>{title}</ModalHeader>
                 <ModalBody>
                     <Slider itemImages={itemData.img} />

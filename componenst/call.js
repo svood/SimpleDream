@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import {Row, Button, Modal, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
-
+import { faMobile } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ModalCall = (props) => {
     const {
@@ -16,7 +17,7 @@ const ModalCall = (props) => {
 
     return (
         <>
-            <Button color="success" onClick={toggle}  className="m-auto">{buttonLabel}</Button>
+            <Button  color="success" onClick={toggle}  className="m-auto"> <FontAwesomeIcon icon={faMobile} /> {buttonLabel}</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
                 <ModalHeader toggle={toggle}></ModalHeader>
                 <ModalBody>
