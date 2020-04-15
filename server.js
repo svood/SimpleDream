@@ -11,8 +11,8 @@ var LiqPay = require('./libs/liqpay');
 const PORT = 3000;
 var fs = require('fs');
 
-const public = 'i97516070825';
-const private = 'rAolTVFShBIMBUZr459tjWi8BinHvzO2ND7B0JHH'
+const public = 'sandbox_i31171724869';
+const private = 'sandbox_EKnOtyKVqlzpFJjHfn7vsH2bcqJ6PGkI8rZts64x'
 
 const ssrCache = new LRUCache({
     max: 100 * 1024 * 1024, /* cache size will be 100 MB using `return n.length` as length() function */

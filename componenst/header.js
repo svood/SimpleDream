@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
+import { Textbox, Radiobox, Checkbox, Select, Textarea } from 'react-inputs-validation';
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,9 +50,7 @@ const Header = (props) => {
               <NavItem>
                 <NavLink onClick={e => redirectTo("/shipment")}>Доставка и Оплата</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink onClick={e => redirectTo("/return")}>Обмен и возврат</NavLink>
-              </NavItem>
+          
               <NavItem>
                 <NavLink onClick={e => redirectTo("/card")}>Корзина <strong style={{
                   border: '1px solid red',

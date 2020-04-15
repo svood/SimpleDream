@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { ButtonGroup, Alert, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import { faUser,faCity,faPhone,faTruck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Dilivery from '../componenst/sections/dilivery';
 import axios from 'axios'
 import qs from 'qs'
@@ -9,7 +10,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { addPhone, addMailNumber, addFio, addCity, addToCard, setPayType } from '../actions/mainPage'
 import Steps, { Step } from 'rc-steps';
-import parse from 'html-react-parser'
+import { Textbox } from 'react-inputs-validation';
 import {
     isMobile,
     isMobileSafari,
@@ -24,6 +25,10 @@ function HomePage(props) {
     const [payType, setPayType] = useState(0);
     const liqBlock = useRef(null)
 
+    const [fioValid, setFioValid] = useState(false);
+    const [userMailNumberValid, setUserMailNumberValid] = useState(false);
+    const [userPhoneValid, setUserPhoneValid] = useState(false);
+    const [userCityValid, setUserCityValid] = useState(false);
 
     const sendReqest = async () => {
         let from;
@@ -107,8 +112,15 @@ function HomePage(props) {
     }
 
 
+    const firstStep = () => {
+
+        setCurrentStep(1)
+
+
+    }
+
     const saveDataHendler = () => {
-        if (store.userPhone != '' && store.userMailNumber != '' && store.userFio != '' && store.userCity != '') {
+        if (fioValid && userCityValid && userPhoneValid && userMailNumberValid) {
             setCurrentStep(2)
         } else {
             setError('Пожайлуста, заполните все поля')
@@ -117,6 +129,10 @@ function HomePage(props) {
             }, 5000);
         }
     }
+
+
+
+
     const CardStep1 = () => {
         return (
             <Container style={{
@@ -137,6 +153,7 @@ function HomePage(props) {
                             color: '#8642b9',
                         }} >Товары в корзине</h1>
                     </Col>
+                    {(store.card.length === 0) ? <Col><p>Корзина пуста</p></Col> : null}
                     <Row>
                         {
                             store.card.map(i => {
@@ -176,7 +193,7 @@ function HomePage(props) {
                     <strong> Всего: {totlalPrice()} грн </strong></Row>
 
                 <div className="footer-buttons">
-                    <button onClick={e => setCurrentStep(1)}>Далее</button>
+                    <Button color="primary" onClick={e => firstStep()} disabled={(store.card.length === 0) ? true : false}>Далее</Button>
                 </div>
             </Container>
         )
@@ -292,27 +309,104 @@ function HomePage(props) {
 
 
                                 <Col sm={12} md={5} className="m-auto">
-                                    <FormGroup className='mt-2'>
-                                        <Label for="examplePassword" style={{ color: 'rebeccapurple', fontWeight: '500' }}>Ваше ФИО</Label>
-                                        <Input type="text" name="" id="fio" style={{ background: 'white', borderRadius: '14px' }} onChange={e => handelSetFIO(e)} value={store.userFio} />
-                                    </FormGroup>
-                                    <FormGroup className='mt-4'>
-                                        <Label for="examplePassword" style={{ color: 'rebeccapurple', fontWeight: '500' }}>Город</Label>
-                                        <Input type="text" name="city" id="city" style={{ background: 'white', borderRadius: '14px' }} onChange={e => handelSetCity(e)} value={store.userCity} />
-                                    </FormGroup>
+                                    <div className="mt-5 mb-5 text-left">
+                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faUser}/> ФИО:</span>
+                                        <Textbox
+                                            attributesInput={{ // Optional.
+                                                id: 'fio',
+                                                name: 'fio',
+                                                type: 'text',
+                                                // placeholder: 'Place your number here ^-^',
+                                            }}
+                                            value={store.userFio}
+                                            onChange={(name, e) => { handelSetFIO(e) }}
+                                            onBlur={() => { }}
+                                            validationOption={{
+                                                type: 'string',
+                                                min: 4,
+                                                max: 44,
+                                                msgOnError: "Пожайлуста Впишите ФИО получателя",
+                                                regMsg: "regMsg",
+                                            }}
+                                            validationCallback={res =>
+                                                setFioValid(!res)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="mt-5 mb-5 text-left">
+                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faCity}/> Город:</span>
+                                        <Textbox
+                                            attributesInput={{ // Optional.
+                                                id: 'city',
+                                                name: 'city',
+                                                type: 'text',
+                                                // placeholder: 'Place your number here ^-^',
+                                            }}
+                                            value={store.userCity}
+                                            onChange={(name, e) => { handelSetCity(e) }}
+                                            onBlur={() => { }}
+                                            validationOption={{
+                                                type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
+                                                min: 4,
+                                                max: 44,
+                                                msgOnError: "Пожайлуста вишите город доставки",
+                                                regMsg: "regMsg",
+                                            }}
+                                            validationCallback={res =>
+                                                setUserCityValid(!res)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="mt-5 mb-5 text-left">
+                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faPhone}/> Телефон получателя:</span>
+                                        <Textbox
+                                            attributesInput={{ // Optional.
+                                                id: 'phone',
+                                                name: 'phone',
+                                                type: 'phone',
+                                            }}
+                                            value={store.userPhone}
+                                            onChange={(name, e) => { handelSetPhone(e) }}
+                                            onBlur={() => { }}
+                                            validationOption={{
+                                                type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
+                                                min: 9,
+                                                max: 44,
+                                                msgOnError: "Пожайлуста вишите телефон получателя",
+                                                regMsg: "regMsg",
 
+                                            }}
+                                            validationCallback={res =>
+                                                setUserPhoneValid(!res)
+                                            }
 
-                                    <FormGroup className='mt-4'>
-                                        <Label for="examplePassword" style={{ color: 'rebeccapurple', fontWeight: '500' }}>Телефон получателя</Label>
-                                        <Input type="text" name="" id="phone" style={{ background: 'white', borderRadius: '14px' }} onChange={e => handelSetPhone(e)} value={store.userPhone} />
-                                    </FormGroup>
+                                        />
 
-                                    <FormGroup className='mt-4 mb-5'>
-                                        <Label for="examplePassword" style={{ color: 'rebeccapurple', fontWeight: '500' }}>№ отделения НовойПочты</Label>
-                                        <Input type="text" name="number" id="number" style={{ background: 'white', borderRadius: '14px' }} onChange={e => handelSetNumber(e)} value={store.userMailNumber} />
-                                    </FormGroup>
+                                    </div>
+                                    <div className="mt-5 mb-5 text-left">
+                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faTruck}/> № отделения Новой Почты: </span>
+                                        <Textbox
+                                            attributesInput={{ // Optional.
+                                                id: 'userMailNumber',
+                                                name: 'userMailNumber',
+                                                type: 'number',
+                                                // placeholder: 'Place your number here ^-^',
+                                            }}
+                                            value={store.userMailNumber}
+                                            onChange={(name, e) => { handelSetNumber(e) }}
+                                            onBlur={() => { }}
+                                            validationOption={{
+                                                type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
+                                                min: 1,
+                                                max: 20,
+                                                msgOnError: "Пожайлуста вишите № отделения Новой Почты",
+                                            }}
+                                            validationCallback={res =>
+                                                setUserMailNumberValid(!res)
+                                            }
+                                        />
+                                    </div>
                                 </Col>
-
                             </Row>
 
 
