@@ -40,7 +40,7 @@ const SliderProduct = (props) => {
                 key={item.src}
                 className="productImgMain"
             >
-                <img src={item.src} alt={item.altText} />
+                <img src={props.imagePath + item.src + props.imageType} alt={item.altText} />
                 {/* <CarouselCaption captionText={item.caption} captionHeader={item.caption} /> */}
             </CarouselItem>
         );

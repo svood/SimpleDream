@@ -6,14 +6,16 @@ import CountdownTimer from "react-component-countdown-timer";
 
 
 
-const Advantages = () => {
+const Advantages = ({ isMobile }) => {
     return (
 
         <Row className="advantages mt-5 mb-0">
-            <Col sm={12} md={8}>
-                <Slider />
-            </Col>
-            <Col sm={12} md={4} className="p-2" style={{ background: ' #ffffff' }}>
+            {!isMobile ?
+                <Col sm={12} md={8}>
+                    <Slider />
+                </Col> : null}
+
+            <Col sm={12} md={isMobile ? 12 : 4} className="p-2" style={{ background: ' #ffffff' }}>
                 <img src="/images/logo.png" style={{
                     width: '47%',
                     margin: '0 auto',

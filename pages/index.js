@@ -104,7 +104,7 @@ function HomePage(props) {
             <Container className="main">
                 <Row>
                     <Col className="section2" sm={12}>
-                        <Advantages />
+                        <Advantages isMobile={props.isMobile} />
                         <MainBlock />
                     </Col>
                     <Col className="section3" sm={12} id="productSection">
@@ -124,7 +124,7 @@ function HomePage(props) {
                                             <Card className="productBlock">
                                                 {item.hot ? <div className="hot"></div> : false}
 
-                                                <ProductModal title={item.title}>
+                                                <ProductModal title={item.title} imagePath={props.imagePath} imageType={props.imageType}>
                                                     <CardImg key={item.article} top width="100%" height="300px" src={props.imagePath + item.img[0].src + props.imageType} alt="Card image cap" />
                                                 </ProductModal>
                                                 <CardBody>
@@ -181,7 +181,7 @@ function HomePage(props) {
                                                                 </Col>
                                                             </Row>
                                                         </div>
-                                                        <span color="primary" id={`toggler` + item.id} style={{ marginBottom: '1rem', marginTop: '1rem' }}>
+                                                        <span className="togglerInfo" color="primary" id={`toggler` + item.id} style={{ marginBottom: '1rem', marginTop: '1rem' }}>
                                                             Посмотреть описание простынки
                                                         </span>
                                                         <UncontrolledCollapse toggler={`#toggler` + item.id}>
@@ -199,7 +199,7 @@ function HomePage(props) {
 
 
                     <Col className="sectio5 mt-5 mb-5" sm={12} id="diliverySection">
-                        <Dilivery isChrome={props.isChrome} />
+                        <Dilivery isMobile={props.isMobile} />
                     </Col>
                     <CallMe />
                     <Col className="section4 mt-5 mb-5" sm={12} id="aboutSection">
@@ -239,9 +239,9 @@ HomePage.getInitialProps = ({ req }) => {
     } else {
         userAgent = navigator.userAgent // if you are on the client you can access the navigator from the window object
     }
-    // let isChrome = Boolean(userAgent.match(
-    //     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-    // ))
+    let isMobile = Boolean(userAgent.match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    ))
     let isChrome = Boolean(userAgent.match(
         /Android|Opera Mini|IEMobile|WPDesktop|Chrome/i
     ))
@@ -256,7 +256,8 @@ HomePage.getInitialProps = ({ req }) => {
     return {
         isChrome: isChrome,
         imagePath: imagePath,
-        imageType: imageType
+        imageType: imageType,
+        isMobile: isMobile
     }
 };
 

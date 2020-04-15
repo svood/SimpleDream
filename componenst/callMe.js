@@ -12,21 +12,9 @@ const callMe = () => {
             <Row>
                 <Col style={{ textAlign: 'center', }}>
                     <p>
-                        <span style={{
-                            fontSize: '30px',
-                            color: '#204eaf',
-                            fontWeight: 700,
-                            fontFamily: 'sans-serif'
-                        }}>Еще больше товаров в нашем магазине Facebook
+                        <span className="fbText">Еще больше товаров в нашем магазине Facebook
                         <br />
-                            <Button color="success" outline style={{
-                                paddingTop: '10px',
-                                paddingBottom: '10px',
-                                marginTop: '18px',
-                                background: '#2654b5',
-                                color: 'white',
-                                width: '16%',
-                            }}>
+                            <Button color="success" outline className="fbButton" >
                                 <img src="/images/fb.svg"
                                     style={{
                                         width: '28px',

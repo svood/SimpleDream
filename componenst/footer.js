@@ -31,7 +31,7 @@ const Footer = () => {
                         </Nav>
                     </Col>
                     <Col sm={12} md={6}>
-                        <img src="/images/vizamaster.svg" style={{
+                        <img src="/images/vizamaster.svg" className="viza" style={{
                             width: '13%',
                             textAlign: 'left',
                             float: 'right',

@@ -14,7 +14,6 @@ import parse from 'html-react-parser'
 function HomePage(props) {
     const dispatch = useDispatch();
 
-
     const [error, setError] = useState(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [payType, setPayType] = useState(0);
@@ -35,7 +34,7 @@ function HomePage(props) {
             }
         }
 
-        await axios.post('http://localhost:3000/api/liqpay', qs.stringify(requestBody), config)
+        await axios.post('https://simple-dreams.com.ua/api/liqpay', qs.stringify(requestBody), config)
             .then((result) => {
                 console.log(result.data)
                 LiqPayCheckout.init({
@@ -341,24 +340,25 @@ HomePage.getInitialProps = ({ req }) => {
     } else {
         userAgent = navigator.userAgent // if you are on the client you can access the navigator from the window object
     }
-    // let isChrome = Boolean(userAgent.match(
-    //     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-    // ))
+    let isMobile = Boolean(userAgent.match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    ))
     let isChrome = Boolean(userAgent.match(
         /Android|Opera Mini|IEMobile|WPDesktop|Chrome/i
     ))
     if (isChrome) {
         imagePath = '/images/webp',
-        imageType='.webp'
+            imageType = '.webp'
     } else {
         imagePath = '/images',
-        imageType='.jpg'
+            imageType = '.jpg'
     }
 
     return {
         isChrome: isChrome,
         imagePath: imagePath,
-        imageType:imageType
+        imageType: imageType,
+        isMobile:isMobile
     }
 };
 

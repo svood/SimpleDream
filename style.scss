@@ -1,5 +1,5 @@
 
-
+@import './media.scss';
 
 $mainColor: #c6538c;
 $titleColor:#8642b9;
@@ -39,6 +39,20 @@ select {
 .blockTitle {
     color:$blockTitleColor;
     font-size: 19pt;
+}
+.fbButton {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 18px;
+    background: #2654b5;
+    color: white;
+    width: 16%;
+}
+.fbText {
+    font-size: 30px;
+    color: #204eaf;
+    font-weight: 700;
+    font-family: sans-serif
 }
 .card:hover {
     border: 1px solid #f5d8c7;

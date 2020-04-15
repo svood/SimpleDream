@@ -1,13 +1,12 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
-const Dilivery = ({isChrome}) => {
+const Dilivery = ({isMobile}) => {
     return (
 
         <Row className="about">
             <Col sm={12} md={6}>
-
-                <img src="https://static-eu.insales.ru/files/1/7474/10239282/original/mceclip0-1569489939226.png" />
+              {!isMobile ? <img src="https://static-eu.insales.ru/files/1/7474/10239282/original/mceclip0-1569489939226.png" /> : null}  
             </Col>
             <Col sm={12} md={6} className="aboutText border">
                 <div className="one">

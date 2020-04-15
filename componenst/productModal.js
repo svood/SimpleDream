@@ -19,7 +19,7 @@ const ProductModal = (props) => {
             <Modal isOpen={modal} toggle={toggle} size={'lg'}>
                 <ModalHeader toggle={toggle}>{title}</ModalHeader>
                 <ModalBody>
-                    <Slider itemImages={itemData.img} />
+                    <Slider itemImages={itemData.img} imagePath={props.imagePath} imageType={props.imageType} />
                 </ModalBody>
             </Modal>
         </div>
