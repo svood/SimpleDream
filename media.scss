@@ -18,8 +18,12 @@
         margin: 2em auto 0 auto !important;
         display: block;
     }
+    .liqBlock, .liqRow {
+        width:100% !important;
+        padding: 0 !important;
+    }
     .fbButton {
-         width: 100% !important;
+         width: 93% !important;
     }
     .callMe {
        padding: 0 !important;

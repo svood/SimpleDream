@@ -13,7 +13,12 @@ import CallMe from '../componenst/callMe';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { addPhone, addMailNumber, addFio, addCity, addToCard } from '../actions/mainPage'
-
+import {
+    BrowserView,
+    MobileView,
+    isBrowser,
+    isMobile
+} from "react-device-detect";
 
 function HomePage(props) {
     const dispatch = useDispatch();
@@ -24,7 +29,19 @@ function HomePage(props) {
     }; // Store
     const { store } = mainPageStore();
 
+    const mobile = () => {
+        let imagePath;
+        let imageType;
+        if (isMobile) {
+                imagePath = '/images/webp',
+                imageType = '.webp'
+        } else {
+                imagePath = '/images',
+                imageType = '.jpg'
+        }
+        return {imagePath:imagePath,imageType:imageType}
 
+    }
     const [totalPrice, setTotalPrice] = useState(0)
     const [type, SetType] = useState(2)
 
@@ -99,12 +116,12 @@ function HomePage(props) {
 
     return (
         <Container fluid={true}>
-            {console.log("isChrome", props.isChrome)}
+           
             <Header />
             <Container className="main">
                 <Row>
                     <Col className="section2" sm={12}>
-                        <Advantages isMobile={props.isMobile} />
+                        <Advantages isMobile={isMobile} />
                         <MainBlock />
                     </Col>
                     <Col className="section3" sm={12} id="productSection">
@@ -124,8 +141,8 @@ function HomePage(props) {
                                             <Card className="productBlock">
                                                 {item.hot ? <div className="hot"></div> : false}
 
-                                                <ProductModal title={item.title} imagePath={props.imagePath} imageType={props.imageType}>
-                                                    <CardImg key={item.article} top width="100%" height="300px" src={props.imagePath + item.img[0].src + props.imageType} alt="Card image cap" />
+                                                <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
+                                                    <CardImg key={item.article} top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
                                                 </ProductModal>
                                                 <CardBody>
                                                     <CardText className="cardText ">
@@ -199,7 +216,7 @@ function HomePage(props) {
 
 
                     <Col className="sectio5 mt-5 mb-5" sm={12} id="diliverySection">
-                        <Dilivery isMobile={props.isMobile} />
+                        <Dilivery isMobile={isMobile} />
                     </Col>
                     <CallMe />
                     <Col className="section4 mt-5 mb-5" sm={12} id="aboutSection">
@@ -230,32 +247,6 @@ function HomePage(props) {
 
     )
 }
-HomePage.getInitialProps = ({ req }) => {
-    let imagePath;
-    let imageType;
-    var MobileDetect = require('mobile-detect'),
-        md = new MobileDetect(req.headers['user-agent']);
-        console.log(md.mobile())
-  
-    let isMobile =  md.mobile() != null ? true : false 
-    
-    let isChrome = md.userAgent() === 'Chrome' ? true : false 
-    
-   
-    if (isChrome) {
-        imagePath = '/images/webp',
-            imageType = '.webp'
-    } else {
-        imagePath = '/images',
-            imageType = '.jpg'
-    }
 
-    return {
-        isChrome: isChrome,
-        imagePath: imagePath,
-        imageType: imageType,
-        isMobile: isMobile
-    }
-};
 
 export default withRedux(HomePage)

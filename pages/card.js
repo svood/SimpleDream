@@ -200,7 +200,7 @@ function HomePage(props) {
                     border: '4px',
                     borderBottomStyle: 'groove',
                     borderColor: '#d3ffdd',
-                }}>
+                }} className="liqRow">
                     <Col sm={12} className='mt-4 mb-4'>
                         <h1 style={{
                             fontSize: '19px',
@@ -226,7 +226,7 @@ function HomePage(props) {
 
                     </Col>
 
-                    <Col sm={12} md={9} className='m-auto'>
+                    <Col sm={12} md={9} className='m-auto' className='liqBlock'>
                         <div id="liqpayBlock" ref={liqBlock}></div>
                     </Col>
 
