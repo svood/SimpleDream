@@ -64,7 +64,7 @@ const Header = (props) => {
                 }}>{store.card.length}</strong></NavLink>
               </NavItem>
             </Nav>
-            <NavbarText><FontAwesomeIcon icon={faPhone} /> +38 (095) 31 40 133 </NavbarText>
+            <NavbarText><FontAwesomeIcon icon={faPhone}/> <a href='tel:+380953140133'>+38 (095) 31 40 133 </a></NavbarText>
           </Collapse>
         </Container>
       </Navbar>

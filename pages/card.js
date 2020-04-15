@@ -47,7 +47,7 @@ function HomePage(props) {
                     signature: result.data.signature,
                     embedTo: "#liqpayBlock",
                     language: "ru",
-                    mode: isMobile ? "embed" : "embed" // embed || popup
+                    mode: isMobile ? "popup" : "embed" // embed || popup
                 }).on("liqpay.callback", function (data) {
                     console.log(data.status);
                     console.log(data);
@@ -126,8 +126,8 @@ function HomePage(props) {
                 border: '4px',
                 borderBottomStyle: 'groove',
                 borderColor: '#d3ffdd',
-            }} fluid={true} 
-            className='mt-5 ml-auto'>
+            }} fluid={true}
+                className='mt-5 ml-auto'>
                 <>
                     <Col sm={12} className='mt-4 mb-4'>
                         <h1 style={{
@@ -260,9 +260,9 @@ function HomePage(props) {
 
                     <Col sm={12} md={8} className='mt-5 ml-auto mr-auto' >
                         <Steps current={currentStep}>
-                            <Steps.Step title="Ваша Корзина" />
-                            <Steps.Step title="Информация о доставке" />
-                            <Steps.Step title="Вариант оплаты" />
+                            <Steps.Step title="Корзина" />
+                            <Steps.Step title="Доставка" />
+                            <Steps.Step title="Оплата" />
                         </Steps>
                     </Col>
 
@@ -316,16 +316,23 @@ function HomePage(props) {
                             </Row>
 
 
-                            <div className="footer-buttons">
-                                <button onClick={e => setCurrentStep(0)}>Назад</button>
-                                <button onClick={e => saveDataHendler()}>Далее</button>
-                            </div>
+
+                            {
+                                isMobile ?
+                                    <div className="footer-buttons">
+                                        <button onClick={e => setCurrentStep(0)}>Назад</button>
+                                        <button onClick={e => saveDataHendler()}>Далее</button>
+                                    </div>
+                                    :
+                                    <div className="footer-buttons">
+                                        <button onClick={e => saveDataHendler()}>Далее</button>
+                                        <button onClick={e => setCurrentStep(0)}>Назад</button>
+                                    </div>
+                            }
 
                         </Container> : null}
                         {currentStep === 2 ? <CardStep3 /> : null}
                     </Col>
-
-
 
                     <Col className="sectio5 mt-5 mb-5" sm={12} id="diliverySection">
                         <Dilivery />
@@ -363,7 +370,7 @@ HomePage.getInitialProps = ({ req }) => {
         isChrome: isChrome,
         imagePath: imagePath,
         imageType: imageType,
-        isMobile:isMobile
+        isMobile: isMobile
     }
 };
 

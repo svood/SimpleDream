@@ -1,12 +1,14 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
-
-const Dilivery = ({isMobile}) => {
+import {
+    isMobile
+} from "react-device-detect";
+const Dilivery = () => {
     return (
 
         <Row className="about">
             <Col sm={12} md={6}>
-              {!isMobile ? <img src="https://static-eu.insales.ru/files/1/7474/10239282/original/mceclip0-1569489939226.png" /> : null}  
+              {!isMobile ? <img src="/images/deliv.png" /> : null}  
             </Col>
             <Col sm={12} md={6} className="aboutText border">
                 <div className="one">
