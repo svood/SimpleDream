@@ -10,7 +10,12 @@ import { withRedux } from '../lib/redux'
 import { addPhone, addMailNumber, addFio, addCity, addToCard, setPayType } from '../actions/mainPage'
 import Steps, { Step } from 'rc-steps';
 import parse from 'html-react-parser'
-
+import {
+    isMobile,
+    isMobileSafari,
+    isSafari,
+    isEdge
+} from "react-device-detect";
 function HomePage(props) {
     const dispatch = useDispatch();
 
@@ -42,7 +47,7 @@ function HomePage(props) {
                     signature: result.data.signature,
                     embedTo: "#liqpayBlock",
                     language: "ru",
-                    mode: "embed" // embed || popup
+                    mode: isMobile ? "embed" : "embed" // embed || popup
                 }).on("liqpay.callback", function (data) {
                     console.log(data.status);
                     console.log(data);
@@ -51,7 +56,6 @@ function HomePage(props) {
                 }).on("liqpay.close", function (data) {
                     // close
                 });
-
             })
             .catch((err) => {
                 console.log(err);
@@ -122,7 +126,8 @@ function HomePage(props) {
                 border: '4px',
                 borderBottomStyle: 'groove',
                 borderColor: '#d3ffdd',
-            }} className='mt-5 ml-auto'>
+            }} fluid={true} 
+            className='mt-5 ml-auto'>
                 <>
                     <Col sm={12} className='mt-4 mb-4'>
                         <h1 style={{

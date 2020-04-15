@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { ButtonGroup, UncontrolledCollapse, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { ButtonGroup, UncontrolledCollapse, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import data from '../data/products';
 import ProductModal from '../componenst/productModal';
 import NumericInput from 'react-numeric-input';
@@ -7,17 +7,16 @@ import Advantages from '../componenst/sections/advantages';
 import About from '../componenst/sections/about';
 import Dilivery from '../componenst/sections/dilivery';
 import MainBlock from '../componenst/sections/mainBlock';
-import { Wizard } from 'react-multi-steps'
 import Header from '../componenst/header'
 import CallMe from '../componenst/callMe';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
-import { addPhone, addMailNumber, addFio, addCity, addToCard } from '../actions/mainPage'
+import { addToCard } from '../actions/mainPage'
 import {
-    BrowserView,
-    MobileView,
-    isBrowser,
-    isMobile
+    isMobile,
+    isMobileSafari,
+    isSafari,
+    isEdge
 } from "react-device-detect";
 
 function HomePage(props) {
@@ -32,14 +31,14 @@ function HomePage(props) {
     const mobile = () => {
         let imagePath;
         let imageType;
-        if (isMobile) {
-                imagePath = '/images/webp',
-                imageType = '.webp'
-        } else {
-                imagePath = '/images',
+        if (isMobileSafari || isSafari || isEdge) {
+            imagePath = '/images',
                 imageType = '.jpg'
+        } else {
+            imagePath = '/images/webp',
+                imageType = '.webp'
         }
-        return {imagePath:imagePath,imageType:imageType}
+        return { imagePath: imagePath, imageType: imageType }
 
     }
     const [totalPrice, setTotalPrice] = useState(0)
@@ -116,7 +115,7 @@ function HomePage(props) {
 
     return (
         <Container fluid={true}>
-           
+
             <Header />
             <Container className="main">
                 <Row>

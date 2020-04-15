@@ -33,7 +33,6 @@ app.prepare()
         server.use(bodyParser.json({ limit: "500mb" }));
         server.use(express.json()) // for parsing application/json
         server.use(express.urlencoded({ extended: false })) // for parsing application/x-www-form-urlencoded;
-
         server.use(compression());
         server.use(cors());
 
@@ -47,7 +46,7 @@ app.prepare()
                 'amount': req.body.amount,
                 'currency': 'UAH',
                 'description': 'SimpleDreams',
-                'order_id': 'order_id_1',
+                'order_id': new Date().valueOf(),
                 'version': '3'
             });
             res.end(html);
