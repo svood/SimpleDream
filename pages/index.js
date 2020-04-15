@@ -231,20 +231,17 @@ function HomePage(props) {
     )
 }
 HomePage.getInitialProps = ({ req }) => {
-    let userAgent;
     let imagePath;
     let imageType;
-    if (req) { // if you are on the server and you get a 'req' property from your context
-        userAgent = req.headers['user-agent'] // get the user-agent from the headers
-    } else {
-        userAgent = navigator.userAgent // if you are on the client you can access the navigator from the window object
-    }
-    let isMobile = Boolean(userAgent.match(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-    ))
-    let isChrome = Boolean(userAgent.match(
-        /Android|Opera Mini|IEMobile|WPDesktop|Chrome/i
-    ))
+    var MobileDetect = require('mobile-detect'),
+        md = new MobileDetect(req.headers['user-agent']);
+        console.log(md.mobile())
+  
+    let isMobile =  md.mobile() != null ? true : false 
+    
+    let isChrome = md.userAgent() === 'Chrome' ? true : false 
+    
+   
     if (isChrome) {
         imagePath = '/images/webp',
             imageType = '.webp'

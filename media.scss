@@ -1,5 +1,8 @@
 /* Custom, iPhone Retina */ 
 @media only screen and (max-width: 600px)  {
+    iframe {
+        width: 98% !important;
+    }
     ul {
         padding: 1em;
     }
@@ -18,14 +21,14 @@
     .fbButton {
          width: 100% !important;
     }
-   .callMe {
+    .callMe {
        padding: 0 !important;
    }
-   .nav-item {
+    .nav-item {
        width: 100% !important;
        text-align: center;
-   }
-   .viza {
+    }
+    .viza {
     width: 42%  !important;
     text-align: center  !important;
     float: none  !important;
@@ -42,5 +45,5 @@
    .footer-buttons button {
     border-radius: 0 !important;
     width: 100% !important;
-}
+    }
 }
