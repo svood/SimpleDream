@@ -1,22 +1,21 @@
 /* Custom, iPhone Retina */ 
-@media screen and (orientation:landscape) and (max-device-width: 900px) {
-    html{
-        -webkit-transform: rotate(-90deg);
-           -moz-transform: rotate(-90deg);
-            -ms-transform: rotate(-90deg);
-             -o-transform: rotate(-90deg);
-                transform: rotate(-90deg);
-        -webkit-transform-origin: left top;
-           -moz-transform-origin: left top;
-            -ms-transform-origin: left top;
-             -o-transform-origin: left top;
-                transform-origin: left top;
-        width: 320px; /*Разрешение экрана iPhone*/
-        position: absolute;
-        top: 100%;
-            left: 0
+@media only screen and (max-width: 1400px)  {
+    .advancedFirst {
+        display: none;
     }
-}
+    .aboutText {
+        max-height: 299px;
+        display: block;
+        overflow: scroll;
+    }
+    .footerLogo {
+        width: 37% !important;
+        text-align: left;
+        float: none !important;
+        display: block;
+        margin: 0 auto;
+    }
+ }
 
 @media only screen and (max-width: 600px)  {
     iframe {
@@ -67,4 +66,5 @@
     border-radius: 0 !important;
     width: 100% !important;
     }
+
 }

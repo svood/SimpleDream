@@ -15,9 +15,9 @@ const Advantages = ({ isMobile }) => {
                     <Slider />
                 </Col> : null}
 
-            <Col sm={12} md={isMobile ? 12 : 4} className="p-2" style={{ background: ' #ffffff' }}>
+            <Col sm={12} md={4} className="p-2" style={{ background: ' #ffffff' }}>
                 <img src="/images/logo.png" style={{
-                    width: '47%',
+                    width: '42%',
                     margin: '0 auto',
                     display: 'block',
                     marginBottom: '28px'

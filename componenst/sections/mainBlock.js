@@ -10,7 +10,7 @@ const MainBlock = () => {
         <Row >
             <Col>
                 <CardGroup className="mt-5 mb-5 text-center" style={{border:'3px dotted #833dce2b'}}>
-                    <Card body outline color="info" style={{border:'none'}}>
+                    <Card body outline color="info" style={{border:'none'}} className="advancedFirst">
                        <CardText  style={{textAlign: 'left', borderLeft: '1px solid black', paddingLeft:' 10%',fontSize: '14pt',color:'#5f5f5f',fontWeight:'600' }}>Преимущества<br/>Наших простынок</CardText>
                     </Card>
                     <Card body outline color="info" style={{ border: 'none' }} className="aboutCartTitle">

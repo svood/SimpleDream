@@ -136,7 +136,7 @@ function HomePage(props) {
                                 data.map(function (item, it) {
                                     return (
 
-                                        (type === item.type || type === 2) ? <Col sm={12} md={3} className="mt-5" key={`prod_${it}`}>
+                                        (type === item.type || type === 2) ? <Col sm={12} md={6} lg={6} xl={4} className="mt-5" key={`prod_${it}`}>
                                             <Card className="productBlock">
                                                 {item.hot ? <div className="hot"></div> : false}
 

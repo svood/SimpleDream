@@ -318,7 +318,7 @@ function HomePage(props) {
 
 
                             {
-                                isMobile ?
+                                !isMobile ?
                                     <div className="footer-buttons">
                                         <button onClick={e => setCurrentStep(0)}>Назад</button>
                                         <button onClick={e => saveDataHendler()}>Далее</button>

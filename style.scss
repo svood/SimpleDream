@@ -163,7 +163,7 @@ input[type=text]:focus, textarea:focus {
     // border-top: 2px solid;
     border-bottom: 2px solid;
     font-size: 2.2em;
-    padding: 11px 60px;
+    // padding: 11px 60px;
     margin: 0; 
     line-height: 1;
     border-color: #8642b933;
@@ -171,6 +171,11 @@ input[type=text]:focus, textarea:focus {
         color: $titleColor; 
         font-size: 0.7em;
     }
+}
+.footerLogo {
+    width: 34%;
+    text-align: left;
+    float: right;
 }
 .one span:before, .one span:after {
     // content: ""; 
