@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { ButtonGroup, Alert, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { faUser,faCity,faPhone,faTruck } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faCity, faPhone, faTruck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Dilivery from '../componenst/sections/dilivery';
 import axios from 'axios'
@@ -22,7 +22,7 @@ function HomePage(props) {
 
     const [error, setError] = useState(null);
     const [currentStep, setCurrentStep] = useState(0);
-    const [payType, setPayType] = useState(0);
+
     const liqBlock = useRef(null)
 
     const [fioValid, setFioValid] = useState(false);
@@ -30,12 +30,23 @@ function HomePage(props) {
     const [userPhoneValid, setUserPhoneValid] = useState(false);
     const [userCityValid, setUserCityValid] = useState(false);
 
+
+    useEffect(() => {
+        if (store.userCity != '') setUserCityValid(true);
+        if (store.userFio != '') setFioValid(true);
+        if (store.userMailNumber != '') setUserMailNumberValid(true);
+        if (store.userPhone != '') setUserPhoneValid(true);
+
+    });
+
+
     const sendReqest = async () => {
         let from;
+        handeSetPayType(1);
+
         const requestBody = {
             amount: Number(totlalPrice()),
         }
-
         const config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -43,7 +54,7 @@ function HomePage(props) {
                 'Access-Control-Allow-Headers': '*',
             }
         }
-
+// 5168 7453 2132 9879
         await axios.post('https://simple-dreams.com.ua/api/liqpay', qs.stringify(requestBody), config)
             .then((result) => {
                 console.log(result.data)
@@ -54,12 +65,15 @@ function HomePage(props) {
                     language: "ru",
                     mode: isMobile ? "popup" : "embed" // embed || popup
                 }).on("liqpay.callback", function (data) {
-                    console.log(data.status);
-                    console.log(data);
+                    console.log("data callback",data);
+                    console.log("data status",data.status);
+                    if(data.status === "success") {
+                        sendForm();
+                    }
                 }).on("liqpay.ready", function (data) {
                     // ready
                 }).on("liqpay.close", function (data) {
-                    // close
+                    console.log("close", data)
                 });
             })
             .catch((err) => {
@@ -67,6 +81,39 @@ function HomePage(props) {
             })
     }
 
+    const sendForm = async () => {
+        let products = '';
+        store.card.forEach(element => {
+            products += element.title + ' Размер: ' + element.sizeInfo + '\n'
+        });
+
+        const requestBody = {
+            fio: store.userFio,
+            mailNumber: store.userMailNumber,
+            phone: store.userPhone,
+            city: store.userCity,
+            card: store.card,
+            products: products,
+            total: totlalPrice(),
+            payType: (store.payType === 1) ? "Оплачено Приват" : "Наложенный платеж"
+        }
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+            }
+        }
+
+        await axios.post('http://localhost:3000/api/sendform', qs.stringify(requestBody), config)
+            .then((result) => {
+                console.log(result.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 
     const mainPageStore = () => {
         return useSelector(state => ({
@@ -90,7 +137,7 @@ function HomePage(props) {
     }
 
     const handeSetPayType = (e) => {
-        dispatch(setPayType(Number(e.target.value)))
+        dispatch(setPayType(e))
     }
 
     const removeProduct = (element) => {
@@ -122,6 +169,7 @@ function HomePage(props) {
     const saveDataHendler = () => {
         if (fioValid && userCityValid && userPhoneValid && userMailNumberValid) {
             setCurrentStep(2)
+            sendReqest()
         } else {
             setError('Пожайлуста, заполните все поля')
             setTimeout(() => {
@@ -199,17 +247,10 @@ function HomePage(props) {
         )
     }
 
-    const changePayType = (e) => {
-        e.preventDefault()
-        liqBlock.current.innerText = "";
-        if (e.target.value === "1") {
-            setPayType(0)
-            sendReqest()
-        } else {
-            setPayType(Number(e.target.value))
-        }
+    const agreeWithNovaPay = () => {
+        sendForm();
+        dispatch(addToCard([]))
     }
-
 
 
     const CardStep3 = () => {
@@ -229,31 +270,27 @@ function HomePage(props) {
                             borderLeft: '2px solid #8642b9',
                             paddingLeft: '12px',
                             color: '#8642b9',
-                        }} >Данные получателя</h1>
+                        }} >Выбор Варианта оплаты</h1>
                     </Col>
-                    <Col sm={12} md={9} className='m-auto'>
-                        {/* <ButtonGroup>
-                            <Button color="success" onClick={e => sendReqest()}>Приват 24</Button>
-                            <Button color="success" outline >Наложенным платежом</Button>
-                        </ButtonGroup> */}
-
-                        <FormGroup onChange={e => changePayType(e)}>
-                            <Label for="exampleSelect">Выберите вариант оплаты</Label>
-                            <Input type="select" name="select" id="exampleSelect">
-                                <option value={0}>-</option>
-                                <option value={1}>Приват 24</option>
-                                <option value={2}>Наложенным платежом</option>
-                            </Input>
-                        </FormGroup>
-
+                    <Col sm={12} md={6} className='m-auto'>
+                        <Button color="primary" onClick={e => sendReqest()} outline={store.payType === 1 ? false : true} block>Приват 24</Button>
                     </Col>
+                    <Col sm={12} md={6} className='m-auto'>
+                        <Button color="primary" onClick={e => handeSetPayType(2)} outline={store.payType === 2 ? false : true} block>Наложенным платежом</Button>
+                    </Col>
+                    {store.payType === 2 ?
+                        <Col sm={12} className="mt-5 text-center">
+                            <p className='mb-5' style={{ color: '#214d7b', fontSize: '13pt', fontWeight: '500' }}>Вы выбрали метод оплаты наложенным платежом при получении товара в отделении Новой Почты. Дополнительно оплачивается 2% от суммы + 20 грн оформление, согласно тарифам Новой Почты ! </p>
+                            <Button color="success" className="m-auto" onClick={e => agreeWithNovaPay()} >Подтвердить заказ</Button>
+                        </Col> : null
+                    }
 
-                    <Col sm={12} md={9} className='m-auto' className='liqBlock'>
+                    <Col sm={12} md={9} className='liqBlock'>
                         <div id="liqpayBlock" ref={liqBlock}></div>
                     </Col>
 
                     <Col sm={12} md={9} className='m-auto'>
-                        <div className="footer-buttons">
+                        <div style={{ background: 'none', color: '#656565' }}>
                             <button onClick={e => setCurrentStep(1)}>Назад</button>
                         </div>
                     </Col>
@@ -308,9 +345,9 @@ function HomePage(props) {
                                 {error ? <Col sm={12} className="mt-2 mb-2"><Alert color="danger">{error}</Alert></Col> : null}
 
 
-                                <Col sm={12} md={5} className="m-auto">
+                                <Col sm={12} md={5} className="m-auto" className="formContainer mb-5">
                                     <div className="mt-5 mb-5 text-left">
-                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faUser}/> ФИО:</span>
+                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faUser} /> ФИО:</span>
                                         <Textbox
                                             attributesInput={{ // Optional.
                                                 id: 'fio',
@@ -334,7 +371,7 @@ function HomePage(props) {
                                         />
                                     </div>
                                     <div className="mt-5 mb-5 text-left">
-                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faCity}/> Город:</span>
+                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faCity} /> Город:</span>
                                         <Textbox
                                             attributesInput={{ // Optional.
                                                 id: 'city',
@@ -358,7 +395,7 @@ function HomePage(props) {
                                         />
                                     </div>
                                     <div className="mt-5 mb-5 text-left">
-                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faPhone}/> Телефон получателя:</span>
+                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faPhone} /> Телефон получателя:</span>
                                         <Textbox
                                             attributesInput={{ // Optional.
                                                 id: 'phone',
@@ -374,7 +411,6 @@ function HomePage(props) {
                                                 max: 44,
                                                 msgOnError: "Пожайлуста вишите телефон получателя",
                                                 regMsg: "regMsg",
-
                                             }}
                                             validationCallback={res =>
                                                 setUserPhoneValid(!res)
@@ -384,7 +420,7 @@ function HomePage(props) {
 
                                     </div>
                                     <div className="mt-5 mb-5 text-left">
-                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faTruck}/> № отделения Новой Почты: </span>
+                                        <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faTruck} /> № отделения Новой Почты: </span>
                                         <Textbox
                                             attributesInput={{ // Optional.
                                                 id: 'userMailNumber',

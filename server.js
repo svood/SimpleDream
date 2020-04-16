@@ -10,7 +10,7 @@ const compression = require('compression');
 var LiqPay = require('./libs/liqpay');
 const PORT = 3000;
 var fs = require('fs');
-
+const axios = require('axios');
 const public = 'sandbox_i31171724869';
 const private = 'sandbox_EKnOtyKVqlzpFJjHfn7vsH2bcqJ6PGkI8rZts64x'
 
@@ -51,6 +51,41 @@ app.prepare()
             });
             res.end(html);
         });
+
+        server.post('/api/sendform', (req, res) => {
+
+            const token = '1146944249:AAGlKsZ4O_Bq2Mb4zU8OGxp3tXrPdNAsfdo';
+            const chat = '628193328';
+            let fields = [
+                '<b>-----Новый заказ-----</b>',
+                '<b>Оплата:</b>: ' + req.body.payType,
+                '<b>ФИО</b>: ' + req.body.fio,
+                '<b>Телефон</b>: ' + req.body.phone,
+                '<b>Город</b>: ' + req.body.city,
+                '<b>Отделение Новой почты</b>: ' + req.body.mailNumber,
+                '<b>----------Товары----------</b> ',
+                req.body.products,
+                '<b>--------------------</b> ',
+                '<b>Всего</b>: ' + req.body.total + 'грн',
+            ]
+            let msg = ''
+            //проходимся по массиву и склеиваем все в одну строку
+            fields.forEach(field => {
+                msg += field + '\n'
+            });
+            //кодируем результат в текст, понятный адресной строке
+            msg = encodeURI(msg)
+
+
+            axios.get(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat}&parse_mode=html&text=${msg}`)
+                .then((result) => {
+                    res.end(result);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.end(err);
+                })
+        })
 
 
 

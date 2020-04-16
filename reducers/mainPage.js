@@ -3,7 +3,7 @@ const initialState = {
     userMailNumber: '',
     userFio: '',
     userCity: '',
-    payType:0,
+    payType:1,
     card: [],
 };
 
