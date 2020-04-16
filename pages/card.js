@@ -106,7 +106,7 @@ function HomePage(props) {
             }
         }
 
-        await axios.post('http://localhost:3000/api/sendform', qs.stringify(requestBody), config)
+        await axios.post('https://simple-dreams.com.ua/api/sendform', qs.stringify(requestBody), config)
             .then((result) => {
                 console.log(result.data)
             })
