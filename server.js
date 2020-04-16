@@ -55,7 +55,7 @@ app.prepare()
         server.post('/api/sendform', (req, res) => {
 
             const token = '1146944249:AAGlKsZ4O_Bq2Mb4zU8OGxp3tXrPdNAsfdo';
-            const chat = '628193328';
+            const chat = '-323585312';
             let fields = [
                 '<b>-----Новый заказ-----</b>',
                 '<b>Оплата:</b>: ' + req.body.payType,
