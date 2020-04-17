@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { ButtonGroup, UncontrolledCollapse, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { ButtonGroup, UncontrolledCollapse, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import data from '../data/products';
 import ProductModal from '../componenst/productModal';
 import NumericInput from 'react-numeric-input';
@@ -12,6 +12,8 @@ import CallMe from '../componenst/callMe';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { addToCard } from '../actions/mainPage'
+import { Select, Button } from 'antd';
+
 import {
     isMobile,
     isMobileSafari,
@@ -27,6 +29,7 @@ function HomePage(props) {
         }), shallowEqual);
     }; // Store
     const { store } = mainPageStore();
+    const { Option } = Select;
 
     const mobile = () => {
         let imagePath;
@@ -74,39 +77,14 @@ function HomePage(props) {
     }
 
 
-    const CustomSizeWidth = (id, startWidth, startHeight, defaultPrice, newWidth, it) => {
-        let ProductPriceField = document.getElementById(id);
-        let ProductCustomField = document.getElementById(id + "_customHeight").value;
-        let WidthPrice = ((defaultPrice / startWidth) * Number(newWidth)) - defaultPrice;
-        let HeightPrice = ((defaultPrice / startHeight) * Number(ProductCustomField)) - defaultPrice;
-        ProductPriceField.value = WidthPrice + HeightPrice + defaultPrice + " грн";
-    }
 
-    const CustomSizeHeight = (id, startWidth, startHeight, defaultPrice, newHeight, it) => {
-        let ProductPriceField = document.getElementById(id);
-        let ProductCustomField = document.getElementById(id + "_customWidth").value;
-        let HeightPrice = ((defaultPrice / startHeight) * Number(newHeight)) - defaultPrice;
-        let WidthPrice = ((defaultPrice / startWidth) * Number(ProductCustomField)) - defaultPrice;
-        ProductPriceField.value = HeightPrice + WidthPrice + defaultPrice + " грн";
-    }
 
-    const changePrice = (itemId, addedPrice, defaultPrice, startWidth, startHeight, it) => {
+    const changePrice = (itemId, value) => {
         let ProductPriceField = document.getElementById(itemId);
-        let ProductCustomField = document.getElementById(itemId + "_customPrice");
-        let pricePlus = Number(addedPrice);
-
-        if (pricePlus > 0) {
-            ProductCustomField.style.display = "none"
-            ProductPriceField.value = pricePlus + " грн";
-            data[it].price = pricePlus;
-        } else {
-            let ProductCustomFieldHeight = document.getElementById(itemId + "_customHeight").value;
-            let ProductCustomFieldWidth = document.getElementById(itemId + "_customWidth").value;
-            let WidthPrice = ((defaultPrice / startWidth) * Number(ProductCustomFieldWidth)) - defaultPrice;
-            let HeightPrice = ((defaultPrice / startHeight) * Number(ProductCustomFieldHeight)) - defaultPrice;
-            ProductPriceField.value = Number(WidthPrice) + Number(HeightPrice) + defaultPrice + " грн";
-            ProductCustomField.style.display = "block";
-        }
+        let attributes = document.getElementById(itemId + "_attribute");
+        attributes.setAttribute('price', value)
+        // attributes.setAttribute('selectedSize', e.target.options[e.target.selectedIndex].innerText)
+        ProductPriceField.value = value + " грн";
     }
 
 
@@ -148,55 +126,21 @@ function HomePage(props) {
                                                         <p><input id={item.id} value={item.price + " грн"} disabled /></p>
                                                         <p className="mt-2 mb-2 itemIitle">{item.title + ", Материал: " + item.material} </p>
                                                         <Row className="mt-3">
-                                                            <Col sm={12} md={6}>
-                                                                <FormGroup>
-                                                                    <Input type="select" name="select" id="size" className={item.id + "_standartSelect"} onChange={e => changePrice(item.id, e.target.value, item.price, item.startWidth, item.startHeight, it)}>
-                                                                        {item.sizes.map(function (data, i) {
-                                                                            return (
-                                                                                <option value={data.price} defaultChecked={(i <= 1) ? true : false} key={it + data.size}>{data.size}</option>
-                                                                            )
-                                                                        })}
-                                                                        <option value="0">Свой размер</option>
-                                                                    </Input>
-                                                                </FormGroup>
+                                                            <Col sm={12} md={6} id={item.id + "_size"} >
+                                                                <Select style={{ width: '100%' }} defaultValue={item.sizes[0].size} onChange={(value) => changePrice(item.id, value)}>
+                                                                    {item.sizes.map(function (data, i) {
+                                                                        return (
+                                                                            <Option value={data.price} defaultChecked={(i <= 1) ? true : false} key={it + data.size}>{data.size}</Option>
+                                                                        )
+                                                                    })}
+                                                                </Select>
                                                             </Col>
                                                             <Col sm={12} md={6}>
-                                                                <Button onClick={e => addToCart(item, it)} className="addToCart" outline color="success">В корзину</Button>
+                                                                <Button onClick={e => addToCart(item, it)} className="addToCart" type="primary">В корзину</Button>
                                                             </Col>
                                                         </Row>
 
-                                                        <div id={item.id + "_customPrice"} style={{ display: 'none' }}>
-                                                            <Row className="CustomInputs" >
-                                                                <Col sm={12}>* Впишите размеры в см </Col>
-                                                                <Col sm={12} md={6}>
-                                                                    <Label for="long">Ширина</Label>
-                                                                    <NumericInput
-                                                                        id={item.id + "_customWidth"}
-                                                                        style={false}
-                                                                        name="long"
-                                                                        defaultValue={item.startWidth}
-                                                                        min={item.startWidth}
-                                                                        max={item.maxWidth}
-                                                                        onChange={value => CustomSizeWidth(item.id, item.startWidth, item.startHeight, item.price, value, it)}
-                                                                    />
-                                                                </Col>
 
-                                                                <Col sm={12} md={6}>
-                                                                    <Label for="width">Длинна</Label>
-                                                                    <form>
-                                                                        <NumericInput
-                                                                            id={item.id + "_customHeight"}
-                                                                            style={false}
-                                                                            name="width"
-                                                                            defaultValue={item.startHeight}
-                                                                            min={item.starHeight}
-                                                                            max={item.maxHeight}
-                                                                            onChange={value => CustomSizeHeight(item.id, item.startWidth, item.startHeight, item.price, value, it)}
-                                                                        />
-                                                                    </form>
-                                                                </Col>
-                                                            </Row>
-                                                        </div>
                                                         <span className="togglerInfo" color="primary" id={`toggler` + item.id} style={{ marginBottom: '1rem', marginTop: '1rem' }}>
                                                             Посмотреть описание простынки
                                                         </span>
@@ -206,7 +150,9 @@ function HomePage(props) {
                                                     </CardText>
                                                 </CardBody>
                                             </Card>
+                                            <div id={item.id + "_attribute"} price={item.price} customWidth={0} CustomSizeHeight={0} selectedSize={item.sizes[0].size}></div>
                                         </Col> : null
+
                                     )
                                 })
                             }
