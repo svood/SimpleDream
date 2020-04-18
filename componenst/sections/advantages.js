@@ -1,21 +1,18 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
 import Slider from '../mainSlider'
-import ModalCall from '../call';
 import CountdownTimer from "react-component-countdown-timer";
-
-
+import {Row, Col } from 'antd';
 
 const Advantages = ({ isMobile }) => {
     return (
 
-        <Row className="advantages mt-5 mb-0">
+        <Row  gutter={[0, 0]}>
             {!isMobile ?
-                <Col sm={12} md={8}>
+                <Col xs={0} sm={0} md={18} lg={17} xl={15}>
                     <Slider />
                 </Col> : null}
 
-            <Col sm={12} md={4} className="p-2" style={{ background: ' #ffffff' }}>
+            <Col xs={24} sm={24} md={6} lg={7} xl={9} className="p-2" style={{ background: ' #ffffff' }}>
                 <img src="/images/logo.png" style={{
                     width: '42%',
                     margin: '0 auto',
@@ -28,26 +25,10 @@ const Advantages = ({ isMobile }) => {
                         <p className="text-center blockTitle">Весенняя  <strong>распродажа</strong> !</p>
                     </span>
                 </div>
-
-
-
                 <div className="mt-0 promo">
                     <CountdownTimer count={5432} showTitle responsive className="mt-0" dayTitle="Дни" hourTitle="Часы" secondTitle="Секунды" minuteTitle="Минуты" />
                 </div>
-
-
-                {/* <ol className="rounded mt-4">
-                    <li><span>Не кашлатится</span></li>
-                    <li><span>Не портится после глажки</span></li>
-                    <li><span>Не портится после стирки</span></li>
-                    <li><span>Не вызывает алергии</span></li>
-                    <li><span>Материя легкая, мягкая, воздушная</span></li>
-                </ol> */}
-                {/* <div className="text-center mt-5">
-                    <ModalCall buttonLabel="Заказать пошив на заказ" />
-                </div> */}
             </Col>
-
         </Row>
 
 

@@ -183,6 +183,15 @@ input[type=text]:focus, textarea:focus {
         font-size: 0.7em;
     }
 }
+.logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 28px 16px 0;
+    float: left;
+    line-height: 2;
+
+}
 .footerLogo {
     width: 34%;
     text-align: left;
