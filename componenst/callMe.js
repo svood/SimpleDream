@@ -1,30 +1,18 @@
 import React from 'react';
-import { Row, Col, Container, Button } from 'reactstrap';
-import ModalCall from '../componenst/call';
-import { faMobile } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Row, Col, Button, Typography } from 'antd';
+import { FacebookOutlined } from '@ant-design/icons';
 
-// facebook-square
 const callMe = () => {
+    const { Paragraph, Text } = Typography;
     return (
-
-        <Container className="callMe border p-5" fluid={true} style={{ background: 'rgba(228, 228, 228, 0.15)' }}>
-            <Row>
-                <Col style={{ textAlign: 'center', }}>
-                    <p>
-                        <span className="fbText">Еще больше товаров в нашем магазине Facebook
-                        <br />
-                            <Button color="success" outline className="fbButton" >
-                                <img src="/images/fb.svg"
-                                    style={{
-                                        width: '28px',
-                                    }} /> Перейти</Button> </span>
-                    </p>
-
-
-                </Col>
-            </Row>
-        </Container>
+        <Row style={{ background: 'rgba(228, 228, 228, 0.15)', marginTop: '4em', marginBottom: '4em' }} justify='center'>
+            <Col span={20} >
+                <Paragraph style={{ textAlign: 'center' }}>
+                    <Text className="fbText">Еще больше товаров в нашем магазине Facebook </Text>
+                </Paragraph>
+                <Button style={{ margin: '0 auto', display: 'block' }} type="primary" shape="round" icon={<FacebookOutlined />} size={'large'} > Перейти </Button>
+            </Col>
+        </Row>
     )
 }
 

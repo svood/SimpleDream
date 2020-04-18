@@ -100,13 +100,9 @@ img {
     }
 
 }
-// .aboutText {
-//     box-shadow: 0 0 black;
-//     text-align: justify;
-//     padding: 15px;
-//     max-height: 20rem;
-//     overflow-y: scroll;
-// }
+.aboutText {
+    font-size: 12pt;
+}
 label {
     text-align: center;
     width: 100%;
@@ -289,10 +285,14 @@ input[type=text]:focus, textarea:focus {
 }
 .hot {
     position: absolute;
-    top: 3%;
+    top: 3em;
     background: red;
-    padding: 0 17px 0 17px;
+    padding: 0 1em 0 1em;
     color: white;
+    z-index: 99;
+    width: 4em;
+    height: 2em;
+    line-height: 2em;
 }
 .productBlock {
     img, a, select {

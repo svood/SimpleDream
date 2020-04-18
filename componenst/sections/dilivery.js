@@ -1,22 +1,24 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
 import {
     isMobile
 } from "react-device-detect";
+
+import { Row, Col } from 'antd';
+
+
 const Dilivery = () => {
     return (
-
-        <Row className="about">
-            <Col sm={12} md={6}>
-              {!isMobile ? <img src="/images/deliv.png" /> : null}  
+        <Row className="about" style={{marginTop:'4em'}}>
+            <Col sm={24} md={12}>
+                {!isMobile ? <img src="/images/deliv.png" /> : null}
             </Col>
-            <Col sm={12} md={6} className="aboutText border">
+            <Col sm={24} md={12} className="aboutText border">
                 <div className="one">
                     <span>
                         <h3>Доставка и Оплата:</h3>
                     </span>
                 </div>
-                <ul className="mt-3">
+                <ul style={{marginTop:'1em'}}>
                     <li>оплата через корзину (Приват 24)</li>
                     <li>наложенный платеж при получении товара в отделении Новой Почты. Дополнительно оплачивается согласно тарифам Новой Почты</li>
                 </ul>
@@ -25,7 +27,7 @@ const Dilivery = () => {
 
                     Бесплатная доставка на склад Новой Почты осуществляется при заказе от 2000 грн.
                 </p>
-                <a href="/shipment" style={{color:'#2654b5'}}>Подробнее в разделе Доставка и Оплата</a>
+                <a href="/shipment" style={{ color: '#2654b5' }}>Подробнее в разделе Доставка и Оплата</a>
             </Col>
         </Row>
     )

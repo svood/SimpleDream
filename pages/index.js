@@ -69,15 +69,10 @@ function HomePage(props) {
         ProductPriceField.value = value + " грн";
     }
 
-
-
-
-
     return (
-        <>
+        <div className='main'>
             <Advantages isMobile={isMobile} />
             <MainBlock />
-
             <Row gutter={[0, 48]} justify="center">
                 <Col>
                     <Button outline color="info" onClick={e => SetType(2)}>Все</Button>
@@ -85,17 +80,16 @@ function HomePage(props) {
                     <Button outline color="info" onClick={e => SetType(0)}>Девочкам</Button>
                 </Col>
             </Row>
-
-            <Row gutter={[16,16]} justify="center" >
+            <Row gutter={[16, 16]} justify="center" >
                 {
                     data.map(function (item, it) {
                         return (
                             (type === item.type || type === 2) ?
-                                <Col  xs={20} sm={20} md={12} lg={8} xl={7}>
+                                <Col xs={20} sm={20} md={12} lg={8} xl={6}>
                                     <Card hoverable>
-                                        {item.hot ? <div className="hot"></div> : false}
+                                        {item.hot ? <div className="hot">HOT</div> : false}
                                         <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
-                                            <img key={item.article} top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
+                                            <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
                                         </ProductModal>
                                         <p><input id={item.id} value={item.price + " грн"} disabled /></p>
                                         <p className="mt-2 mb-2 itemIitle">{item.title + ", Материал: " + item.material} </p>
@@ -113,7 +107,7 @@ function HomePage(props) {
                                                 <Button onClick={e => addToCart(item, it)} className="addToCart" type="primary">В корзину</Button>
                                             </Col>
                                         </Row>
-                                        <Collapse style={{marginTop:'1em'}}>
+                                        <Collapse style={{ marginTop: '1em' }}>
                                             <Panel header="Посмотреть описание простынки" >
                                                 <p>{item.text}</p>
                                             </Panel>
@@ -130,7 +124,6 @@ function HomePage(props) {
             <CallMe />
             <About />
 
-            {/* CARD */}
             <div>
                 {
                     store.card.length > 0 ?
@@ -140,7 +133,7 @@ function HomePage(props) {
                         </div> : null
                 }
             </div>
-        </ >
+        </div>
 
     )
 }

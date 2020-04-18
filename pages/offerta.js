@@ -29,11 +29,11 @@ function Return() {
     return (
         <Container fluid={true}>
             <Header />
-            <Container className="main mt-5">
+            <Container className="main ">
                 <Row>
 
 
-                    <Col sm={12} md={9} className="mt-5 mb-5 ml-auto mr-auto infoContent" >
+                    <Col sm={12} md={9} className="infoContent" >
                         <h1>Договор публичной оферты</h1>
                         <h6>Общие положения</h6>
                         <p>

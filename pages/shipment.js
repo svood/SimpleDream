@@ -1,22 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { ButtonGroup, UncontrolledCollapse, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import data from '../data/products';
-import ProductModal from '../componenst/productModal';
-import NumericInput from 'react-numeric-input';
-import Advantages from '../componenst/sections/advantages';
-import About from '../componenst/sections/about';
-import Dilivery from '../componenst/sections/dilivery';
-import MainBlock from '../componenst/sections/mainBlock';
-import { Wizard } from 'react-multi-steps'
-import Header from '../componenst/header'
 import CallMe from '../componenst/callMe';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import {  useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
-import { addPhone, addMailNumber, addFio, addCity, addToCard } from '../actions/mainPage'
+import { Row, Col } from 'antd';
 
 
 function Shipment() {
-
     const mainPageStore = () => {
         return useSelector(state => ({
             store: state.mainPage,
@@ -24,15 +13,10 @@ function Shipment() {
     }; // Store
     const { store } = mainPageStore();
 
-
     return (
-        <Container fluid={true}>
-            <Header />
-            <Container className="main mt-5">
-                <Row>
-
-
-                    <Col sm={12} md={9} className="mt-5 mb-5 ml-auto mr-auto infoContent" >
+        <>
+            <Row className="main" justify='cenetr'>
+                    <Col sm={12} md={20} className='infoContent' style={{margin:'3em auto'}}>
                         <h1>Оплата и доставка</h1>
                         <p>
                             <h3>Варианты оплаты:</h3>
@@ -62,20 +46,6 @@ function Shipment() {
                         </p>
                         <p><strong>Мы будем рады ответить на все вопросы о статусе доставки Вашего заказа по тел.: +38 (095) 314 01 33 в рабочие дни с 10.00 до 18.00</strong></p>
                     </Col>
-
-
-                    <CallMe />
-
-                </Row>
-
-
-
-
-            </Container >
-            <Row className="footer"></Row>
-
-            {/* CARD */}
-            <div>
                 {
                     store.card.length > 0 ?
                         <div className="shopingCard" onClick={e => window.location.href = '/card'}>
@@ -83,13 +53,11 @@ function Shipment() {
                             <img src='/images/ShoppingCart.svg' />
                         </div> : null
                 }
-            </div>
-        </Container >
-
+                </Row >
+              <CallMe />
+              </>
     )
 }
-Shipment.getInitialProps = (ctx) => {
-    return { cookie: ctx.query }
-};
+
 
 export default withRedux(Shipment)

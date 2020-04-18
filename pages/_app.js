@@ -4,32 +4,26 @@ import "react-component-countdown-timer/lib/styles.scss";
 import 'antd/dist/antd.css';
 import 'rc-steps/assets/index.css';
 import '../style.scss';
-import Header from '../componenst/header'
-import Footer from '../componenst/footer'
+import NavBar from '../componenst/header'
+import FooterNav from '../componenst/footer'
 import Head from 'next/head'
-import { Select, Button, Layout } from 'antd';
+import { Layout } from 'antd';
 
 export default function MyApp({ Component, pageProps }) {
-  
+    const { Content, Header,Footer } = Layout;
+
     return (
         <>
+       <Head>
+       <script src="//static.liqpay.ua/libjs/checkout.js" async></script>
 
+        </Head>
 
-            <Head>
-                <script src="//static.liqpay.ua/libjs/checkout.js" async></script>
-            </Head>
-
-            <Layout>
-                <Header />
-            </Layout>
-
-            <Layout style={{width:'95%',margin:'0 auto'}}>
-                <Component {...pageProps} />
-            </Layout>
-
-            <Layout>
-                <Footer />
-            </Layout>
+        <Layout style={{ width: '95%', margin: '0 auto', background: 'white' }}>
+            <Header style={{background: 'white' }}><NavBar/></Header>
+            <Content> <Component {...pageProps} /></Content>
+            <Footer>FooterNav</Footer>
+        </Layout>
 
         </>
     )
