@@ -21,6 +21,23 @@
     iframe {
         width: 98% !important;
     }
+    .footerNav {
+        a {
+            width: 100%;
+            border: 2px dotted #c7c7c7;
+            padding: 4px 9px 6px 10px;
+            margin-right: 2em;
+        }
+    
+    }
+    .ant-card-body {
+        padding: 9px;
+    }
+    .formContainer {
+      width: 100%;
+      border: none !important;
+      padding: 1em;
+    }
     ul {
         padding: 1em;
     }

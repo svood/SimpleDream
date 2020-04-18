@@ -7,23 +7,40 @@ import '../style.scss';
 import NavBar from '../componenst/header'
 import FooterNav from '../componenst/footer'
 import Head from 'next/head'
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 
 export default function MyApp({ Component, pageProps }) {
-    const { Content, Header,Footer } = Layout;
+    const { Content, Header, Footer } = Layout;
 
     return (
         <>
-       <Head>
-       <script src="//static.liqpay.ua/libjs/checkout.js" async></script>
+            <Head>
+                <script src="//static.liqpay.ua/libjs/checkout.js" async></script>
 
-        </Head>
+            </Head>
 
-        <Layout style={{ width: '95%', margin: '0 auto', background: 'white' }}>
-            <Header style={{background: 'white' }}><NavBar/></Header>
-            <Content> <Component {...pageProps} /></Content>
-            <Footer>FooterNav</Footer>
-        </Layout>
+            <Layout style={{ width: '95%', margin: '0 auto', background: 'white' }}>
+                <Header style={{ background: 'white' }}><NavBar /></Header>
+                <Content> <Component {...pageProps} /></Content>
+                <Footer>
+                    <Row>
+                        <Col sm={24} md={20}>
+                            <nav className='footerNav'>
+                                <a href='/' >Главная</a>
+                                <a href='/shipment' >Доставка и Оплата</a>
+                                <a href='/return'> Обмен и возврат</a>
+                                <a href='/offerta'>Договор оферты</a>
+                                <a href='/card'>Корзина</a>
+                            </nav>
+                        </Col>
+                        <Col  sm={24} md={4}>
+                            <img src="/images/vizamaster.svg" className="viza" className="footerLogo" />
+                        </Col>
+                    </Row>
+                </Footer>
+
+
+            </Layout>
 
         </>
     )

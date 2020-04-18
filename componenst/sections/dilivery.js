@@ -8,7 +8,7 @@ import { Row, Col } from 'antd';
 
 const Dilivery = () => {
     return (
-        <Row className="about" style={{marginTop:'4em'}}>
+        <Row className="about" style={{marginTop:'4em',padding:'2em'}}>
             <Col sm={24} md={12}>
                 {!isMobile ? <img src="/images/deliv.png" /> : null}
             </Col>

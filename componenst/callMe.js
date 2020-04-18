@@ -5,8 +5,8 @@ import { FacebookOutlined } from '@ant-design/icons';
 const callMe = () => {
     const { Paragraph, Text } = Typography;
     return (
-        <Row style={{ background: 'rgba(228, 228, 228, 0.15)', marginTop: '4em', marginBottom: '4em' }} justify='center'>
-            <Col span={20} >
+        <Row style={{ background: 'rgba(228, 228, 228, 0.15)', marginTop: '4em', marginBottom: '4em',padding:'2em' }} justify='center'>
+            <Col sm={24} md={20}>
                 <Paragraph style={{ textAlign: 'center' }}>
                     <Text className="fbText">Еще больше товаров в нашем магазине Facebook </Text>
                 </Paragraph>

@@ -6,7 +6,7 @@ import {Row, Col } from 'antd';
 const Advantages = ({ isMobile }) => {
     return (
 
-        <Row  gutter={[0, 0]}>
+        <Row >
             {!isMobile ?
                 <Col xs={0} sm={0} md={18} lg={17} xl={15}>
                     <Slider />
@@ -19,7 +19,7 @@ const Advantages = ({ isMobile }) => {
                     display: 'block',
                     marginBottom: '28px'
                 }} />
-                <div className="one">
+                <div className="one" style={{padding:'1em'}}>
                     <span>
                         <h1>Детские простынки</h1>
                         <p className="text-center blockTitle">Весенняя  <strong>распродажа</strong> !</p>

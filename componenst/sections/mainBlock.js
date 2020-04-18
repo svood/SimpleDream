@@ -14,25 +14,25 @@ const MainBlock = () => {
                 </Card>
             </Col> */}
             <Col xs={24} sm={24} md={6} lg={6} xl={6}>
-                <Card body outline style={{ border: '2px dotted #413381'  }} className="aboutCartTitle">
+                <Card body outline style={{ border: '4px dotted rgb(210, 210, 210)'  }} className="aboutCartTitle">
                     <div style={{ color: '#ec0505',fontSize: '1.5em'     }}><FontAwesomeIcon icon={faGem} /> <br />Не кашлатится</div>
                     {/* <CardText>With supporting text below as a natural lead-in to additional content.</CardText> */}
                 </Card>
             </Col>
             <Col xs={24} sm={24} md={6} lg={6} xl={6}>
-                <Card body outline style={{ border: '2px dotted #413381' }}>
+                <Card body outline style={{ border: '4px dotted rgb(210, 210, 210)' }}>
                     <div className="aboutCartTitle" style={{ color: 'rgb(30, 27, 197)',fontSize: '1.5em' }}><FontAwesomeIcon icon={faStar} /><br /> Не портится после глажки</div>
                     {/* <CardText>With supporting text below as a natural lead-in to additional content.</CardText> */}
                 </Card>
             </Col>
             <Col xs={24} sm={24} md={6} lg={6} xl={6}>
-                <Card body outline style={{ border: '2px dotted #413381' }}>
+                <Card body outline style={{ border: '4px dotted rgb(210, 210, 210)' }}>
                     <div className="aboutCartTitle" style={{ color: 'rgb(40, 167, 69)',fontSize: '1.5em' }}><FontAwesomeIcon icon={faTshirt} /><br /> Не портится после стирки</div>
                     {/* <CardText>With supporting text below as a natural lead-in to additional content.</CardText> */}
                 </Card>
             </Col>
             <Col xs={24} sm={24} md={6} lg={6} xl={6}>
-                <Card body outline style={{border: '2px dotted #413381' }}>
+                <Card body outline style={{border: '4px dotted rgb(210, 210, 210)' }}>
                     <div className="aboutCartTitle" style={{ color: 'rgb(236, 5, 208)',fontSize: '1.5em' }}><FontAwesomeIcon icon={faDisease} /><br /> Не вызывает алергии</div>
                     {/* <CardText>With supporting text below as a natural lead-in to additional content.</CardText> */}
                 </Card>

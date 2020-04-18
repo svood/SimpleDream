@@ -347,6 +347,7 @@ function HomePage(props) {
 
     return (
         <div className="main">
+            {isMobile ? 
             <Row>
                 <Col sm={24} md={12} style={{ margin: '2em auto' }}>
                     <Steps>
@@ -356,7 +357,7 @@ function HomePage(props) {
                         <Step status={currentStep === 3 ? "process" : "finish"} title="Оплата" icon={<SmileOutlined />} />
                     </Steps>
                 </Col>
-            </Row>
+            </Row> : null }
 
 
 
@@ -375,8 +376,8 @@ function HomePage(props) {
                     borderBottomStyle: 'groove',
                     borderColor: '#d3ffdd',
                 }}>
-                    <Row gutter={[16, 16]} style={{ marginTop: '4em' }}>
-                        <Col sm={24} md={8} className="formContainer" >
+                    <Row gutter={{sm:0,md:16}} style={{ marginTop: '4em' }}>
+                        <Col sm={24} md={12} className="formContainer" >
                             <h1 style={{
                                 fontSize: '19px',
                                 textAlign: 'center',

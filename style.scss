@@ -186,12 +186,24 @@ input[type=text]:focus, textarea:focus {
     margin: 16px 28px 16px 0;
     float: left;
     line-height: 2;
-
+    font-family: cursive;
+    color: #453280;
+    font-weight: 600;
+    font-size: large;
 }
 .footerLogo {
     width: 34%;
+    max-width: 95px;
     text-align: left;
     float: right;
+}
+.footerNav {
+    a {
+        border: 2px dotted #c7c7c7;
+        padding: 4px 9px 6px 10px;
+        margin-right: 2em;
+    }
+
 }
 .one span:before, .one span:after {
     // content: ""; 

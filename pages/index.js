@@ -73,19 +73,19 @@ function HomePage(props) {
         <div className='main'>
             <Advantages isMobile={isMobile} />
             <MainBlock />
-            <Row gutter={[0, 48]} justify="center">
+            <Row gutter={{ xs: 2, sm: 2, md: 28, lg: 48 }} justify="center">
                 <Col>
                     <Button outline color="info" onClick={e => SetType(2)}>Все</Button>
                     <Button outline color="info" onClick={e => SetType(1)}>Мальчикам</Button>
                     <Button outline color="info" onClick={e => SetType(0)}>Девочкам</Button>
                 </Col>
             </Row>
-            <Row gutter={[16, 16]} justify="center" >
+            <Row gutter={{ xs: 2, sm: 2, md: 16, lg: 16 }} justify="center" >
                 {
                     data.map(function (item, it) {
                         return (
                             (type === item.type || type === 2) ?
-                                <Col xs={20} sm={20} md={12} lg={8} xl={6}>
+                                <Col xs={24} sm={24} md={12} lg={8} xl={6}>
                                     <Card hoverable>
                                         {item.hot ? <div className="hot">HOT</div> : false}
                                         <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
