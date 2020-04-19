@@ -10,6 +10,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { addToCard } from '../actions/mainPage'
 import { Select, Button, Collapse, Row, Col, Card } from 'antd';
+import LazyLoad from 'react-lazyload';
 
 import {
     isMobile,
@@ -92,7 +93,9 @@ function HomePage(props) {
                                     <Card hoverable>
                                         {item.hot ? <div className="hot">HOT</div> : false}
                                         <ProductModal  title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
-                                            <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
+                                        <LazyLoad height={400} once >
+ <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />      </LazyLoad>
+
                                         </ProductModal>
                                         <p><input id={item.id} value={item.price + " грн"} disabled /></p>
                                         <p className="mt-2 mb-2 itemIitle">{item.title + ", Материал: " + item.material} </p>

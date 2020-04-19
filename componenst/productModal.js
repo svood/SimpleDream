@@ -18,7 +18,7 @@ const ProductModal = (props) => {
         <div>
             <a color="danger" onClick={toggle}>{props.children}</a>
 
-            <Modal title={title} visible={modal} onCancel={e=>setModal(false)} dots={'sda' }>
+            <Modal title={title} visible={modal} onCancel={e=>setModal(false)} centered>
                 <Slider itemImages={itemData.img} imagePath={props.imagePath} imageType={props.imageType} />
             </Modal>
         </div>
