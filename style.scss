@@ -179,6 +179,12 @@ input[type=text]:focus, textarea:focus {
         font-size: 0.7em;
     }
 }
+.ant-card-hoverable:hover {
+    button {
+        background: #36c536;
+        color: white;
+    }
+}
 .logo {
     width: 120px;
     height: 31px;

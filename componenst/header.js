@@ -29,9 +29,6 @@ const NavBar = ({ length }) => {
 
   };
 
-
-
-
   return (
     <>
       <div className="logo" >SimpleDreams</div>
@@ -39,7 +36,7 @@ const NavBar = ({ length }) => {
       {!isMobile ?
         menu('horizontal') :
         <>
-        <Button style={{float:'right', top: '1em'}} type="primary" shape="circle" onClick={e => setVisible(true)} icon={<MenuUnfoldOutlined />} />
+        <Button style={{float:'right', top: '1em'}}  shape="circle" onClick={e => setVisible(true)} icon={<MenuUnfoldOutlined />} />
 
           <Drawer
             title="Меню"

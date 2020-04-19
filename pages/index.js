@@ -80,7 +80,7 @@ function HomePage(props) {
                     <Button outline color="info" onClick={e => SetType(0)}>Девочкам</Button>
                 </Col>
             </Row>
-            <Row gutter={{ xs: 2, sm: 2, md: 16, lg: 16 }} justify="center" >
+            <Row gutter={{ xs: 2, sm: 2, md: 16, lg: 16 }} justify="center" style={{marginTop:'3em'}}>
                 {
                     data.map(function (item, it) {
                         return (
@@ -104,7 +104,7 @@ function HomePage(props) {
                                                 </Select>
                                             </Col>
                                             <Col span={12}>
-                                                <Button onClick={e => addToCart(item, it)} className="addToCart" type="primary">В корзину</Button>
+                                                <Button onClick={e => addToCart(item, it)} className="addToCart"  >В корзину</Button>
                                             </Col>
                                         </Row>
                                         <Collapse style={{ marginTop: '1em' }}>

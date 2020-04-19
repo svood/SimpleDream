@@ -24,8 +24,8 @@ export default function MyApp({ Component, pageProps }) {
                 <Content> <Component {...pageProps} /></Content>
                 <Footer>
                     <Row>
-                        <Col sm={24} md={20}>
-                            <nav className='footerNav'>
+                        <Col sm={24} md={20} className='footerNav'>
+                            <nav >
                                 <a href='/' >Главная</a>
                                 <a href='/shipment' >Доставка и Оплата</a>
                                 <a href='/return'> Обмен и возврат</a>
@@ -33,7 +33,7 @@ export default function MyApp({ Component, pageProps }) {
                                 <a href='/card'>Корзина</a>
                             </nav>
                         </Col>
-                        <Col  sm={24} md={4}>
+                        <Col  sm={24} md={4} className='footerNav'>
                             <img src="/images/vizamaster.svg" className="viza" className="footerLogo" />
                         </Col>
                     </Row>

@@ -257,8 +257,8 @@ function HomePage(props) {
                     padding: '2%'
                 }}> <strong> Всего: {totlalPrice()} грн </strong> </Col>
 
-                <div className="footer-buttons">
-                    <Button color="primary" onClick={e => firstStep()} disabled={(store.card.length === 0) ? true : false}>Далее</Button>
+                <div>
+                    <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => firstStep()} disabled={(store.card.length === 0) ? true : false}>Далее</Button>
                 </div>
             </div>
         )
@@ -299,21 +299,23 @@ function HomePage(props) {
                 <Row>
                     {store.payType === 2 ?
                         <Col sm={12} style={{ margin: '0 auto', marginBottom: '2em', marginTop: '2em' }}>
-                            <p className='mb-5' style={{ color: '#214d7b', fontSize: '13pt', fontWeight: '500', textAlign: 'center' }}>Вы выбрали метод оплаты наложенным платежом при получении товара в отделении Новой Почты. Дополнительно оплачивается 2% от суммы + 20 грн оформление, согласно тарифам Новой Почты ! </p>
-                            <Button shape="round" size='lage' style={{ background: '#17b933', color: 'white', display: 'block', margin: '0 auto', marginBottom: '2em', marginTop: '2em' }} color="success" className="m-auto" onClick={e => agreeWithNovaPay()} >Подтвердить заказ</Button>
+                            <Card>
+                                <p className='mb-5' style={{ color: '#214d7b', fontSize: '13pt', fontWeight: '500', textAlign: 'center' }}>Вы выбрали метод оплаты наложенным платежом при получении товара в отделении Новой Почты. Дополнительно оплачивается 2% от суммы + 20 грн оформление, согласно тарифам Новой Почты ! </p>
+                                <Button shape="round" size='lage' style={{ background: '#17b933', color: 'white', display: 'block', margin: '0 auto', marginBottom: '2em', marginTop: '2em' }} color="success" className="m-auto" onClick={e => agreeWithNovaPay()} >Подтвердить заказ</Button>
+                            </Card>
                         </Col> : null
                     }
                 </Row>
                 <Row>
-                    <Col sm={12} md={9} className='liqBlock'>
+                    <Col sm={24} md={9} className='liqBlock'>
                         <div id="liqpayBlock" ref={liqBlock}></div>
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={12} md={9} className='m-auto'>
-                        <div style={{ background: 'none', color: '#656565' }}>
-                            <button onClick={e => setCurrentStep(1)}>Назад</button>
-                        </div>
+                    <Col sm={24} md={9} className='m-auto'  style={{ display: 'block', margin: '0 auto',  marginTop: '2em' }}>
+                        
+                            <Button onClick={e => setCurrentStep(1)} style={{ display: 'block', margin: '0 auto'}}>Назад</Button>
+                        
                     </Col>
                 </Row>
             </div>
@@ -332,12 +334,12 @@ function HomePage(props) {
                 borderColor: '#d3ffdd',
             }}>
                 <Col span={24}>
-                    <Card style={{textAlign:'center'}}>
+                    <Card style={{ textAlign: 'center' }}>
                         <img src="https://www.neosaransk.ru/assets/img/success.png" style={{
                             maxWidth: '248px', margin: '32px auto', display: 'block'
                         }} />
-                        <p style={{fontSize:'16pt'}}>Ваш заказ успешно оформлен. Мы свяжемся с Вами в близжайшее время </p>
-                        <p style={{fontSize:'12pt'}}>Номер Вашего заказа №41 </p>
+                        <p style={{ fontSize: '16pt' }}>Ваш заказ успешно оформлен. Мы свяжемся с Вами в близжайшее время </p>
+                        <p style={{ fontSize: '12pt' }}>Номер Вашего заказа №41 </p>
                     </Card>
                 </Col>
             </Row>
@@ -347,17 +349,18 @@ function HomePage(props) {
 
     return (
         <div className="main">
-            {isMobile ? 
-            <Row>
-                <Col sm={24} md={12} style={{ margin: '2em auto' }}>
-                    <Steps>
-                        <Step status={currentStep === 0 ? "process" : "finish"} title="Корзина" icon={currentStep === 0 ? <LoadingOutlined /> : <ShoppingCartOutlined />} />
-                        <Step status={currentStep === 1 ? "process" : "finish"} title="Доставка" icon={currentStep === 1 ? <LoadingOutlined /> : <SolutionOutlined />} />
-                        <Step status={currentStep === 2 ? "process" : "finish"} title="Оплата" icon={currentStep === 2 ? <LoadingOutlined /> : <DollarCircleOutlined />} />
-                        <Step status={currentStep === 3 ? "process" : "finish"} title="Оплата" icon={<SmileOutlined />} />
-                    </Steps>
-                </Col>
-            </Row> : null }
+            {console.log(isMobile)}
+            {!isMobile ?
+                <Row>
+                    <Col sm={24} md={12} style={{ margin: '2em auto' }}>
+                        <Steps>
+                            <Step status={currentStep === 0 ? "process" : "finish"} title="Корзина" icon={currentStep === 0 ? <LoadingOutlined /> : <ShoppingCartOutlined />} />
+                            <Step status={currentStep === 1 ? "process" : "finish"} title="Доставка" icon={currentStep === 1 ? <LoadingOutlined /> : <SolutionOutlined />} />
+                            <Step status={currentStep === 2 ? "process" : "finish"} title="Оплата" icon={currentStep === 2 ? <LoadingOutlined /> : <DollarCircleOutlined />} />
+                            <Step status={currentStep === 3 ? "process" : "finish"} title="Оплата" icon={<SmileOutlined />} />
+                        </Steps>
+                    </Col>
+                </Row> : null}
 
 
 
@@ -376,7 +379,7 @@ function HomePage(props) {
                     borderBottomStyle: 'groove',
                     borderColor: '#d3ffdd',
                 }}>
-                    <Row gutter={{sm:0,md:16}} style={{ marginTop: '4em' }}>
+                    <Row gutter={{ sm: 0, md: 16 }} style={{ marginTop: '4em' }}>
                         <Col sm={24} md={12} className="formContainer" >
                             <h1 style={{
                                 fontSize: '19px',
@@ -485,18 +488,8 @@ function HomePage(props) {
                             </div>
                         </Col>
                         <Col span={24}>
-                            {
-                                !isMobile ?
-                                    <div className="footer-buttons">
-                                        <button onClick={e => setCurrentStep(0)}>Назад</button>
-                                        <button onClick={e => saveDataHendler()}>Далее</button>
-                                    </div>
-                                    :
-                                    <div className="footer-buttons">
-                                        <button onClick={e => saveDataHendler()}>Далее</button>
-                                        <button onClick={e => setCurrentStep(0)}>Назад</button>
-                                    </div>
-                            }
+                            <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => saveDataHendler()}>Далее</Button>
+                            <Button style={{ margin: '2em auto', display: 'block' }} onClick={e => setCurrentStep(0)}>Назад</Button>
                         </Col>
                     </Row>
                 </div> : null}

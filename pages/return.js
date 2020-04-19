@@ -26,13 +26,11 @@ function Return() {
 
 
     return (
-        <Container fluid={true}>
-            <Header />
-            <Container className="main mt-5">
+      
+          
+            <div className="main mt-5">
                 <Row>
-
-
-                    <Col sm={12} md={9} className="mt-5 mb-5 ml-auto mr-auto infoContent" >
+                    <Col sm={12} md={9} className="infoContent" style={{margin: '3em auto',width: '78%'}}>
                         <h1>Обмен и возврат</h1>
                         <h3>Гарантии</h3>
                         <p>
@@ -59,7 +57,7 @@ function Return() {
 
                 </Row>
 
-            </Container >
+         
             <Row className="footer"></Row>
 
             {/* CARD */}
@@ -72,7 +70,7 @@ function Return() {
                         </div> : null
                 }
             </div>
-        </Container >
+        </div >
 
     )
 }

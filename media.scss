@@ -22,11 +22,16 @@
         width: 98% !important;
     }
     .footerNav {
+    margin: 0 auto;
+        text-align: center;
         a {
-            width: 100%;
-            border: 2px dotted #c7c7c7;
-            padding: 4px 9px 6px 10px;
-            margin-right: 2em;
+            width: 100% !important;
+            display: block !important;
+            padding: 0 !important;
+            margin-right: 0 100% !important;
+        }
+        img {
+            margin-top:2em;
         }
     
     }
