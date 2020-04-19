@@ -45,6 +45,9 @@ function HomePage(props) {
     }
 
     const [type, SetType] = useState(2)
+  
+
+
 
     const addToCart = (item, it) => {
         let attributes = document.getElementById(item.id + "_attribute");
@@ -88,7 +91,7 @@ function HomePage(props) {
                                 <Col xs={24} sm={24} md={12} lg={8} xl={6}>
                                     <Card hoverable>
                                         {item.hot ? <div className="hot">HOT</div> : false}
-                                        <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
+                                        <ProductModal  title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
                                             <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
                                         </ProductModal>
                                         <p><input id={item.id} value={item.price + " грн"} disabled /></p>

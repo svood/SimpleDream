@@ -179,6 +179,12 @@ input[type=text]:focus, textarea:focus {
         font-size: 0.7em;
     }
 }
+.ant-carousel .slick-dots li {
+    background: red;
+}
+.ant-carousel .slick-dots li.slick-active button {
+    background: rgb(128, 38, 212);
+}
 .ant-card-hoverable:hover {
     button {
         background: #36c536;

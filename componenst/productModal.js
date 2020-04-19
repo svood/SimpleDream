@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
 import Slider from './sliderProduct'
 import data from '../data/products'
+import { Modal } from 'antd';
 
 const ProductModal = (props) => {
     const {
@@ -16,11 +17,9 @@ const ProductModal = (props) => {
     return (
         <div>
             <a color="danger" onClick={toggle}>{props.children}</a>
-            <Modal isOpen={modal} toggle={toggle} size={'lg'}>
-                <ModalHeader toggle={toggle}>{title}</ModalHeader>
-                <ModalBody>
-                    <Slider itemImages={itemData.img} imagePath={props.imagePath} imageType={props.imageType} />
-                </ModalBody>
+
+            <Modal title={title} visible={modal} onCancel={e=>setModal(false)} dots={'sda' }>
+                <Slider itemImages={itemData.img} imagePath={props.imagePath} imageType={props.imageType} />
             </Modal>
         </div>
     );
