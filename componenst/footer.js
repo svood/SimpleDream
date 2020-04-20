@@ -11,7 +11,7 @@ const Footer = () => {
         <Container fluid={true}>
             <Container className='main pt-3 pb-3'>
                 <Row>
-                    <Col sm={12} md={9}>
+                    <Col sm={24} md={9}>
                         <Nav>
                             <NavItem>
                                 <NavLink onClick={e => redirectTo("/")}>Главная</NavLink>
@@ -30,7 +30,7 @@ const Footer = () => {
                             </NavItem>
                         </Nav>
                     </Col>
-                    <Col sm={12} md={3}>
+                    <Col sm={24} md={3}>
                         <img src="/images/vizamaster.svg" className="viza" className="footerLogo" />
                     </Col>
                 </Row>

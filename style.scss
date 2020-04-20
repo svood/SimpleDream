@@ -102,6 +102,7 @@ img {
 }
 .aboutText {
     font-size: 12pt;
+    padding: 1em;
 }
 label {
     text-align: center;
@@ -318,7 +319,7 @@ input[type=text]:focus, textarea:focus {
 }
 .hot {
     position: absolute;
-    top: 3em;
+    top: 4em;
     background: red;
     padding: 0 1em 0 1em;
     color: white;
@@ -327,6 +328,19 @@ input[type=text]:focus, textarea:focus {
     height: 2em;
     line-height: 2em;
 }
+.super {
+    position: absolute;
+    top: 2em;
+    background: #ffffffe8;
+    padding: 0 1em 0 1em;
+    color: #7c46ff;
+    z-index: 99;
+    width: 13em;
+    height: 2em;
+    line-height: 2em;
+}
+
+
 .productBlock {
     img, a, select {
         cursor: pointer;

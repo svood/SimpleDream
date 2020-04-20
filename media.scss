@@ -21,7 +21,11 @@
     iframe {
         width: 98% !important;
     }
+    .sort {
+        display: grid;
+    }
     .footerNav {
+        width: 100%;
     margin: 0 auto;
         text-align: center;
         a {

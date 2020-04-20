@@ -101,8 +101,8 @@ function HomePage(props) {
 
             <Advantages isMobile={isMobile} />
             <MainBlock />
-            <Row gutter={{ xs: 2, sm: 2, md: 28, lg: 48 }} justify="center">
-                <Col>
+            <Row gutter={{ xs: 2, sm: 2, md: 28, lg: 48 }} justify="center" >
+                <Col className="sort">
                     <Button outline color="info" onClick={e => SetType(4)}>Все</Button>
                     <Button outline color="info" onClick={e => SetType(1)}>Мальчикам</Button>
                     <Button outline color="info" onClick={e => SetType(0)}>Девочкам</Button>
@@ -117,6 +117,7 @@ function HomePage(props) {
                                 <Col xs={24} sm={24} md={12} lg={8} xl={6}>
                                     <Card hoverable>
                                         {item.hot ? <div className="hot">HOT</div> : false}
+                                        {item.super ? <div className="super">Уникальный дизайн</div> : false}
                                         <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
                                             <LazyLoad height={400} once>
                                                 <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Carousel } from 'antd';
+import LazyLoad from 'react-lazyload';
 
 const mainSlider = () => {
 
@@ -23,7 +24,7 @@ const mainSlider = () => {
 
     const slides = itemImages.map((item) => {
         return (
-            <img src={item.src} alt={item.altText} />
+            <LazyLoad><img src={item.src} alt={item.altText} /></LazyLoad>
         );
     });
 
