@@ -121,7 +121,6 @@ function HomePage(props) {
                                             <LazyLoad height={400} once>
                                                 <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
                                             </LazyLoad>
-
                                         </ProductModal>
                                         <p><input id={item.id} value={item.price + " грн"} disabled /></p>
                                         <p className="mt-2 mb-2 itemIitle">{item.title + ", Материал: " + item.material} </p>
