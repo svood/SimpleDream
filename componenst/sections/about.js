@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import { isMobile,isChrome } from 'react-device-detect';
+import LazyLoad from 'react-lazyload';
 
 
 const About = ({  }) => {

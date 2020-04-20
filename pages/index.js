@@ -31,7 +31,7 @@ function HomePage(props) {
     const { store } = mainPageStore();
     const { Option } = Select;
     const { Panel } = Collapse;
-
+    const [type, SetType] = useState(4)
     useEffect(() => {
         ReactGA.initialize('UA-163962797-1');
     });
@@ -58,7 +58,7 @@ function HomePage(props) {
 
     }
 
-    const [type, SetType] = useState(4)
+
 
 
 

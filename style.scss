@@ -231,21 +231,10 @@ input[type=text]:focus, textarea:focus {
 }
 .footerNav {
     a {
-        border: 2px dotted #c7c7c7;
         padding: 4px 9px 6px 10px;
         margin-right: 2em;
     }
 
-}
-.one span:before, .one span:after {
-    // content: ""; 
-    // position: absolute;
-    // top: 0;
-    // width: 30px;
-    // height: 100%;
-    // border-left: 2px solid;
-    // border-right: 2px solid;
-    // background: repeating-linear-gradient(180deg, transparent, transparent 2px, #8642b933,  2px, #8642b933 4px);
 }
 
 .aboutCartTitle {
