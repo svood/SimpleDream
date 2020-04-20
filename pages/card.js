@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-
 import { faUser, faCity, faPhone, faTruck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Dilivery from '../componenst/sections/dilivery';
@@ -9,18 +8,13 @@ import CallMe from '../componenst/callMe';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { addPhone, addMailNumber, addFio, addCity, addToCard, setPayType } from '../actions/mainPage'
-// import Steps, { Step } from 'rc-steps';
 import { Textbox } from 'react-inputs-validation';
-import {
-    isMobile,
-    isMobileSafari,
-    isSafari,
-    isEdge
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import { ShoppingCartOutlined, SolutionOutlined, LoadingOutlined, SmileOutlined, DollarCircleOutlined } from '@ant-design/icons';
+import ReactGA from 'react-ga';
 
 
-import { Steps, Button, Radio, Row, Col, Card, Alert } from 'antd';
+import { Steps, Button, Row, Col, Card, Alert } from 'antd';
 
 
 function HomePage(props) {
@@ -38,11 +32,11 @@ function HomePage(props) {
 
 
     useEffect(() => {
+        ReactGA.initialize('UA-163962797-1');
         if (store.userCity != '') setUserCityValid(true);
         if (store.userFio != '') setFioValid(true);
         if (store.userMailNumber != '') setUserMailNumberValid(true);
         if (store.userPhone != '') setUserPhoneValid(true);
-
     });
 
 
@@ -74,7 +68,12 @@ function HomePage(props) {
                     console.log("data status", data.status);
                     if (data.status === "success") {
                         sendForm();
+                        ReactGA.event({
+                            category: 'Cart',
+                            action: 'Go to Step 4',
+                        });
                         setCurrentStep(3)
+                        ReactGA.pageview('/cart/step4')
                     }
                 }).on("liqpay.ready", function (data) {
                     // ready
@@ -97,6 +96,12 @@ function HomePage(props) {
     }
 
     const sendForm = async () => {
+        ReactGA.event({
+            category: 'Cart',
+            action: 'Pay',
+            value: (store.payType === 1) ? "Оплачено Приват" : "Наложенный платеж"
+        });
+
         let products = '';
         store.card.forEach(element => {
             products += element.title + ' Размер: ' + element.sizeInfo + '\n'
@@ -175,15 +180,25 @@ function HomePage(props) {
 
 
     const firstStep = () => {
-
+        ReactGA.event({
+            category: 'Cart',
+            action: 'Go to Step 2',
+        });
         setCurrentStep(1)
+        ReactGA.pageview('/cart/step2')
 
-
+        window.scrollTo(0, 0)
     }
 
     const saveDataHendler = () => {
+        window.scrollTo(0, 0)
         if (fioValid && userCityValid && userPhoneValid && userMailNumberValid) {
+            ReactGA.event({
+                category: 'Cart',
+                action: 'Go to Step 3',
+            });
             setCurrentStep(2)
+            ReactGA.pageview('/cart/step3')
             sendReqest()
         } else {
             setError('Пожайлуста, заполните все поля')
@@ -198,7 +213,6 @@ function HomePage(props) {
 
     const CardStep1 = () => {
         return (
-
             <div style={{
                 background: 'rgb(247, 247, 247)',
                 padding: '13px',
@@ -207,6 +221,7 @@ function HomePage(props) {
                 borderBottomStyle: 'groove',
                 borderColor: '#d3ffdd',
             }}>
+
                 <Row >
                     <Col sm={24}>
                         <h1 style={{
@@ -265,9 +280,14 @@ function HomePage(props) {
     }
 
     const agreeWithNovaPay = () => {
+        ReactGA.event({
+            category: 'Cart',
+            action: 'Go to Step 4',
+        });
         sendForm();
         dispatch(addToCard([]))
         setCurrentStep(3)
+        window.scrollTo(0, 0)
     }
 
 
@@ -312,10 +332,8 @@ function HomePage(props) {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sm={24} md={9} className='m-auto'  style={{ display: 'block', margin: '0 auto',  marginTop: '2em' }}>
-                        
-                            <Button onClick={e => setCurrentStep(1)} style={{ display: 'block', margin: '0 auto'}}>Назад</Button>
-                        
+                    <Col sm={24} md={9} className='m-auto' style={{ display: 'block', margin: '0 auto', marginTop: '2em' }}>
+                        <Button onClick={e => setCurrentStep(1)} style={{ display: 'block', margin: '0 auto' }}>Назад</Button>
                     </Col>
                 </Row>
             </div>
@@ -349,7 +367,6 @@ function HomePage(props) {
 
     return (
         <div className="main">
-            {console.log(isMobile)}
             {!isMobile ?
                 <Row>
                     <Col sm={24} md={12} style={{ margin: '2em auto' }}>
@@ -363,12 +380,11 @@ function HomePage(props) {
                 </Row> : null}
 
 
-
-            <Row>
+            {currentStep === 0 ? <Row>
                 <Col sm={24} md={16} style={{ margin: '2em auto' }}>
                     {currentStep === 0 ? <CardStep1 /> : null}
                 </Col>
-            </Row>
+            </Row> : null}
 
 
             {currentStep === 1 ?

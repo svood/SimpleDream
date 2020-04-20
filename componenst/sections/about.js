@@ -1,8 +1,9 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import { isMobile,isChrome } from 'react-device-detect';
 
 
-const About = ({ isChrome }) => {
+const About = ({  }) => {
     return (
 
         <Row className="about" justify='cenetr'>
@@ -13,7 +14,7 @@ const About = ({ isChrome }) => {
                         <h3 style={{ color: '#2654b5' }}>Основные достоинства сатина:</h3>
                     </span>
                 </div>
-                <ul style={{marginTop:'1em'}}>
+                <ul style={{ marginTop: '1em' }}>
                     <li>Ткань гигиенична, хорошо поглощает влагу. Тело человека под такой тканью «дышит».</li>
                     <li>Невысокая теплопроводность позволяет летом в одежде из сатина не перегреваться. Зимой сатиновое полотно сохраняет приятную физиологическую температуру тела.</li>
                     <li>Материя легкая, мягкая, воздушная, создает чувство комфорта.</li>
@@ -28,12 +29,16 @@ const About = ({ isChrome }) => {
                     </p>
 
             </Col>
-            <Col sm={24} md={12}>
-                {isChrome ?
-                    <img src="/images/baners/satinBaner.png" /> :
-                    <img src="/images/baners/satinBaner.png" />
-                }
-            </Col>
+            {!isMobile ?
+                <Col sm={24} md={12}>
+                    {isChrome ?
+                        <img src="/images/webp/satinBaner.webp" /> :
+                        <img src="/images/baners/satinBaner.png" />
+                    } 
+                </Col> : null
+
+            }
+
         </Row>
     )
 }

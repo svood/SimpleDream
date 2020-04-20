@@ -7,7 +7,7 @@ const MainBlock = () => {
     
     return (
 
-        <Row gutter={[12, 48]} justify="center" align="center" style={{textAlign:'center',marginTop:'2em'}}>
+        <Row gutter={[12, 48]} justify="center" align="center" style={{textAlign:'center',margin:'2em'}}>
             {/* <Col xs={24} sm={24} md={6} lg={0} xl={4}>
                 <Card body outline color="info" style={{ border: 'none' }} className="advancedFirst">
                     <div style={{ textAlign: 'left', borderLeft: '1px solid black', paddingLeft: ' 10%', fontSize: '14pt', color: '#5f5f5f', fontWeight: '600' }}>Преимущества<br />Наших простынок</div>

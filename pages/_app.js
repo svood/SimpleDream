@@ -16,7 +16,7 @@ export default function MyApp({ Component, pageProps }) {
         <>
             <Head>
                 <script src="//static.liqpay.ua/libjs/checkout.js" async></script>
-
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
 
             <Layout style={{ width: '95%', margin: '0 auto', background: 'white' }}>

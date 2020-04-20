@@ -16,7 +16,7 @@ const SliderProduct = (props) => {
     });
 
     return (
-        <Carousel autoplay>
+        <Carousel >
             {slides}
         </Carousel>
     );

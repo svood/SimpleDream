@@ -1,4 +1,4 @@
-import React, { useState, } from 'react'
+import React, { useState, useEffect } from 'react'
 import data from '../data/products';
 import ProductModal from '../componenst/productModal';
 import Advantages from '../componenst/sections/advantages';
@@ -11,6 +11,8 @@ import { withRedux } from '../lib/redux'
 import { addToCard } from '../actions/mainPage'
 import { Select, Button, Collapse, Row, Col, Card } from 'antd';
 import LazyLoad from 'react-lazyload';
+import ReactGA from 'react-ga';
+import Head from 'next/head'
 
 import {
     isMobile,
@@ -30,6 +32,17 @@ function HomePage(props) {
     const { Option } = Select;
     const { Panel } = Collapse;
 
+    useEffect(() => {
+        ReactGA.initialize('UA-163962797-1');
+    });
+
+    const goToCart = () => {
+        ReactGA.event({
+            category: 'Cart',
+            action: 'Click to bottom cart icon'
+        });
+        window.location.href = '/card'
+    }
 
     const mobile = () => {
         let imagePath;
@@ -45,12 +58,17 @@ function HomePage(props) {
 
     }
 
-    const [type, SetType] = useState(2)
-  
+    const [type, SetType] = useState(4)
+
 
 
 
     const addToCart = (item, it) => {
+        ReactGA.event({
+            category: 'Cart',
+            action: 'Add to cart',
+            value: item.title
+        });
         let attributes = document.getElementById(item.id + "_attribute");
         let SizeInfo = attributes.getAttribute('selectedSize');
         let productPrice = attributes.getAttribute('price')
@@ -75,27 +93,35 @@ function HomePage(props) {
 
     return (
         <div className='main'>
+
+            <Head>
+                <title>Детские простынки ✓ Простынки из хлопка ✓ Купить детскую постель ✓  Simple Dreams</title>
+                <meta name="description" content="Детские простынки их хлопка ✔ Купить детскую простынку ✔ Натуральные простынки ✔ Simple Dreams "></meta>
+            </Head>
+
             <Advantages isMobile={isMobile} />
             <MainBlock />
             <Row gutter={{ xs: 2, sm: 2, md: 28, lg: 48 }} justify="center">
                 <Col>
-                    <Button outline color="info" onClick={e => SetType(2)}>Все</Button>
+                    <Button outline color="info" onClick={e => SetType(4)}>Все</Button>
                     <Button outline color="info" onClick={e => SetType(1)}>Мальчикам</Button>
                     <Button outline color="info" onClick={e => SetType(0)}>Девочкам</Button>
+                    <Button outline color="info" onClick={e => SetType(3)}>Унивирсальные</Button>
                 </Col>
             </Row>
-            <Row gutter={{ xs: 2, sm: 2, md: 16, lg: 16 }} justify="center" style={{marginTop:'3em'}}>
+            <Row gutter={{ xs: 2, sm: 2, md: 16, lg: 16 }} justify="center" style={{ marginTop: '3em' }}>
                 {
                     data.map(function (item, it) {
                         return (
-                            (type === item.type || type === 2) ?
+                            (type === item.type || type === 4) ?
                                 <Col xs={24} sm={24} md={12} lg={8} xl={6}>
                                     <Card hoverable>
                                         {item.hot ? <div className="hot">HOT</div> : false}
-                                        <ProductModal  title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
-                                        <LazyLoad height={400} once >
-                                            <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
-                                         </LazyLoad>
+                                        <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
+                                            <LazyLoad height={400} once >
+                                                <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
+                                            </LazyLoad>
+
                                         </ProductModal>
                                         <p><input id={item.id} value={item.price + " грн"} disabled /></p>
                                         <p className="mt-2 mb-2 itemIitle">{item.title + ", Материал: " + item.material} </p>
@@ -133,7 +159,7 @@ function HomePage(props) {
             <div>
                 {
                     store.card.length > 0 ?
-                        <div className="shopingCard" onClick={e => window.location.href = '/card'}>
+                        <div className="shopingCard" onClick={e => goToCart()}>
                             <span>{store.card.length}</span>
                             <img src='/images/ShoppingCart.svg' />
                         </div> : null

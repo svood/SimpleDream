@@ -31,7 +31,7 @@ const NavBar = ({ length }) => {
 
   return (
     <>
-      <div className="logo" >SimpleDreams</div>
+      <a className="logo" href='/'>SimpleDreams</a>
 
       {!isMobile ?
         menu('horizontal') :
@@ -50,11 +50,6 @@ const NavBar = ({ length }) => {
         </>
 
       }
-
-
-
-
-
     </>
   );
 }
