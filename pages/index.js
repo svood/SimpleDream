@@ -118,7 +118,7 @@ function HomePage(props) {
                                     <Card hoverable>
                                         {item.hot ? <div className="hot">HOT</div> : false}
                                         <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
-                                            <LazyLoad height={400} once >
+                                            <LazyLoad height={400} once>
                                                 <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
                                             </LazyLoad>
 

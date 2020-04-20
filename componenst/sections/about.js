@@ -32,8 +32,8 @@ const About = ({  }) => {
             {!isMobile ?
                 <Col sm={24} md={12}>
                     {isChrome ?
-                        <img src="/images/webp/satinBaner.webp" /> :
-                        <img src="/images/baners/satinBaner.png" />
+                        <LazyLoad height={400} once><img src="/images/webp/satinBaner.webp" /></LazyLoad> :
+                        <LazyLoad height={400} once><img src="/images/baners/satinBaner.png" /></LazyLoad>
                     } 
                 </Col> : null
 
