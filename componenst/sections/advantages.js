@@ -1,8 +1,10 @@
 import React from 'react';
 import Slider from '../mainSlider'
 import CountdownTimer from "react-component-countdown-timer";
-import {Row, Col } from 'antd';
-
+import { Row, Col } from 'antd';
+import {
+    isChrome
+} from "react-device-detect";
 const Advantages = ({ isMobile }) => {
     return (
 
@@ -13,13 +15,21 @@ const Advantages = ({ isMobile }) => {
                 </Col> : null}
 
             <Col xs={24} sm={24} md={6} lg={7} xl={9} className="p-2" style={{ background: ' #ffffff' }}>
-                <img src="/images/logo.png" style={{
-                    width: '42%',
-                    margin: '0 auto',
-                    display: 'block',
-                    marginBottom: '28px'
-                }} />
-                <div className="one" style={{padding:'1em'}}>
+                {isChrome ?
+                    <img src="/images/webp/logo.webp" style={{
+                        width: '42%',
+                        margin: '0 auto',
+                        display: 'block',
+                        marginBottom: '28px'
+                    }} /> : <img src="/images/logo.png" style={{
+                        width: '42%',
+                        margin: '0 auto',
+                        display: 'block',
+                        marginBottom: '28px'
+                    }} />
+                }
+
+                <div className="one" style={{ padding: '1em' }}>
                     <span>
                         <h1>Детские простынки</h1>
                         <p className="text-center blockTitle">Весенняя  <strong>распродажа</strong> !</p>
