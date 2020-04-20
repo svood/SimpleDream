@@ -15,6 +15,7 @@ const Advantages = ({ isMobile }) => {
                 </Col> : null}
 
             <Col xs={24} sm={24} md={6} lg={7} xl={9} className="p-2" style={{ background: ' #ffffff' }}>
+                
                 {isChrome ?
                     <img src="/images/webp/logo.webp" style={{
                         width: '42%',

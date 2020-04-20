@@ -123,7 +123,7 @@ const data = [
     },
     {
         id: 4,
-        type: 3,
+        type: 0,
         title: 'Простынь Беж',
         inStock: true,
         hot: false,
@@ -184,7 +184,7 @@ const data = [
     },
     {
         id: 6,
-        type: 3,
+        type: 0,
         title: 'Простынь Воздушные шары',
         inStock: true,
         hot: false,
@@ -304,7 +304,7 @@ const data = [
 
     {
         id: 10,
-        type: 1,
+        type: 3,
         title: 'Простынь желтая',
         inStock: true,
         hot: false,
@@ -343,7 +343,7 @@ const data = [
 
     {
         id: 11,
-        type: 1,
+        type: 0,
         title: 'Простынь Лес',
         inStock: true,
         hot: false,
@@ -419,7 +419,7 @@ const data = [
     },
     {
         id: 13,
-        type: 1,
+        type: 3,
         title: 'Простынь Серая',
         inStock: true,
         hot: false,
@@ -457,7 +457,7 @@ const data = [
     },
     {
         id: 14,
-        type: 1,
+        type: 3,
         title: 'Простынь Овечки',
         inStock: true,
         hot: false,
@@ -495,7 +495,7 @@ const data = [
     },
     {
         id: 15,
-        type: 1,
+        type: 0,
         title: 'Простынь Персик',
         inStock: true,
         hot: false,
@@ -617,7 +617,7 @@ const data = [
     },
     {
         id: 19,
-        type: 1,
+        type: 3,
         title: 'Простынь Графит',
         inStock: true,
         hot: false,
@@ -645,7 +645,7 @@ const data = [
     },
     {
         id: 20,
-        type: 3,
+        type: 0,
         title: 'Простынь оранжевая',
         inStock: true,
         hot: false,
@@ -673,7 +673,7 @@ const data = [
     },
     {
         id: 21,
-        type: 1,
+        type: 3,
         title: 'Простынь Звезды',
         inStock: true,
         hot: false,
@@ -739,7 +739,7 @@ const data = [
     },
     {
         id: 23,
-        type: 1,
+        type: 3,
         title: 'Простынь Морской мир',
         inStock: true,
         hot: false,
@@ -768,7 +768,7 @@ const data = [
     
     {
         id: 24,
-        type: 1,
+        type: 3,
         title: 'Простынь Мятная',
         inStock: true,
         hot: false,
@@ -796,7 +796,7 @@ const data = [
     },
     {
         id: 25,
-        type: 1,
+        type: 3,
         title: 'Простынь Ночное небо',
         inStock: true,
         hot: false,
@@ -829,7 +829,7 @@ const data = [
     },
     {
         id: 26,
-        type: 1,
+        type: 0,
         title: 'Простынь Розовая',
         inStock: true,
         hot: false,
@@ -857,7 +857,7 @@ const data = [
     },
     {
         id: 27,
-        type: 1,
+        type: 3,
         title: 'Простынь Салатовая',
         inStock: true,
         hot: false,
@@ -885,7 +885,7 @@ const data = [
     },
     {
         id: 28,
-        type: 1,
+        type: 0,
         title: 'Простынь Чайная роза',
         inStock: true,
         hot: false,

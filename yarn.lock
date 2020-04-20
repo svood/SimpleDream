@@ -7557,7 +7557,7 @@ rc-slider@~9.2.3:
     shallowequal "^1.1.0"
     warning "^4.0.3"
 
-rc-steps@^3.5.0, rc-steps@~3.5.0:
+rc-steps@~3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/rc-steps/-/rc-steps-3.5.0.tgz#36b2a7f1f49907b0d90363884b18623caf9fb600"
   integrity sha512-2Vkkrpa7PZbg7qPsqTNzVDov4u78cmxofjjnIHiGB9+9rqKS8oTLPzbW2uiWDr3Lk+yGwh8rbpGO1E6VAgBCOg==
@@ -7732,6 +7732,11 @@ react-final-form@^6.4.0:
   dependencies:
     "@babel/runtime" "^7.9.2"
     ts-essentials "^6.0.3"
+
+react-ga@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.7.0.tgz#24328f157f31e8cffbf4de74a3396536679d8d7c"
+  integrity sha512-AjC7UOZMvygrWTc2hKxTDvlMXEtbmA0IgJjmkhgmQQ3RkXrWR11xEagLGFGaNyaPnmg24oaIiaNPnEoftUhfXA==
 
 react-input-mask@^2.0.4:
   version "2.0.4"

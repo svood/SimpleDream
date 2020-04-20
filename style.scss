@@ -183,7 +183,14 @@ input[type=text]:focus, textarea:focus {
     background: red;
 }
 .ant-carousel .slick-dots li.slick-active button {
-    background: rgb(128, 38, 212);
+    background: transparent;
+}
+.ant-carousel .slick-dots li button {
+    width: 20px !important;
+    height: 20px !important;
+}
+.ant-modal-footer {
+    display:none;
 }
 .ant-card-hoverable:hover {
     button {
@@ -202,6 +209,19 @@ input[type=text]:focus, textarea:focus {
     color: #453280;
     font-weight: 600;
     font-size: large;
+}
+.ant-carousel .slick-dots li {
+    background: #b944e0;
+    width: 20px !important;
+    height: 20px;
+    border-radius: 50px;
+}
+.ant-carousel .slick-dots li.slick-active {
+    width: 24px;
+    background: #faad14;
+    width: 20px !important;
+    height: 20px;
+    border-radius: 50px;
 }
 .footerLogo {
     width: 34%;
