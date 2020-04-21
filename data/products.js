@@ -635,7 +635,7 @@ const data = [
     },
     {
         id: 19,
-        type: 3,
+        type: 1,
         title: 'Простынь Графит',
         inStock: true,
         hot: false,

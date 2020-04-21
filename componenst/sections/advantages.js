@@ -12,7 +12,7 @@ const Advantages = ({ isMobile }) => {
 
         <Row >
             {!isMobile ?
-                <Col xs={0} sm={0} md={18} lg={17} xl={15}>
+                <Col xs={24} sm={24} md={18} lg={17} xl={15}>
                     <Slider />
                 </Col> : null}
 
