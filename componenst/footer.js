@@ -26,6 +26,9 @@ const Footer = () => {
                                 <NavLink onClick={e => redirectTo("/offerta")}>Договор оферты</NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink onClick={e => redirectTo("/about")}>О Нас</NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink onClick={e => redirectTo("/card")}>Корзина</NavLink>
                             </NavItem>
                         </Nav>

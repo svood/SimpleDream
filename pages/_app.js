@@ -30,6 +30,7 @@ export default function MyApp({ Component, pageProps }) {
                                 <a href='/shipment' >Доставка и Оплата</a>
                                 <a href='/return'> Обмен и возврат</a>
                                 <a href='/offerta'>Договор оферты</a>
+                                <a href='/about'>О нас</a>
                                 <a href='/card'>Корзина</a>
                             </nav>
                         </Col>
