@@ -6,28 +6,25 @@ import {
 import { Row, Col } from 'antd';
 
 
-const Dilivery = () => {
+const Dilivery = ({ t }) => {
     return (
-        <Row className="about" style={{marginTop:'4em',padding:'2em'}}>
+        <Row className="about" style={{ marginTop: '4em', padding: '2em' }}>
             <Col sm={24} md={12}>
                 {!isMobile ? <img src="/images/deliv.png" /> : null}
             </Col>
             <Col sm={24} md={12} className="aboutText border">
                 <div className="one">
                     <span>
-                        <h3>Доставка и Оплата:</h3>
+                        <h3>{t("dilivery.h3")}</h3>
                     </span>
                 </div>
-                <ul style={{marginTop:'1em'}}>
-                    <li>оплата через корзину (Приват 24)</li>
-                    <li>наложенный платеж при получении товара в отделении Новой Почты. Дополнительно оплачивается согласно тарифам Новой Почты</li>
+                <ul style={{ marginTop: '1em' }}>
+                    <li>{t("dilivery.li.1")}</li>
+                    <li>{t("dilivery.li.2")}</li>
                 </ul>
-                <p>
-                    Доставка по Украине на любой склад Новой Почты или адресная доставка (стоимость адресной доставки регулируется действующими тарифами Новой Почты).
-
-                    Бесплатная доставка на склад Новой Почты осуществляется при заказе от 2000 грн.
+                <p>{t("dilivery.p")}
                 </p>
-                <a href="/shipment" style={{ color: '#2654b5' }}>Подробнее в разделе Доставка и Оплата</a>
+                <a href="/shipment" style={{ color: '#2654b5' }}>{t("dilivery.button")}</a>
             </Col>
         </Row>
     )

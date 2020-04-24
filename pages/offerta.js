@@ -1,18 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { ButtonGroup, UncontrolledCollapse, Modal, ModalHeader, ModalBody, ModalFooter, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import data from '../data/products';
-import ProductModal from '../componenst/productModal';
-import NumericInput from 'react-numeric-input';
-import Advantages from '../componenst/sections/advantages';
-import About from '../componenst/sections/about';
-import Dilivery from '../componenst/sections/dilivery';
-import MainBlock from '../componenst/sections/mainBlock';
-import { Wizard } from 'react-multi-steps'
-import Header from '../componenst/header'
-import CallMe from '../componenst/callMe';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import React from 'react'
+
+import {  useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
-import { addPhone, addMailNumber, addFio, addCity, addToCard } from '../actions/mainPage'
+
 
 
 function Return() {
@@ -31,8 +21,6 @@ function Return() {
       
             <Container className="main ">
                 <Row>
-
-
                     <Col sm={12} md={9} className="infoContent" >
                         <h1>Договор публичной оферты</h1>
                         <h6>Общие положения</h6>

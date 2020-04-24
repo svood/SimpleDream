@@ -13,7 +13,7 @@ import { Select, Button, Collapse, Row, Col, Card } from 'antd';
 import LazyLoad from 'react-lazyload';
 import ReactGA from 'react-ga';
 import Head from 'next/head'
-
+import { withTranslation } from '../i18n'
 import {
     isMobile,
     isMobileSafari,
@@ -21,7 +21,7 @@ import {
     isEdge
 } from "react-device-detect";
 
-function HomePage(props) {
+function HomePage({ t }) {
     const dispatch = useDispatch();
     const mainPageStore = () => {
         return useSelector(state => ({
@@ -55,15 +55,10 @@ function HomePage(props) {
                 imageType = '.webp'
         }
         return { imagePath: imagePath, imageType: imageType }
-
     }
 
 
-
-
-
-
-    const addToCart = (item, it) => {
+    const addToCart = (item) => {
         ReactGA.event({
             category: 'Cart',
             action: 'Add to cart',
@@ -95,18 +90,18 @@ function HomePage(props) {
         <div className='main'>
 
             <Head>
-                <title>Детские простынки ✓ Простынки из хлопка ✓ Купить детскую постель ✓  Simple Dreams</title>
-                <meta name="description" content="Детские простынки их хлопка ✔ Купить детскую простынку ✔ Натуральные простынки ✔ Simple Dreams "></meta>
+                <title>{t("title")}</title>
+                <meta name="description" content={t("description")}></meta>
             </Head>
 
-            <Advantages isMobile={isMobile} />
-            <MainBlock />
+            <Advantages isMobile={isMobile} t={t} />
+            <MainBlock t={t} />
             <Row gutter={{ xs: 2, sm: 2, md: 28, lg: 48 }} justify="center" >
                 <Col className="sort">
-                    <Button outline color="info" onClick={e => SetType(4)}>Все</Button>
-                    <Button outline color="info" onClick={e => SetType(1)}>Мальчикам</Button>
-                    <Button outline color="info" onClick={e => SetType(0)}>Девочкам</Button>
-                    <Button outline color="info" onClick={e => SetType(3)}>Унивирсальные</Button>
+                    <Button outline color="info" onClick={e => SetType(4)}>{t("sort.all")}</Button>
+                    <Button outline color="info" onClick={e => SetType(1)}>{t("sort.man")}</Button>
+                    <Button outline color="info" onClick={e => SetType(0)}>{t("sort.woman")}</Button>
+                    <Button outline color="info" onClick={e => SetType(3)}>{t("sort.unyversal")}</Button>
                 </Col>
             </Row>
             <Row gutter={{ xs: 2, sm: 2, md: 16, lg: 16 }} justify="center" style={{ marginTop: '3em' }}>
@@ -116,15 +111,15 @@ function HomePage(props) {
                             (type === item.type || type === 4) ?
                                 <Col xs={24} sm={24} md={12} lg={8} xl={6}>
                                     <Card hoverable>
-                                        {item.hot ? <div className="hot">HOT</div> : false}
-                                        {item.super ? <div className="super">Уникальный дизайн</div> : false}
+                                        {item.hot ? <div className="hot">{t("hotLable")}</div> : false}
+                                        {item.super ? <div className="super">{t("designLable")}</div> : false}
                                         <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
                                             <LazyLoad height={400} once>
                                                 <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
                                             </LazyLoad>
                                         </ProductModal>
                                         <p><input id={item.id} value={item.price + " грн"} disabled /></p>
-                                        <p className="mt-2 mb-2 itemIitle">{item.title + ", Материал: " + item.material} </p>
+                                        <p className="mt-2 mb-2 itemIitle">{item.title + ", " + t("material") + ": " + item.material} </p>
                                         <Row >
                                             <Col span={12} id={item.id + "_size"} >
                                                 <Select style={{ width: '100%' }} defaultValue={item.sizes[0].size} onChange={(value) => changePrice(item, value)}>
@@ -136,11 +131,11 @@ function HomePage(props) {
                                                 </Select>
                                             </Col>
                                             <Col span={12}>
-                                                <Button onClick={e => addToCart(item, it)} className="addToCart"  >В корзину</Button>
+                                                <Button onClick={e => addToCart(item, it)} className="addToCart"  >{t("addToCart")}}</Button>
                                             </Col>
                                         </Row>
                                         <Collapse style={{ marginTop: '1em' }}>
-                                            <Panel header="Посмотреть описание простынки" >
+                                            <Panel header={t("showProductDesk")} >
                                                 <p>{item.text}</p>
                                             </Panel>
                                         </Collapse>
@@ -152,9 +147,9 @@ function HomePage(props) {
                 }
             </Row>
 
-            <Dilivery isMobile={isMobile} />
-            <CallMe />
-            <About />
+            <Dilivery isMobile={isMobile} t={t} />
+            <CallMe t={t} />
+            <About t={t} />
 
             <div>
                 {
@@ -169,5 +164,10 @@ function HomePage(props) {
     )
 }
 
+HomePage.getInitialProps = async () => {
+    return {
+        namespacesRequired: ['common'],
+    }
+}
 
-export default withRedux(HomePage)
+export default withTranslation(['common'])(withRedux(HomePage))

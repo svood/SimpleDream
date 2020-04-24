@@ -2,14 +2,14 @@ import "react-component-countdown-timer/lib/styles.scss";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 import 'antd/dist/antd.css';
-import 'rc-steps/assets/index.css';
 import '../style.scss';
 import NavBar from '../componenst/header'
-import FooterNav from '../componenst/footer'
 import Head from 'next/head'
 import { Layout, Row, Col } from 'antd';
+import { appWithTranslation } from '../i18n'
 
-export default function MyApp({ Component, pageProps }) {
+
+const App = ({ Component, pageProps }) => {
     const { Content, Header, Footer } = Layout;
 
     return (
@@ -43,6 +43,11 @@ export default function MyApp({ Component, pageProps }) {
 
             </Layout>
 
-        </>
+        </> 
     )
 }
+
+
+
+
+export default appWithTranslation(App)

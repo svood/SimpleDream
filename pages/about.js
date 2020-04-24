@@ -4,9 +4,9 @@ import { useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { Row, Col } from 'antd';
 import Dilivery from '../componenst/sections/dilivery';
+import { withTranslation } from '../i18n'
 
-
-function Shipment() {
+function About({ t }) {
     const mainPageStore = () => {
         return useSelector(state => ({
             store: state.mainPage,
@@ -18,11 +18,8 @@ function Shipment() {
         <>
             <Row className="main" justify='cenetr'>
                 <Col sm={12} md={20} className='infoContent' style={{ margin: '3em auto' }}>
-                    <h1>О нас</h1>
-                    <p>
-                        «Simple Dreams» - украинский производитель детского постельного белья. В нашем ассортименте разнообразные комплекты в кроватку и коляску, защитные бортики, пеленки и аксессуары. Мы работаем только с натуральными материалами и делаем основной акцент на высокое качество нашей продукции. Создание товаров для детей - очень ответственный процесс, поэтому наша команда продумывает все до мелочей. Особое внимание мы уделяем дизайну постельного белья, тщательно подбираем цвета, принты и формы, поскольку они выполняют очень важную роль в поддержании эмоционального здоровья малышей и влияют на формирование психики. Окружить ребенка любовью и теплом с первых дней его жизни - основная задача родителей, а мы поможем позаботиться о его комфорте и гармоничном развитии. Мы убеждены в том, что каждый ребенок индивидуален, а его потенциал не имеет границ. Поэтому каждый комплект постельного белья «Simple Dreams» сможет подчеркнуть характер вашего малыша и поможет раскрыть его творческий потенциал.
-                        </p>
-                    <p><strong>Мы будем рады ответить на все вопросы о статусе доставки Вашего заказа по тел.: +38 (095) 314 01 33 в рабочие дни с 10.00 до 18.00</strong></p>
+                    <h1>{t("aboutPage.h1")}</h1>
+                    {t("aboutPage.p", { returnObjects: true }).map(item => { return (<p> {item} </p>) })}
                 </Col>
                 {
                     store.card.length > 0 ?
@@ -32,11 +29,17 @@ function Shipment() {
                         </div> : null
                 }
             </Row >
-            <CallMe />
-        <Dilivery/>
+            <CallMe t={t} />
+            <Dilivery t={t} />
         </>
     )
 }
 
 
-export default withRedux(Shipment)
+About.getInitialProps = async () => {
+    return {
+        namespacesRequired: ['common'],
+    }
+}
+
+export default withTranslation(['common'])(withRedux(About))

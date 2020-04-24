@@ -7,10 +7,13 @@ var bodyParser = require('body-parser');
 const cors = require('cors');
 const LRUCache = require('lru-cache');
 const compression = require('compression');
-var LiqPay = require('./libs/liqpay');
+var LiqPay = require('./lib/liqpay');
 const PORT = 3000;
 var fs = require('fs');
 const axios = require('axios');
+const nextI18NextMiddleware = require('next-i18next/middleware').default
+const nextI18next = require('./i18n')
+
 const public = 'sandbox_i31171724869';
 const private = 'sandbox_EKnOtyKVqlzpFJjHfn7vsH2bcqJ6PGkI8rZts64x'
 
@@ -36,6 +39,9 @@ app.prepare()
         server.use(compression());
         server.use(cors());
 
+
+        await nextI18next.initPromise
+        server.use(nextI18NextMiddleware(nextI18next))
 
 
 

@@ -1,43 +1,30 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import { isMobile,isChrome } from 'react-device-detect';
+import { isMobile, isChrome } from 'react-device-detect';
 import LazyLoad from 'react-lazyload';
 
 
-const About = ({  }) => {
+const About = ({ t }) => {
     return (
-
         <Row className="about" justify='cenetr'>
             <Col sm={24} md={12} className="aboutText border">
-
                 <div className="one">
                     <span>
-                        <h3 style={{ color: '#2654b5' }}>Основные достоинства сатина:</h3>
+                        <h3 style={{ color: '#2654b5' }}>{t("about.h3")}</h3>
                     </span>
                 </div>
                 <ul style={{ marginTop: '1em' }}>
-                    <li>Ткань гигиенична, хорошо поглощает влагу. Тело человека под такой тканью «дышит».</li>
-                    <li>Невысокая теплопроводность позволяет летом в одежде из сатина не перегреваться. Зимой сатиновое полотно сохраняет приятную физиологическую температуру тела.</li>
-                    <li>Материя легкая, мягкая, воздушная, создает чувство комфорта.</li>
-                    <li>Прочность ткани позволяет ее многократно стирать. Только на четвертой сотне стирок глянец может начать исчезать.</li>
-                    <li>Материя не мнется, образует естественные драпированные складки.</li>
-                    <li>Сатиновое полотно из натуральных волокон экологично, не вызывает аллергических реакций.</li>
+                    {t("about.ul", { returnObjects: true }).map(item => { return (<li> {item} </li>) })}
                 </ul>
-
-                <p>
-                    Про недостатки сатина что-либо сказать сложно, т.к. явных минусов нет. Некоторым потребителям не нравятся скользящие свойства материи. В шелковой пижаме на сатиновой простыне, возможно, спать не очень комфортно. В таком случае стоит сменить пижаму или выбрать другое постельное белье.
-                    Располагая информацией обо всех видах, типах, особенностях материалов, можно выбрать максимально подходящий вариант. Сатиновые ткани окружают человека на протяжении многих веков. Это вызывает доверие.
-                    </p>
-
+                <p>{t("about.p")}</p>
             </Col>
             {!isMobile ?
                 <Col sm={24} md={12}>
                     {isChrome ?
                         <LazyLoad height={400} once><img src="/images/webp/satinBaner.webp" /></LazyLoad> :
                         <LazyLoad height={400} once><img src="/images/baners/satinBaner.png" /></LazyLoad>
-                    } 
+                    }
                 </Col> : null
-
             }
 
         </Row>

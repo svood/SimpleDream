@@ -9,15 +9,19 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { addPhone, addMailNumber, addFio, addCity, addToCard, setPayType } from '../actions/mainPage'
 import { Textbox } from 'react-inputs-validation';
-import { isMobile } from "react-device-detect";
+import {
+    isMobile,
+    isMobileSafari,
+    isSafari,
+    isEdge
+} from "react-device-detect";
 import { ShoppingCartOutlined, SolutionOutlined, LoadingOutlined, SmileOutlined, DollarCircleOutlined } from '@ant-design/icons';
 import ReactGA from 'react-ga';
-
-
+import { withTranslation } from '../i18n'
 import { Steps, Button, Row, Col, Card, Alert } from 'antd';
 
 
-function HomePage(props) {
+function Cart({ t }) {
     const dispatch = useDispatch();
 
     const [error, setError] = useState(null);
@@ -40,10 +44,21 @@ function HomePage(props) {
     });
 
 
-    const sendReqest = async () => {
-        let from;
-        handeSetPayType(1);
+    const mobile = () => {
+        let imagePath;
+        let imageType;
+        if (isMobileSafari || isSafari || isEdge) {
+            imagePath = '/images',
+                imageType = '.jpg'
+        } else {
+            imagePath = '/images/webp',
+                imageType = '.webp'
+        }
+        return { imagePath: imagePath, imageType: imageType }
+    }
 
+    const sendReqest = async () => {
+        handeSetPayType(1);
         const requestBody = {
             amount: Number(totlalPrice()),
         }
@@ -104,7 +119,7 @@ function HomePage(props) {
 
         let products = '';
         store.card.forEach(element => {
-            products += element.title + ' Размер: ' + element.sizeInfo + '\n'
+            products += element.title + t("size") + element.sizeInfo + '\n'
         });
 
         const requestBody = {
@@ -186,7 +201,6 @@ function HomePage(props) {
         });
         setCurrentStep(1)
         ReactGA.pageview('/cart/step2')
-
         window.scrollTo(0, 0)
     }
 
@@ -201,7 +215,7 @@ function HomePage(props) {
             ReactGA.pageview('/cart/step3')
             sendReqest()
         } else {
-            setError('Пожайлуста, заполните все поля')
+            setError(t("CartPage.inputsError"))
             setTimeout(() => {
                 setError(null)
             }, 5000);
@@ -229,11 +243,11 @@ function HomePage(props) {
                             borderLeft: '2px solid #8642b9',
                             paddingLeft: '12px',
                             color: '#8642b9',
-                        }} >Товары в корзине</h1>
+                        }} >{t("CartPage.productInCart")}</h1>
                     </Col>
                 </Row>
 
-                {(store.card.length === 0) ? <Col><p>Корзина пуста</p></Col> : null}
+                {(store.card.length === 0) ? <Col><p>{t("CartPage.NoProducts")}</p></Col> : null}
 
                 <Row gutter={[16, 16]}>
                     {
@@ -250,13 +264,13 @@ function HomePage(props) {
                                             background: 'rgb(138, 100, 255)',
                                             color: 'white',
                                             fontWeight: '500'
-                                        }}>Х удалить</Button>
-                                        <img className='card-img-top' top width="100%" height="300px" src={props.imagePath + i.image + props.imageType} />
+                                        }}>{t("CartPage.deleteProduct")}</Button>
+                                        <img className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + i.image + mobile().imageType} />
 
                                         <Row style={{ textAlign: 'center', textAlign: 'center', background: '#f7f7f7', padding: '12px' }}>
                                             <Col span={24} >{i.title}</Col>
-                                            <Col span={24} >Размер: {i.sizeInfo}</Col>
-                                            <Col span={24}>Цена: {i.price} грн</Col>
+                                            <Col span={24} >{t("size")}: {i.sizeInfo}</Col>
+                                            <Col span={24}>{t("price")}: {i.price} {t("uah")}</Col>
                                         </Row>
                                     </Card>
                                 </Col>
@@ -270,10 +284,10 @@ function HomePage(props) {
                     display: 'block',
                     background: 'white',
                     padding: '2%'
-                }}> <strong> Всего: {totlalPrice()} грн </strong> </Col>
+                }}> <strong> {t("total")}: {totlalPrice()} {t("uah")} </strong> </Col>
 
                 <div>
-                    <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => firstStep()} disabled={(store.card.length === 0) ? true : false}>Далее</Button>
+                    <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => firstStep()} disabled={(store.card.length === 0) ? true : false}>{t("next")}</Button>
                 </div>
             </div>
         )
@@ -307,21 +321,21 @@ function HomePage(props) {
                             borderLeft: '2px solid #8642b9',
                             paddingLeft: '12px',
                             color: '#8642b9',
-                        }} >Выбор Варианта оплаты</h1>
+                        }} >{t("CartPage.selectpayType")}</h1>
                     </Col>
                 </Row>
                 <Row>
                     <Col sm={24} md={24} className='m-auto' justify="center" flex='1' style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Button color="primary" onClick={e => sendReqest()} type={store.payType === 1 ? 'primary' : false} >Приват 24</Button>
-                        <Button color="primary" onClick={e => handeSetPayType(2)} type={store.payType === 2 ? 'primary' : false} >Наложенным платежом</Button>
+                        <Button color="primary" onClick={e => sendReqest()} type={store.payType === 1 ? 'primary' : false} >{t("CartPage.pricatePay")}</Button>
+                        <Button color="primary" onClick={e => handeSetPayType(2)} type={store.payType === 2 ? 'primary' : false} >{t("CartPage.novaPay")}</Button>
                     </Col>
                 </Row>
                 <Row>
                     {store.payType === 2 ?
                         <Col sm={12} style={{ margin: '0 auto', marginBottom: '2em', marginTop: '2em' }}>
                             <Card>
-                                <p className='mb-5' style={{ color: '#214d7b', fontSize: '13pt', fontWeight: '500', textAlign: 'center' }}>Вы выбрали метод оплаты наложенным платежом при получении товара в отделении Новой Почты. Дополнительно оплачивается 2% от суммы + 20 грн оформление, согласно тарифам Новой Почты ! </p>
-                                <Button shape="round" size='lage' style={{ background: '#17b933', color: 'white', display: 'block', margin: '0 auto', marginBottom: '2em', marginTop: '2em' }} color="success" className="m-auto" onClick={e => agreeWithNovaPay()} >Подтвердить заказ</Button>
+                                <p className='mb-5' style={{ color: '#214d7b', fontSize: '13pt', fontWeight: '500', textAlign: 'center' }}>{t("CartPage.novaText")}</p>
+                                <Button shape="round" size='lage' style={{ background: '#17b933', color: 'white', display: 'block', margin: '0 auto', marginBottom: '2em', marginTop: '2em' }} color="success" className="m-auto" onClick={e => agreeWithNovaPay()} >{t("agree")}</Button>
                             </Card>
                         </Col> : null
                     }
@@ -333,7 +347,7 @@ function HomePage(props) {
                 </Row>
                 <Row>
                     <Col sm={24} md={9} className='m-auto' style={{ display: 'block', margin: '0 auto', marginTop: '2em' }}>
-                        <Button onClick={e => setCurrentStep(1)} style={{ display: 'block', margin: '0 auto' }}>Назад</Button>
+                        <Button onClick={e => setCurrentStep(1)} style={{ display: 'block', margin: '0 auto' }}>{t("previous")}</Button>
                     </Col>
                 </Row>
             </div>
@@ -356,8 +370,8 @@ function HomePage(props) {
                         <img src="https://www.neosaransk.ru/assets/img/success.png" style={{
                             maxWidth: '248px', margin: '32px auto', display: 'block'
                         }} />
-                        <p style={{ fontSize: '16pt' }}>Ваш заказ успешно оформлен. Мы свяжемся с Вами в близжайшее время </p>
-                        <p style={{ fontSize: '12pt' }}>Номер Вашего заказа №41 </p>
+                        <p style={{ fontSize: '16pt' }}>{t("CartPage.sucsessText")} </p>
+                        <p style={{ fontSize: '12pt' }}>{t("CartPage.oderNumber")} №41 </p>
                     </Card>
                 </Col>
             </Row>
@@ -371,10 +385,10 @@ function HomePage(props) {
                 <Row>
                     <Col sm={24} md={12} style={{ margin: '2em auto' }}>
                         <Steps>
-                            <Step status={currentStep === 0 ? "process" : "finish"} title="Корзина" icon={currentStep === 0 ? <LoadingOutlined /> : <ShoppingCartOutlined />} />
-                            <Step status={currentStep === 1 ? "process" : "finish"} title="Доставка" icon={currentStep === 1 ? <LoadingOutlined /> : <SolutionOutlined />} />
-                            <Step status={currentStep === 2 ? "process" : "finish"} title="Оплата" icon={currentStep === 2 ? <LoadingOutlined /> : <DollarCircleOutlined />} />
-                            <Step status={currentStep === 3 ? "process" : "finish"} title="Оплата" icon={<SmileOutlined />} />
+                            <Step status={currentStep === 0 ? "process" : "finish"} title={t("CartPage.steps.cart")} icon={currentStep === 0 ? <LoadingOutlined /> : <ShoppingCartOutlined />} />
+                            <Step status={currentStep === 1 ? "process" : "finish"} title={t("CartPage.steps.delivery")} icon={currentStep === 1 ? <LoadingOutlined /> : <SolutionOutlined />} />
+                            <Step status={currentStep === 2 ? "process" : "finish"} title={t("CartPage.steps.pay")} icon={currentStep === 2 ? <LoadingOutlined /> : <DollarCircleOutlined />} />
+                            <Step status={currentStep === 3 ? "process" : "finish"} title={t("CartPage.steps.final")} icon={<SmileOutlined />} />
                         </Steps>
                     </Col>
                 </Row> : null}
@@ -401,10 +415,10 @@ function HomePage(props) {
                                 fontSize: '19px',
                                 textAlign: 'center',
                                 color: '#8642b9',
-                            }} >Данные получателя</h1>
+                            }} >{t("CartPage.inputsH1")}</h1>
                             {error ? <Col span={24} className="mt-2 mb-2"><Alert message={error} type="error" /></Col> : null}
                             <div style={{ marginTop: '2em', marginBottom: '2em' }}>
-                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faUser} /> ФИО:</span>
+                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faUser} />{t("CartPage.inputs.fio.text")}</span>
                                 <Textbox
                                     attributesInput={{ // Optional.
                                         id: 'fio',
@@ -419,7 +433,7 @@ function HomePage(props) {
                                         type: 'string',
                                         min: 4,
                                         max: 44,
-                                        msgOnError: "Пожайлуста Впишите ФИО получателя",
+                                        msgOnError: t("CartPage.inputs.fio.validator"),
                                         regMsg: "regMsg",
                                     }}
                                     validationCallback={res =>
@@ -428,7 +442,7 @@ function HomePage(props) {
                                 />
                             </div>
                             <div style={{ marginTop: '2em', marginBottom: '2em' }}>
-                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faCity} /> Город:</span>
+                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faCity} /> {t("CartPage.inputs.city.text")}</span>
                                 <Textbox
                                     attributesInput={{ // Optional.
                                         id: 'city',
@@ -444,7 +458,7 @@ function HomePage(props) {
                                         type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
                                         min: 4,
                                         max: 44,
-                                        msgOnError: "Пожайлуста вишите город доставки",
+                                        msgOnError: t("CartPage.inputs.city.validator"),
                                         regMsg: "regMsg",
                                     }}
                                     validationCallback={res =>
@@ -453,7 +467,7 @@ function HomePage(props) {
                                 />
                             </div>
                             <div style={{ marginTop: '2em', marginBottom: '2em' }}>
-                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faPhone} /> Телефон получателя:</span>
+                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faPhone} /> {t("CartPage.inputs.phone.text")}</span>
                                 <Textbox
                                     attributesInput={{ // Optional.
                                         id: 'phone',
@@ -468,7 +482,7 @@ function HomePage(props) {
                                         type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
                                         min: 9,
                                         max: 44,
-                                        msgOnError: "Пожайлуста вишите телефон получателя",
+                                        msgOnError: t("CartPage.inputs.phone.validator"),
                                         regMsg: "regMsg",
                                     }}
                                     validationCallback={res =>
@@ -479,7 +493,7 @@ function HomePage(props) {
 
                             </div>
                             <div style={{ marginTop: '2em', marginBottom: '2em' }}>
-                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faTruck} /> № отделения Новой Почты: </span>
+                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faTruck} />{t("CartPage.inputs.mailNumber.text")}</span>
                                 <Textbox
                                     attributesInput={{ // Optional.
                                         id: 'userMailNumber',
@@ -495,7 +509,7 @@ function HomePage(props) {
                                         type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
                                         min: 1,
                                         max: 20,
-                                        msgOnError: "Пожайлуста вишите № отделения Новой Почты",
+                                        msgOnError: t("CartPage.inputs.mailNumber.validator"),
                                     }}
                                     validationCallback={res =>
                                         setUserMailNumberValid(!res)
@@ -504,49 +518,26 @@ function HomePage(props) {
                             </div>
                         </Col>
                         <Col span={24}>
-                            <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => saveDataHendler()}>Далее</Button>
-                            <Button style={{ margin: '2em auto', display: 'block' }} onClick={e => setCurrentStep(0)}>Назад</Button>
+                            <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => saveDataHendler()}>{t("next")}</Button>
+                            <Button style={{ margin: '2em auto', display: 'block' }} onClick={e => setCurrentStep(0)}>{t("previous")}</Button>
                         </Col>
                     </Row>
                 </div> : null}
 
             {currentStep === 2 ? <CardStep3 /> : null}
             {currentStep === 3 ? <CardStep4 /> : null}
-            <Dilivery />
-            <CallMe />
+            
+            <Dilivery t={t} />
+            <CallMe t={t} />
 
         </div>
     )
 }
-HomePage.getInitialProps = ({ req }) => {
-    let userAgent;
-    let imagePath;
-    let imageType;
-    if (req) { // if you are on the server and you get a 'req' property from your context
-        userAgent = req.headers['user-agent'] // get the user-agent from the headers
-    } else {
-        userAgent = navigator.userAgent // if you are on the client you can access the navigator from the window object
-    }
-    let isMobile = Boolean(userAgent.match(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-    ))
-    let isChrome = Boolean(userAgent.match(
-        /Android|Opera Mini|IEMobile|WPDesktop|Chrome/i
-    ))
-    if (isChrome) {
-        imagePath = '/images/webp',
-            imageType = '.webp'
-    } else {
-        imagePath = '/images',
-            imageType = '.jpg'
-    }
-
+Cart.getInitialProps = () => {
     return {
-        isChrome: isChrome,
-        imagePath: imagePath,
-        imageType: imageType,
-        isMobile: isMobile
+        namespacesRequired: ['common']
     }
 };
 
-export default withRedux(HomePage)
+
+export default withTranslation(['common'])(withRedux(Cart))
