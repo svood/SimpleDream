@@ -15,7 +15,7 @@ import {
     isSafari,
     isEdge
 } from "react-device-detect";
-import { ShoppingCartOutlined, SolutionOutlined, LoadingOutlined, SmileOutlined, DollarCircleOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, SolutionOutlined, SettingFilled, SmileOutlined, DollarCircleOutlined } from '@ant-design/icons';
 import ReactGA from 'react-ga';
 import { withTranslation } from '../i18n'
 import { Steps, Button, Row, Col, Card, Alert } from 'antd';
@@ -398,9 +398,9 @@ function Cart({ t }) {
                     <Row>
                         <Col sm={24} md={12} style={{ margin: '2em auto' }}>
                             <Steps>
-                                <Step status={currentStep === 0 ? "process" : "finish"} title={t("CartPage.steps.cart")} icon={currentStep === 0 ? <LoadingOutlined /> : <ShoppingCartOutlined />} />
-                                <Step status={currentStep === 1 ? "process" : "finish"} title={t("CartPage.steps.delivery")} icon={currentStep === 1 ? <LoadingOutlined /> : <SolutionOutlined />} />
-                                <Step status={currentStep === 2 ? "process" : "finish"} title={t("CartPage.steps.pay")} icon={currentStep === 2 ? <LoadingOutlined /> : <DollarCircleOutlined />} />
+                                <Step status={currentStep === 0 ? "process" : "finish"} title={t("CartPage.steps.cart")} icon={currentStep === 0 ? <SettingFilled spin/> : <ShoppingCartOutlined />} />
+                                <Step status={currentStep === 1 ? "process" : "finish"} title={t("CartPage.steps.delivery")} icon={currentStep === 1 ? <SettingFilled spin/> : <SolutionOutlined />} />
+                                <Step status={currentStep === 2 ? "process" : "finish"} title={t("CartPage.steps.pay")} icon={currentStep === 2 ? <SettingFilled spin/> : <DollarCircleOutlined />} />
                                 <Step status={currentStep === 3 ? "process" : "finish"} title={t("CartPage.steps.final")} icon={<SmileOutlined />} />
                             </Steps>
                         </Col>

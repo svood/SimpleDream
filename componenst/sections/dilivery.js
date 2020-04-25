@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import { Row, Col } from 'antd';
 
 const DiliveryStyles = styled.div`
-    margin-top:4em;
-    padding:2em;
-    border: 1px solid #6f29bc;
+    margin-top: 4em;
     padding: 1em;
+    border-top: 1px solid #e5ceff;
+    border-bottom: 1px solid #e5ceff;
     img {
         width:100%;
     }
@@ -36,7 +36,7 @@ const Dilivery = ({ t }) => {
                     <li>{t("dilivery.li.1")}</li>
                     <li>{t("dilivery.li.2")}</li>
                 </ul>
-                <p>{t("dilivery.p")}</p>
+                <p style={{padding:'2em'}}>{t("dilivery.p")}</p>
                 <a href="/shipment">{t("dilivery.button")}</a>
             </Col>
         </Row>

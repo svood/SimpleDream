@@ -3,7 +3,7 @@ import Slider from '../mainSlider'
 import CountdownTimer from "react-component-countdown-timer";
 import { Row, Col } from 'antd';
 import {
-    isChrome
+  isChrome
 } from "react-device-detect";
 import LazyLoad from 'react-lazyload';
 import styled from 'styled-components'
@@ -24,11 +24,12 @@ span:after {right: 0;}
 p {
   color: #eb7663;
 }
-span {
+p {
     width: 100%;
+    padding: 1em;
     font-family: 'Righteous', cursive;
     position: relative;
-    color: #8642b933; 
+    color: #8642b9; 
     display: inline-block;
     border-bottom: 2px solid;
     font-size: 2.2em;
@@ -44,9 +45,7 @@ span {
       font-size: 18pt;
      }
     }
-
 `;
-
 
 const Timer = styled.div`
 .root-react-component-countdown-timer{
@@ -141,42 +140,42 @@ const Timer = styled.div`
 `
 
 const Advantages = ({ isMobile, t }) => {
-    return (
-        <Row >
+  return (
+    <Row >
 
-            {!isMobile ?
-                <Col xs={24} sm={24} md={18} lg={17} xl={15}>
-                    <Slider />
-                </Col> : null}
-            <Col xs={24} sm={24} md={6} lg={7} xl={9}>
-                <LogoImage>
-                    {isChrome ?
-                        <LazyLoad><img src="/images/webp/logo.webp" /></LazyLoad> : <LazyLoad><img src="/images/logo.png" /></LazyLoad>
-                    }
-                </LogoImage>
-                <MainBlock >
-                    <span>
-                        <h1>{t("mainH1")}</h1>
-                        <p className="text-center blockTitle">{t("mainDesk.normal")}<strong> {t("mainDesk.strong")}</strong></p>
-                    </span>
-                </MainBlock>
-                <Timer>
-                    <CountdownTimer count={5432}
-                        showTitle
-                        responsive
-                        className="mt-0"
-                        dayTitle={t("dayTitle")}
-                        hourTitle={t("hourTitle")}
-                        secondTitle={t("secondTitle")}
-                        minuteTitle={t("minuteTitle")}
-                    />
-                </Timer>
-            </Col>
+      {!isMobile ?
+        <Col xs={24} sm={24} md={18} lg={17} xl={15}>
+          <Slider />
+        </Col> : null}
+      <Col xs={24} sm={24} md={6} lg={7} xl={9} style={{ padding: '2em', background: '#f9f9f9' }}>
+        <LogoImage>
+          {isChrome ?
+            <LazyLoad><img src="/images/webp/logo.webp" /></LazyLoad> : <LazyLoad><img src="/images/logo.png" /></LazyLoad>
+          }
+        </LogoImage>
+        <MainBlock>
 
-        </Row>
+          <h1>{t("mainH1")}</h1>
+          <p >{t("mainDesk.normal")}<strong> {t("mainDesk.strong")}</strong></p>
+
+        </MainBlock>
+        <Timer>
+          <CountdownTimer count={5432}
+            showTitle
+            responsive
+            className="mt-0"
+            dayTitle={t("dayTitle")}
+            hourTitle={t("hourTitle")}
+            secondTitle={t("secondTitle")}
+            minuteTitle={t("minuteTitle")}
+          />
+        </Timer>
+      </Col>
+
+    </Row>
 
 
-    )
+  )
 }
 
 export default Advantages;

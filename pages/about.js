@@ -7,6 +7,7 @@ import Dilivery from '../componenst/sections/dilivery';
 import { withTranslation } from '../i18n'
 import MainLayout from '../componenst/layouts/main'
 import styled from 'styled-components'
+import i18n from '../i18n'
 
 const InfoContent = styled.div`
         width:95%;

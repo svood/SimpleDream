@@ -7,7 +7,7 @@ import { withTranslation } from '../i18n'
 import MainLayout from '../componenst/layouts/main'
 import { ru, ua } from '../public/static/texts/return'
 import styled from 'styled-components'
-
+import { i18n } from '../i18n'
 const InfoContent = styled.div`
         width:95%;
         margin:1em auto;
@@ -72,7 +72,7 @@ function Return({ t, lng }) {
             <InfoContent>
                 <Row >
                     <Col sm={24} md={24} className="infoContent" style={{ margin: '3em auto', width: '78%' }}>
-                        {lng === 'ru' ? ru() : ua()}
+                        {i18n.language  === 'ru' ? ru() : ua()}
                     </Col>
                 </Row>
             </InfoContent>
@@ -91,9 +91,8 @@ function Return({ t, lng }) {
 }
 
 
-Return.getInitialProps = ({ req }) => {
+Return.getInitialProps = () => {
     return {
-        lng: req.lng,
         namespacesRequired: ['common'],
     }
 }

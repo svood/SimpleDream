@@ -3,11 +3,10 @@ import CallMe from '../componenst/callMe';
 import { useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { Row, Col } from 'antd';
-import { withTranslation } from '../i18n'
+import { withTranslation,i18n } from '../i18n'
 import MainLayout from '../componenst/layouts/main'
 import { ru, ua } from '../public/static/texts/shipment'
 import styled from 'styled-components'
-
 const InfoContent = styled.div`
         width:95%;
         margin:1em auto;
@@ -29,7 +28,6 @@ const InfoContent = styled.div`
         ul {
             margin-top: 1em;
         }
-        
 `;
 
 const CartStyle = styled.div`
@@ -60,7 +58,7 @@ const CartStyle = styled.div`
     }
 `
 
-function Shipment({ t, lng }) {
+function Shipment({ t }) {
     const mainPageStore = () => {
         return useSelector(state => ({
             store: state.mainPage,
@@ -73,7 +71,7 @@ function Shipment({ t, lng }) {
             <InfoContent>
                 <Row className="main" justify='cenetr'>
                     <Col sm={12} md={20} className='infoContent' style={{ margin: '3em auto' }}>
-                        {lng === 'ru' ? ru() : ua()}
+                        {i18n.language === 'ru' ? ru() : ua()}
                     </Col>
                     {
                         store.card.length > 0 ?
@@ -92,7 +90,6 @@ function Shipment({ t, lng }) {
 
 Shipment.getInitialProps = ({ req }) => {
     return {
-        lng: req.lng,
         namespacesRequired: ['common'],
     }
 };

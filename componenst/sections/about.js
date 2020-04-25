@@ -5,18 +5,18 @@ import LazyLoad from 'react-lazyload';
 import styled from 'styled-components'
 
 const StylesAbout = styled.div`
-h3 {
-    text-align: justify;
-    padding: 1em 3em 0em 3em;
-}
-p {
-    text-align: justify;
-    padding: 1em 3em 0em 3em;
-}
-img {
-    display: block;
-    float: right;
-}
+    h3 {
+        text-align: justify;
+        padding: 1em 3em 0em 3em;
+    }
+    p {
+        text-align: justify;
+        padding: 1em 3em 0em 3em;
+    }
+    img {
+        display: block;
+        float: right;
+    }
 `;
 
 const About = ({ t }) => {

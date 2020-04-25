@@ -21,7 +21,7 @@ const NavStyles = styled.a`
 const LengStyled = styled.div`
     position: absolute;
     right: 3em;
-    top: 0em;
+    top: 0.5em;
     button {
       width: 29px;
       height: 29px;

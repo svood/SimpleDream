@@ -8,7 +8,7 @@ import { withTranslation } from '../i18n'
 import MainLayout from '../componenst/layouts/main'
 import { ru, ua } from '../public/static/texts/offerta';
 import styled from 'styled-components'
-
+import { i18n } from '../i18n'
 const InfoContent = styled.div`
         width:95%;
         margin:1em auto;
@@ -60,7 +60,7 @@ const CartStyle = styled.div`
         text-align: center;
     }
 `
-function Offert({ t, lng }) {
+function Offert({ t }) {
     const mainPageStore = () => {
         return useSelector(state => ({
             store: state.mainPage,
@@ -73,7 +73,7 @@ function Offert({ t, lng }) {
             <InfoContent>
                 <Row className="main">
                     <Col sm={24} md={24} className="infoContent" >
-                        {lng === 'ru' ? ru() : ua()}
+                        {i18n.language === 'ru' ? ru() : ua()}
                     </Col>
                 </Row>
             </InfoContent>
@@ -92,11 +92,10 @@ function Offert({ t, lng }) {
 }
 
 
-Offert.getInitialProps = (req) => {
+Offert.getInitialProps = ({req}) => {
     return {
-        lng: req.lng,
         namespacesRequired: ['common'],
     }
 }
 
-export default withTranslation(['common'])(withRedux(Offert))
+export default withRedux(withTranslation(['common'])(Offert))
