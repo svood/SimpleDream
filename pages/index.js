@@ -20,8 +20,69 @@ import {
     isSafari,
     isEdge
 } from "react-device-detect";
+import styled from 'styled-components'
 
 
+const Product = styled.div`
+    img {
+        height: 400px;
+        object-fit: cover;
+        width:100%;
+    }
+    input {
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+        background: #ebebeb;
+        border: none;
+        width: 100%;
+        font-weight: 700;
+        color: #646464;
+    }
+    :hover {
+        button {
+            background: green;
+            color:white;
+        }
+    }
+    button {
+        background: aliceblue;
+        width: 100%;
+    }
+    p {
+        color: black;
+        margin-top: 1em;
+    }
+    
+    .hot {
+        position: absolute;
+        top: 4em;
+        background: red;
+        padding: 0 1em 0 1em;
+        color: white;
+        z-index: 99;
+        width: 4em;
+        height: 2em;
+        line-height: 2em;
+    }
+    .super {
+        position: absolute;
+        top: 2em;
+        background: #ffffffe8;
+        padding: 0 1em 0 1em;
+        color: #7c46ff;
+        z-index: 99;
+        width: 13em;
+        height: 2em;
+        line-height: 2em;
+    }
+    .ant-collapse {
+        margin-top:1em;
+    }
+    .ant-select {
+        width:100%
+    }
+`
 
 
 function HomePage({ t, star }) {
@@ -95,7 +156,7 @@ function HomePage({ t, star }) {
             <Advantages isMobile={isMobile} t={t} />
             <MainBlock t={t} />
             <Row gutter={{ xs: 2, sm: 2, md: 28, lg: 48 }} justify="center" >
-                <Col className="sort">
+                <Col >
                     <Button outline color="info" onClick={e => SetType(4)}>{t("sort.all")}</Button>
                     <Button outline color="info" onClick={e => SetType(1)}>{t("sort.man")}</Button>
                     <Button outline color="info" onClick={e => SetType(0)}>{t("sort.woman")}</Button>
@@ -109,18 +170,19 @@ function HomePage({ t, star }) {
                             (type === item.type || type === 4) ?
                                 <Col xs={24} sm={24} md={12} lg={8} xl={6}>
                                     <Card hoverable>
-                                        {item.hot ? <div className="hot">{t("hotLable")}</div> : false}
-                                        {item.super ? <div className="super">{t("designLable")}</div> : false}
+                                        <Product>
+                                        {item.hot ? <span className="hot">{t("hotLable")}</span> : false}
+                                        {item.super ? <span className="super">{t("designLable")}</span> : false}
                                         <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
                                             <LazyLoad height={400} once>
-                                                <img key={item.article} className='card-img-top' top width="100%" height="300px" src={mobile().imagePath + item.img[0].src + mobile().imageType} alt="Card image cap" />
+                                                <img key={item.article} src={mobile().imagePath + item.img[0].src + mobile().imageType} alt={item.title} />
                                             </LazyLoad>
                                         </ProductModal>
-                                        <p><input id={item.id} value={item.price + " грн"} disabled /></p>
-                                        <p className="mt-2 mb-2 itemIitle">{item.title + ", " + t("material") + ": " + item.material} </p>
+                                        <input id={item.id} value={item.price + " грн"} disabled />
+                                        <p>{item.title + ", " + t("material") + ": " + item.material} </p>
                                         <Row >
                                             <Col span={12} id={item.id + "_size"} >
-                                                <Select style={{ width: '100%' }} defaultValue={item.sizes[0].size} onChange={(value) => changePrice(item, value)}>
+                                                <Select defaultValue={item.sizes[0].size} onChange={(value) => changePrice(item, value)}>
                                                     {item.sizes.map(function (data, i) {
                                                         return (
                                                             <Option value={data.price} defaultChecked={(i <= 1) ? true : false} key={it + data.size}>{data.size}</Option>
@@ -129,14 +191,15 @@ function HomePage({ t, star }) {
                                                 </Select>
                                             </Col>
                                             <Col span={12}>
-                                                <Button onClick={e => addToCart(item, it)} className="addToCart"  >{t("addToCart")}}</Button>
+                                                <Button onClick={e => addToCart(item, it)}>{t("addToCart")}</Button>
                                             </Col>
                                         </Row>
-                                        <Collapse style={{ marginTop: '1em' }}>
+                                        <Collapse >
                                             <Panel header={t("showProductDesk")} >
                                                 <p>{item.text}</p>
                                             </Panel>
                                         </Collapse>
+                                        </Product>
                                     </Card>
                                     <div id={item.id + "_attribute"} price={item.price} customWidth={0} CustomSizeHeight={0} selectedSize={item.sizes[0].size}></div>
                                 </Col> : null
@@ -164,7 +227,7 @@ function HomePage({ t, star }) {
 
 
 
-HomePage.getInitialProps = ({}) => {
+HomePage.getInitialProps = ({ }) => {
     return {
         namespacesRequired: ['common'],
     }

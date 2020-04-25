@@ -1,8 +1,16 @@
 import React from 'react';
 import { Carousel } from 'antd';
 import LazyLoad from 'react-lazyload';
+import styled from 'styled-components'
 
 const mainSlider = () => {
+
+
+    const SliderStyle = styled.div`
+        img {
+            width:100%;
+        } 
+    `;
 
     const itemImages = [
         {
@@ -24,9 +32,11 @@ const mainSlider = () => {
     });
 
     return (
-        <Carousel autoplay>
-            {slides}
-        </Carousel>
+        <SliderStyle>
+            <Carousel autoplay>
+                {slides}
+            </Carousel>
+        </SliderStyle>
     );
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import '../style.scss';
+// import '../style.scss';
+
 import { appWithTranslation } from '../i18n'
 
 

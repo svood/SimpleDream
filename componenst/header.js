@@ -2,6 +2,20 @@ import React, { useState } from 'react';
 import { Menu, Drawer, Button } from 'antd';
 import { isMobile } from "react-device-detect";
 import { MenuUnfoldOutlined } from '@ant-design/icons';
+import styled from 'styled-components'
+
+const NavStyles  = styled.a`
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 28px 16px 0;
+  float: left;
+  line-height: 2;
+  font-family: cursive;
+  color: #453280;
+  font-weight: 600;
+  font-size: large;
+`;
 
 const NavBar = ({ t }) => {
   const [visible, setVisible] = useState(false);
@@ -29,13 +43,12 @@ const NavBar = ({ t }) => {
 
   return (
     <>
-      <a className="logo" href='/'>SimpleDreams</a>
+      <NavStyles className="logo" href='/'>SimpleDreams</NavStyles>
 
       {!isMobile ?
         menu('horizontal') :
         <>
           <Button style={{ float: 'right', top: '1em' }} shape="circle" onClick={e => setVisible(true)} icon={<MenuUnfoldOutlined />} />
-
           <Drawer
             title="Меню"
             placement={'left'}

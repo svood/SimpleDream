@@ -1,9 +1,21 @@
 import React from 'react'
 import { Row, Col } from 'antd';
+import styled from 'styled-components'
+const StylesFooter = styled.div`
+  img {
+    width: 118px;
+    float: right;
+  }
+  a {
+    padding: 1em;
+  }
+`;
+
 const Footer = ({ t }) => {
   return (
-
+    <StylesFooter>
     <Row>
+      
       <Col sm={24} md={20} className='footerNav'>
         <nav>
           <a href='/' >{t("navLinks.index")}</a>
@@ -18,6 +30,7 @@ const Footer = ({ t }) => {
         <img src="/images/vizamaster.svg" className="viza" className="footerLogo" />
       </Col>
     </Row>
+    </StylesFooter>
   )
 }
 

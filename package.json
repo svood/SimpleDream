@@ -57,6 +57,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "remote-redux-devtools": "^0.5.16",
+    "styled-components": "^5.1.0",
     "yarn": "^1.22.4"
   }
 }

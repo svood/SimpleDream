@@ -21,6 +21,12 @@ const MainLayout = ({ children, t, meta }) => {
       <Footer>
         <FooterNav t={t} />
       </Footer>
+      <style global jsx>{`
+            body {
+              background-image: url('/images/bg.jpg');
+            }
+
+          `}</style>
     </Layout>
 
   )
