@@ -14,7 +14,7 @@ const About = ({ t }) => {
                     </span>
                 </div>
                 <ul style={{ marginTop: '1em' }}>
-                    {t("about.ul", { returnObjects: true }).map(item => { return (<li> {item} </li>) })}
+                    {/* {t("about.ul", { returnObjects: true }).map(item => { return (<li> {item} </li>) })} */}
                 </ul>
                 <p>{t("about.p")}</p>
             </Col>

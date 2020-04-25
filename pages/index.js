@@ -12,8 +12,8 @@ import { addToCard } from '../actions/mainPage'
 import { Select, Button, Collapse, Row, Col, Card } from 'antd';
 import LazyLoad from 'react-lazyload';
 import ReactGA from 'react-ga';
-import Head from 'next/head'
 import { withTranslation } from '../i18n'
+import MainLayout from '../componenst/layouts/main'
 import {
     isMobile,
     isMobileSafari,
@@ -21,7 +21,10 @@ import {
     isEdge
 } from "react-device-detect";
 
-function HomePage({ t }) {
+
+
+
+function HomePage({ t, star }) {
     const dispatch = useDispatch();
     const mainPageStore = () => {
         return useSelector(state => ({
@@ -87,13 +90,8 @@ function HomePage({ t }) {
     }
 
     return (
-        <div className='main'>
-
-            <Head>
-                <title>{t("title")}</title>
-                <meta name="description" content={t("description")}></meta>
-            </Head>
-
+        <MainLayout t={t} meta={{ title: t("title"), description: t("description") }}>
+            {console.log('props', star)}
             <Advantages isMobile={isMobile} t={t} />
             <MainBlock t={t} />
             <Row gutter={{ xs: 2, sm: 2, md: 28, lg: 48 }} justify="center" >
@@ -160,14 +158,17 @@ function HomePage({ t }) {
                         </div> : null
                 }
             </div>
-        </div>
+        </MainLayout>
     )
 }
 
-HomePage.getInitialProps = async () => {
+
+
+HomePage.getInitialProps = ({}) => {
     return {
         namespacesRequired: ['common'],
     }
-}
+};
+
 
 export default withTranslation(['common'])(withRedux(HomePage))

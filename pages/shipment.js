@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import CallMe from '../componenst/callMe';
-import {  useSelector, shallowEqual } from 'react-redux'
+import { useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { Row, Col } from 'antd';
+import { withTranslation } from '../i18n'
+import MainLayout from '../componenst/layouts/main'
+import { ru, ua } from '../public/static/texts/shipment'
 
-
-function Shipment() {
+function Shipment({ t, lng }) {
     const mainPageStore = () => {
         return useSelector(state => ({
             store: state.mainPage,
@@ -14,38 +16,11 @@ function Shipment() {
     const { store } = mainPageStore();
 
     return (
-        <>
+        <MainLayout t={t} meta={{ title: t("title"), description: t("description") }}>
             <Row className="main" justify='cenetr'>
-                    <Col sm={12} md={20} className='infoContent' style={{margin:'3em auto'}}>
-                        <h1>Оплата и доставка</h1>
-                        <p>
-                            <h3>Варианты оплаты:</h3>
-                            <ul>
-                                <li>100% предоплата на расчетный счет Приват Банка</li>
-                                <li>наложенный платеж при получении товара в отделении Новой Почты. Дополнительно оплачивается 2% от суммы + 20 грн оформление, согласно тарифам Новой Почты</li>
-                            </ul>
-                        </p>
-                        <p>
-                            Оплата за товары, приобретенные в интернет-магазине Simple Dreams, осуществляется в украинских гривнах. Общая сумма заказа оговаривается во время подтверждения заказа в интернет-магазине и включает в себя цену за товар. В общую сумму заказа не входят Ваши затраты по оплате заказа (банковскую комиссию, отправку денег Новой Почтой при оплате наложенного платежа и т.д.). В интернет-магазине Simple Dreams размещены фотографии товаров для максимально точного отображения их характеристик и цветов. В связи с определенными настройками и характеристиками Вашего компьютера (либо другого устройства), цвета и характеристики товаров на фотографиях могут отличаться от указанных в интернет-магазине. Такие несоответствия не являются недостатками приобретенных товаров и не могут использоваться, как аргументация для обмена или возврата товаров. К каждому товару в интернет-магазине Simple Dreams прилагается детальное описание их характеристик. Обязательно изучите всю информацию и внимательно ознакомьтесь с характеристиками выбранного товара перед оформлением и подтверждением заказа. Подтверждая заказ, вы соглашаетесь с тем, что надлежащим образом проинформированы о характеристиках товаров и услуг.
-                        </p>
-                        <p>
-                            <h3>Перед использованием товара Вы должны:</h3>
-                            <ul>
-                                <li>Внимательно ознакомиться с правилами эксплуатации товара, указанными на упаковке и ярлыках товара</li>
-                                <li>Обратиться к Simple Dreams за дополнительными разъяснениями по эксплуатации товара, если они Вам необходимы</li>
-                                <li>Использовать товар согласно его целевому назначению и придерживаться правил эксплуатации и безопасности, указанных производителями</li>
-                            </ul>
-                        </p>
-                        <p>
-                            <h3>Варианты доставки:</h3>
-                            <ul>
-                                <li>Доставка по Украине на любой склад Новой Почты или адресная доставка (стоимость адресной доставки регулируется действующими тарифами Новой Почты)</li>
-                                <li>Обратиться к Simple Dreams за дополнительными разъяснениями по эксплуатации товара, если они Вам необходимы</li>
-                                <li>Использовать товар согласно его целевому назначению и придерживаться правил эксплуатации и безопасности, указанных производителями</li>
-                            </ul>
-                        </p>
-                        <p><strong>Мы будем рады ответить на все вопросы о статусе доставки Вашего заказа по тел.: +38 (095) 314 01 33 в рабочие дни с 10.00 до 18.00</strong></p>
-                    </Col>
+                <Col sm={12} md={20} className='infoContent' style={{ margin: '3em auto' }}>
+                    {lng === 'ru' ? ru() : ua()}
+                </Col>
                 {
                     store.card.length > 0 ?
                         <div className="shopingCard" onClick={e => window.location.href = '/card'}>
@@ -53,11 +28,18 @@ function Shipment() {
                             <img src='/images/ShoppingCart.svg' />
                         </div> : null
                 }
-                </Row >
-              <CallMe />
-              </>
+            </Row >
+            <CallMe t={t} />
+        </MainLayout>
     )
 }
 
 
-export default withRedux(Shipment)
+Shipment.getInitialProps = ({ req }) => {
+    return {
+        lng: req.lng,
+        namespacesRequired: ['common'],
+    }
+};
+
+export default withTranslation(['common'])(withRedux(Shipment))

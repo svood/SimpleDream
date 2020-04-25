@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Menu, Layout, Drawer, Button } from 'antd';
-import {
-  isMobile
-} from "react-device-detect";
+import { Menu, Drawer, Button } from 'antd';
+import { isMobile } from "react-device-detect";
 import { MenuUnfoldOutlined } from '@ant-design/icons';
 
-const NavBar = ({ length }) => {
+const NavBar = ({ t }) => {
   const [visible, setVisible] = useState(false);
 
   const redirectTo = (path) => {
@@ -16,14 +14,14 @@ const NavBar = ({ length }) => {
     return (
       <Menu theme="light" mode={mode}>
         <Menu.Item key="1" onClick={e => redirectTo("/")}>
-          Главная
-          </Menu.Item>
+          {t("navLinks.index")}
+        </Menu.Item>
         <Menu.Item key="2" onClick={e => redirectTo("/shipment")}>
-          Доставка и Оплата
-          </Menu.Item>
+          {t("navLinks.shipment")}
+        </Menu.Item>
         <Menu.Item key="3" onClick={e => redirectTo("/card")}>
-          Корзина
-          </Menu.Item>
+          {t("navLinks.card")}
+        </Menu.Item>
       </Menu >
     )
 
@@ -36,7 +34,7 @@ const NavBar = ({ length }) => {
       {!isMobile ?
         menu('horizontal') :
         <>
-        <Button style={{float:'right', top: '1em'}}  shape="circle" onClick={e => setVisible(true)} icon={<MenuUnfoldOutlined />} />
+          <Button style={{ float: 'right', top: '1em' }} shape="circle" onClick={e => setVisible(true)} icon={<MenuUnfoldOutlined />} />
 
           <Drawer
             title="Меню"
@@ -48,7 +46,6 @@ const NavBar = ({ length }) => {
             {menu('vertical')}
           </Drawer>
         </>
-
       }
     </>
   );

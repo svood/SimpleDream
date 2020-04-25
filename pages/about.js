@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 import CallMe from '../componenst/callMe';
 import { useSelector, shallowEqual } from 'react-redux'
 import { withRedux } from '../lib/redux'
 import { Row, Col } from 'antd';
 import Dilivery from '../componenst/sections/dilivery';
 import { withTranslation } from '../i18n'
+import MainLayout from '../componenst/layouts/main'
 
 function About({ t }) {
     const mainPageStore = () => {
@@ -15,7 +16,7 @@ function About({ t }) {
     const { store } = mainPageStore();
 
     return (
-        <>
+        <MainLayout t={t} meta={{ title: t("title"), description: t("description") }}>
             <Row className="main" justify='cenetr'>
                 <Col sm={12} md={20} className='infoContent' style={{ margin: '3em auto' }}>
                     <h1>{t("aboutPage.h1")}</h1>
@@ -31,7 +32,7 @@ function About({ t }) {
             </Row >
             <CallMe t={t} />
             <Dilivery t={t} />
-        </>
+        </MainLayout>
     )
 }
 

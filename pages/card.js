@@ -19,6 +19,7 @@ import { ShoppingCartOutlined, SolutionOutlined, LoadingOutlined, SmileOutlined,
 import ReactGA from 'react-ga';
 import { withTranslation } from '../i18n'
 import { Steps, Button, Row, Col, Card, Alert } from 'antd';
+import MainLayout from '../componenst/layouts/main'
 
 
 function Cart({ t }) {
@@ -380,157 +381,159 @@ function Cart({ t }) {
     }
 
     return (
-        <div className="main">
-            {!isMobile ?
-                <Row>
-                    <Col sm={24} md={12} style={{ margin: '2em auto' }}>
-                        <Steps>
-                            <Step status={currentStep === 0 ? "process" : "finish"} title={t("CartPage.steps.cart")} icon={currentStep === 0 ? <LoadingOutlined /> : <ShoppingCartOutlined />} />
-                            <Step status={currentStep === 1 ? "process" : "finish"} title={t("CartPage.steps.delivery")} icon={currentStep === 1 ? <LoadingOutlined /> : <SolutionOutlined />} />
-                            <Step status={currentStep === 2 ? "process" : "finish"} title={t("CartPage.steps.pay")} icon={currentStep === 2 ? <LoadingOutlined /> : <DollarCircleOutlined />} />
-                            <Step status={currentStep === 3 ? "process" : "finish"} title={t("CartPage.steps.final")} icon={<SmileOutlined />} />
-                        </Steps>
+        <MainLayout  t={t} meta={{ title: t("title"), description: t("description") }}>
+            <div className="main">
+                {!isMobile ?
+                    <Row>
+                        <Col sm={24} md={12} style={{ margin: '2em auto' }}>
+                            <Steps>
+                                <Step status={currentStep === 0 ? "process" : "finish"} title={t("CartPage.steps.cart")} icon={currentStep === 0 ? <LoadingOutlined /> : <ShoppingCartOutlined />} />
+                                <Step status={currentStep === 1 ? "process" : "finish"} title={t("CartPage.steps.delivery")} icon={currentStep === 1 ? <LoadingOutlined /> : <SolutionOutlined />} />
+                                <Step status={currentStep === 2 ? "process" : "finish"} title={t("CartPage.steps.pay")} icon={currentStep === 2 ? <LoadingOutlined /> : <DollarCircleOutlined />} />
+                                <Step status={currentStep === 3 ? "process" : "finish"} title={t("CartPage.steps.final")} icon={<SmileOutlined />} />
+                            </Steps>
+                        </Col>
+                    </Row> : null}
+
+
+                {currentStep === 0 ? <Row>
+                    <Col sm={24} md={16} style={{ margin: '2em auto' }}>
+                        {currentStep === 0 ? <CardStep1 /> : null}
                     </Col>
                 </Row> : null}
 
 
-            {currentStep === 0 ? <Row>
-                <Col sm={24} md={16} style={{ margin: '2em auto' }}>
-                    {currentStep === 0 ? <CardStep1 /> : null}
-                </Col>
-            </Row> : null}
+                {currentStep === 1 ?
+                    <div style={{
+                        background: 'rgb(247, 247, 247)',
+                        padding: '13px',
+                        border: '4px',
+                        borderBottomStyle: 'groove',
+                        borderColor: '#d3ffdd',
+                    }}>
+                        <Row gutter={{ sm: 0, md: 16 }} style={{ marginTop: '4em' }}>
+                            <Col sm={24} md={12} className="formContainer" >
+                                <h1 style={{
+                                    fontSize: '19px',
+                                    textAlign: 'center',
+                                    color: '#8642b9',
+                                }} >{t("CartPage.inputsH1")}</h1>
+                                {error ? <Col span={24} className="mt-2 mb-2"><Alert message={error} type="error" /></Col> : null}
+                                <div style={{ marginTop: '2em', marginBottom: '2em' }}>
+                                    <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faUser} />{t("CartPage.inputs.fio.text")}</span>
+                                    <Textbox
+                                        attributesInput={{ // Optional.
+                                            id: 'fio',
+                                            name: 'fio',
+                                            type: 'text',
+                                        }}
+                                        customStyleInput={InputStyle}
+                                        value={store.userFio}
+                                        onChange={(name, e) => { handelSetFIO(e) }}
+                                        onBlur={() => { }}
+                                        validationOption={{
+                                            type: 'string',
+                                            min: 4,
+                                            max: 44,
+                                            msgOnError: t("CartPage.inputs.fio.validator"),
+                                            regMsg: "regMsg",
+                                        }}
+                                        validationCallback={res =>
+                                            setFioValid(!res)
+                                        }
+                                    />
+                                </div>
+                                <div style={{ marginTop: '2em', marginBottom: '2em' }}>
+                                    <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faCity} /> {t("CartPage.inputs.city.text")}</span>
+                                    <Textbox
+                                        attributesInput={{ // Optional.
+                                            id: 'city',
+                                            name: 'city',
+                                            type: 'text',
+                                            // placeholder: 'Place your number here ^-^',
+                                        }}
+                                        customStyleInput={InputStyle}
+                                        value={store.userCity}
+                                        onChange={(name, e) => { handelSetCity(e) }}
+                                        onBlur={() => { }}
+                                        validationOption={{
+                                            type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
+                                            min: 4,
+                                            max: 44,
+                                            msgOnError: t("CartPage.inputs.city.validator"),
+                                            regMsg: "regMsg",
+                                        }}
+                                        validationCallback={res =>
+                                            setUserCityValid(!res)
+                                        }
+                                    />
+                                </div>
+                                <div style={{ marginTop: '2em', marginBottom: '2em' }}>
+                                    <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faPhone} /> {t("CartPage.inputs.phone.text")}</span>
+                                    <Textbox
+                                        attributesInput={{ // Optional.
+                                            id: 'phone',
+                                            name: 'phone',
+                                            type: 'phone',
+                                        }}
+                                        customStyleInput={InputStyle}
+                                        value={store.userPhone}
+                                        onChange={(name, e) => { handelSetPhone(e) }}
+                                        onBlur={() => { }}
+                                        validationOption={{
+                                            type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
+                                            min: 9,
+                                            max: 44,
+                                            msgOnError: t("CartPage.inputs.phone.validator"),
+                                            regMsg: "regMsg",
+                                        }}
+                                        validationCallback={res =>
+                                            setUserPhoneValid(!res)
+                                        }
 
+                                    />
 
-            {currentStep === 1 ?
-                <div style={{
-                    background: 'rgb(247, 247, 247)',
-                    padding: '13px',
-                    border: '4px',
-                    borderBottomStyle: 'groove',
-                    borderColor: '#d3ffdd',
-                }}>
-                    <Row gutter={{ sm: 0, md: 16 }} style={{ marginTop: '4em' }}>
-                        <Col sm={24} md={12} className="formContainer" >
-                            <h1 style={{
-                                fontSize: '19px',
-                                textAlign: 'center',
-                                color: '#8642b9',
-                            }} >{t("CartPage.inputsH1")}</h1>
-                            {error ? <Col span={24} className="mt-2 mb-2"><Alert message={error} type="error" /></Col> : null}
-                            <div style={{ marginTop: '2em', marginBottom: '2em' }}>
-                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faUser} />{t("CartPage.inputs.fio.text")}</span>
-                                <Textbox
-                                    attributesInput={{ // Optional.
-                                        id: 'fio',
-                                        name: 'fio',
-                                        type: 'text',
-                                    }}
-                                    customStyleInput={InputStyle}
-                                    value={store.userFio}
-                                    onChange={(name, e) => { handelSetFIO(e) }}
-                                    onBlur={() => { }}
-                                    validationOption={{
-                                        type: 'string',
-                                        min: 4,
-                                        max: 44,
-                                        msgOnError: t("CartPage.inputs.fio.validator"),
-                                        regMsg: "regMsg",
-                                    }}
-                                    validationCallback={res =>
-                                        setFioValid(!res)
-                                    }
-                                />
-                            </div>
-                            <div style={{ marginTop: '2em', marginBottom: '2em' }}>
-                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faCity} /> {t("CartPage.inputs.city.text")}</span>
-                                <Textbox
-                                    attributesInput={{ // Optional.
-                                        id: 'city',
-                                        name: 'city',
-                                        type: 'text',
-                                        // placeholder: 'Place your number here ^-^',
-                                    }}
-                                    customStyleInput={InputStyle}
-                                    value={store.userCity}
-                                    onChange={(name, e) => { handelSetCity(e) }}
-                                    onBlur={() => { }}
-                                    validationOption={{
-                                        type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
-                                        min: 4,
-                                        max: 44,
-                                        msgOnError: t("CartPage.inputs.city.validator"),
-                                        regMsg: "regMsg",
-                                    }}
-                                    validationCallback={res =>
-                                        setUserCityValid(!res)
-                                    }
-                                />
-                            </div>
-                            <div style={{ marginTop: '2em', marginBottom: '2em' }}>
-                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faPhone} /> {t("CartPage.inputs.phone.text")}</span>
-                                <Textbox
-                                    attributesInput={{ // Optional.
-                                        id: 'phone',
-                                        name: 'phone',
-                                        type: 'phone',
-                                    }}
-                                    customStyleInput={InputStyle}
-                                    value={store.userPhone}
-                                    onChange={(name, e) => { handelSetPhone(e) }}
-                                    onBlur={() => { }}
-                                    validationOption={{
-                                        type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
-                                        min: 9,
-                                        max: 44,
-                                        msgOnError: t("CartPage.inputs.phone.validator"),
-                                        regMsg: "regMsg",
-                                    }}
-                                    validationCallback={res =>
-                                        setUserPhoneValid(!res)
-                                    }
+                                </div>
+                                <div style={{ marginTop: '2em', marginBottom: '2em' }}>
+                                    <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faTruck} />{t("CartPage.inputs.mailNumber.text")}</span>
+                                    <Textbox
+                                        attributesInput={{ // Optional.
+                                            id: 'userMailNumber',
+                                            name: 'userMailNumber',
+                                            type: 'number',
+                                            // placeholder: 'Place your number here ^-^',
+                                        }}
+                                        customStyleInput={InputStyle}
+                                        value={store.userMailNumber}
+                                        onChange={(name, e) => { handelSetNumber(e) }}
+                                        onBlur={() => { }}
+                                        validationOption={{
+                                            type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
+                                            min: 1,
+                                            max: 20,
+                                            msgOnError: t("CartPage.inputs.mailNumber.validator"),
+                                        }}
+                                        validationCallback={res =>
+                                            setUserMailNumberValid(!res)
+                                        }
+                                    />
+                                </div>
+                            </Col>
+                            <Col span={24}>
+                                <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => saveDataHendler()}>{t("next")}</Button>
+                                <Button style={{ margin: '2em auto', display: 'block' }} onClick={e => setCurrentStep(0)}>{t("previous")}</Button>
+                            </Col>
+                        </Row>
+                    </div> : null}
 
-                                />
+                {currentStep === 2 ? <CardStep3 /> : null}
+                {currentStep === 3 ? <CardStep4 /> : null}
 
-                            </div>
-                            <div style={{ marginTop: '2em', marginBottom: '2em' }}>
-                                <span style={{ color: 'rebeccapurple', fontWeight: '500' }}><FontAwesomeIcon icon={faTruck} />{t("CartPage.inputs.mailNumber.text")}</span>
-                                <Textbox
-                                    attributesInput={{ // Optional.
-                                        id: 'userMailNumber',
-                                        name: 'userMailNumber',
-                                        type: 'number',
-                                        // placeholder: 'Place your number here ^-^',
-                                    }}
-                                    customStyleInput={InputStyle}
-                                    value={store.userMailNumber}
-                                    onChange={(name, e) => { handelSetNumber(e) }}
-                                    onBlur={() => { }}
-                                    validationOption={{
-                                        type: 'string', // Optional.[String].Default: "string". Validation type, options are ['string', 'number', 'alphanumeric', 'alpha'].
-                                        min: 1,
-                                        max: 20,
-                                        msgOnError: t("CartPage.inputs.mailNumber.validator"),
-                                    }}
-                                    validationCallback={res =>
-                                        setUserMailNumberValid(!res)
-                                    }
-                                />
-                            </div>
-                        </Col>
-                        <Col span={24}>
-                            <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => saveDataHendler()}>{t("next")}</Button>
-                            <Button style={{ margin: '2em auto', display: 'block' }} onClick={e => setCurrentStep(0)}>{t("previous")}</Button>
-                        </Col>
-                    </Row>
-                </div> : null}
+                <Dilivery t={t} />
+                <CallMe t={t} />
 
-            {currentStep === 2 ? <CardStep3 /> : null}
-            {currentStep === 3 ? <CardStep4 /> : null}
-            
-            <Dilivery t={t} />
-            <CallMe t={t} />
-
-        </div>
+            </div>
+        </MainLayout>
     )
 }
 Cart.getInitialProps = () => {
