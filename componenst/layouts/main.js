@@ -25,7 +25,6 @@ const MainLayout = ({ children, t, meta }) => {
             body {
               background-image: url('/images/bg.jpg');
             }
-
           `}</style>
     </Layout>
 

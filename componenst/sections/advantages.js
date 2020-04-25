@@ -39,6 +39,11 @@ span {
         color: #443281; 
         font-size: 0.7em;
     }
+    @media (max-width: 768px) {
+     p {
+      font-size: 18pt;
+     }
+    }
 
 `;
 

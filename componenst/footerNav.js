@@ -9,6 +9,17 @@ const StylesFooter = styled.div`
   a {
     padding: 1em;
   }
+  @media (max-width: 768px) {
+    .footerNav  {
+      margin:0 auto;
+    }
+    a {
+      width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    }
+   }
 `;
 
 const Footer = ({ t }) => {
