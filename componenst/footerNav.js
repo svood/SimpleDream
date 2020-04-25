@@ -8,6 +8,7 @@ const StylesFooter = styled.div`
   }
   a {
     padding: 1em;
+    color: #767676;
   }
   @media (max-width: 768px) {
     .footerNav  {
@@ -15,6 +16,7 @@ const StylesFooter = styled.div`
     }
     a {
       width: 100%;
+      color:black;
     margin: 0 auto;
     text-align: center;
     display: block;

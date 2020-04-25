@@ -5,7 +5,7 @@ import { MenuUnfoldOutlined } from '@ant-design/icons';
 import styled from 'styled-components'
 import { i18n } from '../i18n'
 
-const NavStyles  = styled.a`
+const NavStyles = styled.a`
   width: 120px;
   height: 31px;
   background: rgba(255, 255, 255, 0.2);
@@ -45,18 +45,18 @@ const NavBar = ({ t }) => {
   const menu = (mode) => {
     return (
       <>
-      <Menu theme="light" mode={mode}>
-        <Menu.Item key="1" onClick={e => redirectTo("/")}>
-          {t("navLinks.index")}
-        </Menu.Item>
-        <Menu.Item key="2" onClick={e => redirectTo("/shipment")}>
-          {t("navLinks.shipment")}
-        </Menu.Item>
-        <Menu.Item key="3" onClick={e => redirectTo("/card")}>
-          {t("navLinks.card")}
-        </Menu.Item>
-      </Menu >
-      {Leng()}
+        <Menu theme="light" mode={mode}>
+          <Menu.Item key="1" onClick={e => redirectTo("/")}>
+            {t("navLinks.index")}
+          </Menu.Item>
+          <Menu.Item key="2" onClick={e => redirectTo("/shipment")}>
+            {t("navLinks.shipment")}
+          </Menu.Item>
+          <Menu.Item key="3" onClick={e => redirectTo("/card")}>
+            {t("navLinks.card")}
+          </Menu.Item>
+        </Menu >
+        {Leng()}
       </>
     )
 
@@ -65,17 +65,16 @@ const NavBar = ({ t }) => {
   const Leng = () => {
     return (
       <LengStyled>
-        <button onClick={() => {i18n.changeLanguage("ru")}} style={i18n.lng === "ru" ? {background: 'red'} : {background: "#fef6ff"}}>ru</button>
-        <button onClick={() => {i18n.changeLanguage("ua")}}>ua</button>
+        <button onClick={() => { i18n.changeLanguage("ru") }} style={i18n.language === "ru" ? { background: '#7043bb', color: 'white' } : { background: "#fef6ff" }}>ru</button>
+        <button onClick={() => { i18n.changeLanguage("ua") }} style={i18n.language === "ua" ? { background: '#7043bb', color: 'white' } : { background: "#fef6ff" }}>ua</button>
       </LengStyled>
     )
-  
-}
+
+  }
 
   return (
     <>
       <NavStyles className="logo" href='/'>SimpleDreams</NavStyles>
-
       {!isMobile ?
         menu('horizontal') :
         <>

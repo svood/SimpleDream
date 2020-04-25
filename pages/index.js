@@ -83,7 +83,33 @@ const Product = styled.div`
         width:100%
     }
 `
-
+const CartStyle = styled.div`
+    position: fixed;
+    img {
+        width: 100px;
+        position: fixed;
+        bottom: 9%;
+        right: 4%;
+        z-index: 9;
+        background: white;
+        border: 1px solid #1ba52c;
+        border-radius: 84px;
+    }
+    span {
+        position: fixed;
+        bottom: 17%;
+        right: 4%;
+        z-index: 10;
+        font-size: 17pt;
+        color: #ff0047;
+        background: white;
+        border-radius: 50px;
+        border: 1px solid #ffa73a;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+    }
+`
 
 function HomePage({ t, star }) {
     const dispatch = useDispatch();
@@ -171,34 +197,34 @@ function HomePage({ t, star }) {
                                 <Col xs={24} sm={24} md={12} lg={8} xl={6}>
                                     <Card hoverable>
                                         <Product>
-                                        {item.hot ? <span className="hot">{t("hotLable")}</span> : false}
-                                        {item.super ? <span className="super">{t("designLable")}</span> : false}
-                                        <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
-                                            <LazyLoad height={400} once>
-                                                <img key={item.article} src={mobile().imagePath + item.img[0].src + mobile().imageType} alt={item.title} />
-                                            </LazyLoad>
-                                        </ProductModal>
-                                        <input id={item.id} value={item.price + " грн"} disabled />
-                                        <p>{item.title + ", " + t("material") + ": " + item.material} </p>
-                                        <Row >
-                                            <Col span={12} id={item.id + "_size"} >
-                                                <Select defaultValue={item.sizes[0].size} onChange={(value) => changePrice(item, value)}>
-                                                    {item.sizes.map(function (data, i) {
-                                                        return (
-                                                            <Option value={data.price} defaultChecked={(i <= 1) ? true : false} key={it + data.size}>{data.size}</Option>
-                                                        )
-                                                    })}
-                                                </Select>
-                                            </Col>
-                                            <Col span={12}>
-                                                <Button onClick={e => addToCart(item, it)}>{t("addToCart")}</Button>
-                                            </Col>
-                                        </Row>
-                                        <Collapse >
-                                            <Panel header={t("showProductDesk")} >
-                                                <p>{item.text}</p>
-                                            </Panel>
-                                        </Collapse>
+                                            {item.hot ? <span className="hot">{t("hotLable")}</span> : false}
+                                            {item.super ? <span className="super">{t("designLable")}</span> : false}
+                                            <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
+                                                <LazyLoad height={400} once>
+                                                    <img key={item.article} src={mobile().imagePath + item.img[0].src + mobile().imageType} alt={item.title} />
+                                                </LazyLoad>
+                                            </ProductModal>
+                                            <input id={item.id} value={item.price + " грн"} disabled />
+                                            <p>{item.title + ", " + t("material") + ": " + item.material} </p>
+                                            <Row >
+                                                <Col span={12} id={item.id + "_size"} >
+                                                    <Select defaultValue={item.sizes[0].size} onChange={(value) => changePrice(item, value)}>
+                                                        {item.sizes.map(function (data, i) {
+                                                            return (
+                                                                <Option value={data.price} defaultChecked={(i <= 1) ? true : false} key={it + data.size}>{data.size}</Option>
+                                                            )
+                                                        })}
+                                                    </Select>
+                                                </Col>
+                                                <Col span={12}>
+                                                    <Button onClick={e => addToCart(item, it)}>{t("addToCart")}</Button>
+                                                </Col>
+                                            </Row>
+                                            <Collapse >
+                                                <Panel header={t("showProductDesk")} >
+                                                    <p>{item.text}</p>
+                                                </Panel>
+                                            </Collapse>
                                         </Product>
                                     </Card>
                                     <div id={item.id + "_attribute"} price={item.price} customWidth={0} CustomSizeHeight={0} selectedSize={item.sizes[0].size}></div>
@@ -215,10 +241,10 @@ function HomePage({ t, star }) {
             <div>
                 {
                     store.card.length > 0 ?
-                        <div className="shopingCard" onClick={e => goToCart()}>
+                        <CartStyle className="shopingCard" onClick={e => goToCart()}>
                             <span>{store.card.length}</span>
                             <img src='/images/ShoppingCart.svg' />
-                        </div> : null
+                        </CartStyle> : null
                 }
             </div>
         </MainLayout>
