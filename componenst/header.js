@@ -3,6 +3,7 @@ import { Menu, Drawer, Button } from 'antd';
 import { isMobile } from "react-device-detect";
 import { MenuUnfoldOutlined } from '@ant-design/icons';
 import styled from 'styled-components'
+import { i18n } from '../i18n'
 
 const NavStyles  = styled.a`
   width: 120px;
@@ -17,6 +18,23 @@ const NavStyles  = styled.a`
   font-size: large;
 `;
 
+const LengStyled = styled.div`
+    position: absolute;
+    right: 3em;
+    top: 0em;
+    button {
+      width: 29px;
+      height: 29px;
+      line-height: 0;
+      background: #fef6ff;
+      border: 1px solid #959595;
+      margin: 0.3em;
+      border-radius: 50px;
+      color: #9217c4;
+    }
+
+`
+
 const NavBar = ({ t }) => {
   const [visible, setVisible] = useState(false);
 
@@ -26,6 +44,7 @@ const NavBar = ({ t }) => {
 
   const menu = (mode) => {
     return (
+      <>
       <Menu theme="light" mode={mode}>
         <Menu.Item key="1" onClick={e => redirectTo("/")}>
           {t("navLinks.index")}
@@ -37,9 +56,21 @@ const NavBar = ({ t }) => {
           {t("navLinks.card")}
         </Menu.Item>
       </Menu >
+      {Leng()}
+      </>
     )
 
   };
+
+  const Leng = () => {
+    return (
+      <LengStyled>
+        <button onClick={() => {i18n.changeLanguage("ru")}} style={i18n.lng === "ru" ? {background: 'red'} : {background: "#fef6ff"}}>ru</button>
+        <button onClick={() => {i18n.changeLanguage("ua")}}>ua</button>
+      </LengStyled>
+    )
+  
+}
 
   return (
     <>
