@@ -364,7 +364,7 @@ function Cart({ t }) {
                 </Row>
                 <Row>
                     <Col sm={24} md={9} className='liqBlock'>
-                        <div id="liqpayBlock" ref={liqBlock}></div>
+                        <div id="liqpayBlock" ref={liqBlock} style={{margin: '2em auto'}}></div>
                     </Col>
                 </Row>
                 <Row>
