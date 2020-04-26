@@ -9,12 +9,12 @@ const MainLayout = ({ children, t, meta }) => {
 
   return (
 
-    <Layout style={{width: '95%', margin: '0 auto',background: 'white' }}>
+    <Layout style={{ width: '95%', margin: '0 auto', background: 'white' }}>
       <Head>
         <title>{meta.title}</title>
         <meta name="description" content={meta.description}></meta>
       </Head>
-      <Header style={{ background: 'white'}}>
+      <Header style={{ background: 'white' }}>
         <NavBar t={t} />
       </Header>
       <Content>{children}</Content>
@@ -29,6 +29,15 @@ const MainLayout = ({ children, t, meta }) => {
               font-family: Lobster;
               src: url('/static/fonts/Lobster-Regular.ttf');
             }
+            .ant-carousel .slick-dots li button {
+              width: 20px;
+              height: 20px;
+              background: blue;
+              border-radius: 50px;
+            }  
+            .ant-carousel .slick-dots li.slick-active button {
+              background: red;
+            } 
           `}</style>
     </Layout>
 

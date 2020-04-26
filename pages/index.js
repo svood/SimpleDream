@@ -212,11 +212,13 @@ function HomePage({ t, star }) {
                                         <Product>
                                             {item.hot ? <span className="hot">{t("hotLable")}</span> : false}
                                             {item.super ? <span className="super">{t("designLable")}</span> : false}
-                                            <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
-                                                <LazyLoad height={400} once>
-                                                    <img key={item.article} src={mobile().imagePath + item.img[0].src + mobile().imageType} alt={item.title} />
-                                                </LazyLoad>
-                                            </ProductModal>
+                                         
+                                                <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
+                                                    <LazyLoad height={400} once>
+                                                        <img key={item.article} src={mobile().imagePath + item.img[0].src + mobile().imageType} alt={item.title} />
+                                                    </LazyLoad>
+                                                </ProductModal>
+                                           
                                             <input id={item.id} value={item.price + " грн"} disabled />
                                             <p>{i18n.language === "ru" ? item.title : item.titleUA + ", " + t("material") + ": " + item.material} </p>
                                             <Row >

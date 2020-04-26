@@ -9,7 +9,7 @@ const mainSlider = () => {
     const SliderStyle = styled.div`
         img {
             width:100%;
-        } 
+        }
     `;
 
     const itemImages = [
