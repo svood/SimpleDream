@@ -15,7 +15,7 @@ import {
     isSafari,
     isEdge
 } from "react-device-detect";
-import { ShoppingCartOutlined, SolutionOutlined, SettingFilled, SmileOutlined, DollarCircleOutlined,RightCircleOutlined,LeftCircleOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, SolutionOutlined, SettingFilled, SmileOutlined, DollarCircleOutlined, RightCircleOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import ReactGA from 'react-ga';
 import { withTranslation } from '../i18n'
 import { Steps, Button, Row, Col, Card, Alert } from 'antd';
@@ -83,6 +83,7 @@ function Cart({ t }) {
         handeSetPayType(1);
         const requestBody = {
             amount: Number(totlalPrice()),
+            number: (new Date().getMonth() + 1) + "/" + new Date().getDate() + new Date().getMinutes(),
         }
         const config = {
             headers: {
@@ -145,6 +146,7 @@ function Cart({ t }) {
         });
 
         const requestBody = {
+            number: (new Date().getMonth() + 1) + "/" + new Date().getDate() + new Date().getMinutes(),
             fio: store.userFio,
             mailNumber: store.userMailNumber,
             phone: store.userPhone,
@@ -363,8 +365,8 @@ function Cart({ t }) {
                     }
                 </Row>
                 <Row>
-                    <Col sm={24} md={9} className='liqBlock'>
-                        <div id="liqpayBlock" ref={liqBlock} style={{margin: '2em auto'}}></div>
+                    <Col sm={24} md={9} className='liqBlock' style={{ margin: '2em auto',display:'block' }}>
+                        <div id="liqpayBlock" ref={liqBlock} ></div>
                     </Col>
                 </Row>
                 <Row>
@@ -393,7 +395,7 @@ function Cart({ t }) {
                             maxWidth: '248px', margin: '32px auto', display: 'block'
                         }} />
                         <p style={{ fontSize: '16pt' }}>{t("CartPage.sucsessText")} </p>
-                        <p style={{ fontSize: '12pt' }}>{t("CartPage.oderNumber")} №41 </p>
+                        <p style={{ fontSize: '12pt' }}>{t("CartPage.oderNumber")} {(new Date().getMonth() + 1) + "/" + new Date().getDate() + new Date().getMinutes()} </p>
                     </Card>
                 </Col>
             </Row>
@@ -408,9 +410,9 @@ function Cart({ t }) {
                     <Row>
                         <Col sm={24} md={12} style={{ margin: '2em auto' }}>
                             <Steps>
-                                <Step status={currentStep === 0 ? "process" : "finish"} title={t("CartPage.steps.cart")} icon={currentStep === 0 ? <SettingFilled spin/> : <ShoppingCartOutlined />} />
-                                <Step status={currentStep === 1 ? "process" : "finish"} title={t("CartPage.steps.delivery")} icon={currentStep === 1 ? <SettingFilled spin/> : <SolutionOutlined />} />
-                                <Step status={currentStep === 2 ? "process" : "finish"} title={t("CartPage.steps.pay")} icon={currentStep === 2 ? <SettingFilled spin/> : <DollarCircleOutlined />} />
+                                <Step status={currentStep === 0 ? "process" : "finish"} title={t("CartPage.steps.cart")} icon={currentStep === 0 ? <SettingFilled spin /> : <ShoppingCartOutlined />} />
+                                <Step status={currentStep === 1 ? "process" : "finish"} title={t("CartPage.steps.delivery")} icon={currentStep === 1 ? <SettingFilled spin /> : <SolutionOutlined />} />
+                                <Step status={currentStep === 2 ? "process" : "finish"} title={t("CartPage.steps.pay")} icon={currentStep === 2 ? <SettingFilled spin /> : <DollarCircleOutlined />} />
                                 <Step status={currentStep === 3 ? "process" : "finish"} title={t("CartPage.steps.final")} icon={<SmileOutlined />} />
                             </Steps>
                         </Col>

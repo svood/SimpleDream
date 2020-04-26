@@ -4,7 +4,7 @@ import { isMobile } from "react-device-detect";
 import { MenuUnfoldOutlined } from '@ant-design/icons';
 import styled from 'styled-components'
 import { i18n } from '../i18n'
-
+import axios from 'axios'
 const NavStyles = styled.a`
   width: 120px;
   height: 31px;
@@ -55,6 +55,11 @@ const NavBar = ({ t }) => {
           <Menu.Item key="3" onClick={e => redirectTo("/card")}>
             {t("navLinks.card")}
           </Menu.Item>
+          <Menu.Item key="4" onClick={e => redirectTo("/contacts")}>
+            {t("navLinks.contacts")}
+          </Menu.Item>
+
+          
         </Menu >
         {Leng()}
       </>

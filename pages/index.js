@@ -12,7 +12,7 @@ import { addToCard } from '../actions/mainPage'
 import { Select, Button, Collapse, Row, Col, Card } from 'antd';
 import LazyLoad from 'react-lazyload';
 import ReactGA from 'react-ga';
-import { withTranslation } from '../i18n'
+import { withTranslation, i18n } from '../i18n'
 import MainLayout from '../componenst/layouts/main'
 import {
     isMobile,
@@ -88,7 +88,7 @@ const CartStyle = styled.div`
     img {
         width: 100px;
         position: fixed;
-        bottom: 9%;
+        bottom: 4%
         right: 4%;
         z-index: 9;
         background: white;
@@ -159,7 +159,6 @@ function HomePage({ t, star }) {
         return { imagePath: imagePath, imageType: imageType }
     }
 
-
     const addToCart = (item) => {
         ReactGA.event({
             category: 'Cart',
@@ -170,7 +169,7 @@ function HomePage({ t, star }) {
         let SizeInfo = attributes.getAttribute('selectedSize');
         let productPrice = attributes.getAttribute('price')
         store.card[store.card.length] = {
-            title: item.title,
+            title: i18n.language === "ru" ? item.title : item.titleUA,
             price: Number(parseInt(productPrice)),
             id: item.id,
             idOnCard: store.card.length + 1,
@@ -219,7 +218,7 @@ function HomePage({ t, star }) {
                                                 </LazyLoad>
                                             </ProductModal>
                                             <input id={item.id} value={item.price + " грн"} disabled />
-                                            <p>{item.title + ", " + t("material") + ": " + item.material} </p>
+                                            <p>{i18n.language === "ru" ? item.title : item.titleUA + ", " + t("material") + ": " + item.material} </p>
                                             <Row >
                                                 <Col span={12} id={item.id + "_size"} >
                                                     <Select defaultValue={item.sizes[0].size} onChange={(value) => changePrice(item, value)}>
@@ -236,7 +235,7 @@ function HomePage({ t, star }) {
                                             </Row>
                                             <Collapse >
                                                 <Panel header={t("showProductDesk")} >
-                                                    <p>{item.text}</p>
+                                                    <p>{i18n.language === "ru" ? item.text : item.textUA}</p>
                                                 </Panel>
                                             </Collapse>
                                         </Product>

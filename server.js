@@ -52,7 +52,7 @@ app.prepare()
                 'amount': req.body.amount,
                 'currency': 'UAH',
                 'description': 'SimpleDreams',
-                'order_id': new Date().valueOf(),
+                'order_id': req.body.number,
                 'version': '3'
             });
             res.end(html);
@@ -64,6 +64,7 @@ app.prepare()
             const chat = '-323585312';
             let fields = [
                 '<b>-----Новый заказ-----</b>',
+                '<b> Номер заказа:</b> ' + req.body.number,
                 '<b>Оплата:</b>: ' + req.body.payType,
                 '<b>ФИО</b>: ' + req.body.fio,
                 '<b>Телефон</b>: ' + req.body.phone,
@@ -82,6 +83,36 @@ app.prepare()
             //кодируем результат в текст, понятный адресной строке
             msg = encodeURI(msg)
 
+
+            axios.get(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat}&parse_mode=html&text=${msg}`)
+                .then((result) => {
+                    res.end(result);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.end(err);
+                })
+        })
+
+
+        server.post('/api/sendforminfo', (req, res) => {
+
+            const token = '1146944249:AAGlKsZ4O_Bq2Mb4zU8OGxp3tXrPdNAsfdo';
+            const chat = '-323585312';
+            let fields = [
+                '<b>-----Новый вопрос-----</b>',
+                '<b> Имя :</b> ' + req.body.name,
+                '<b>Почта:</b>: ' + req.body.email,
+                '<b>----------Вопрос----------</b> ',
+                req.body.introduction
+            ]
+            let msg = ''
+            //проходимся по массиву и склеиваем все в одну строку
+            fields.forEach(field => {
+                msg += field + '\n'
+            });
+            //кодируем результат в текст, понятный адресной строке
+            msg = encodeURI(msg)
 
             axios.get(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat}&parse_mode=html&text=${msg}`)
                 .then((result) => {

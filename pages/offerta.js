@@ -38,7 +38,7 @@ const CartStyle = styled.div`
     img {
         width: 100px;
         position: fixed;
-        bottom: 9%;
+        bottom: 4%
         right: 4%;
         z-index: 9;
         background: white;
