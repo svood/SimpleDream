@@ -12,10 +12,10 @@ const NavStyles = styled.a`
   margin: 16px 28px 16px 0;
   float: left;
   line-height: 2;
-  font-family: cursive;
-  color: #453280;
-  font-weight: 600;
+  font-weight: 100;
   font-size: large;
+  font-family: Lobster;
+  color: #9325cb;
 `;
 
 const LengStyled = styled.div`
@@ -23,7 +23,7 @@ const LengStyled = styled.div`
     right: 3em;
     top: 0.5em;
     button {
-      width: 29px;
+      width: 30px;
       height: 29px;
       line-height: 0;
       background: #fef6ff;

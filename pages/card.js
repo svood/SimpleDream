@@ -15,7 +15,7 @@ import {
     isSafari,
     isEdge
 } from "react-device-detect";
-import { ShoppingCartOutlined, SolutionOutlined, SettingFilled, SmileOutlined, DollarCircleOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, SolutionOutlined, SettingFilled, SmileOutlined, DollarCircleOutlined,RightCircleOutlined,LeftCircleOutlined } from '@ant-design/icons';
 import ReactGA from 'react-ga';
 import { withTranslation } from '../i18n'
 import { Steps, Button, Row, Col, Card, Alert } from 'antd';
@@ -30,6 +30,16 @@ const FormStyle = styled.div`
     input {
         width: 100%;
         text-align: center;
+    }
+    @media (max-width: 900px) {
+        .formContainer  {
+            width: 100%;
+            margin: 1em auto;
+            
+        }
+        button {
+            margin: 0em auto;
+        }
     }
 `;
 
@@ -299,7 +309,7 @@ function Cart({ t }) {
                 }}> <strong> {t("total")}: {totlalPrice()} {t("uah")} </strong> </Col>
 
                 <div>
-                    <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => firstStep()} disabled={(store.card.length === 0) ? true : false}>{t("next")}</Button>
+                    <Button shape="round" size={'lage'} icon={<RightCircleOutlined />} style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => firstStep()} disabled={(store.card.length === 0) ? true : false}>{t("next")}</Button>
                 </div>
             </div>
         )
@@ -347,7 +357,7 @@ function Cart({ t }) {
                         <Col sm={12} style={{ margin: '0 auto', marginBottom: '2em', marginTop: '2em' }}>
                             <Card>
                                 <p className='mb-5' style={{ color: '#214d7b', fontSize: '13pt', fontWeight: '500', textAlign: 'center' }}>{t("CartPage.novaText")}</p>
-                                <Button shape="round" size='lage' style={{ background: '#17b933', color: 'white', display: 'block', margin: '0 auto', marginBottom: '2em', marginTop: '2em' }} color="success" className="m-auto" onClick={e => agreeWithNovaPay()} >{t("agree")}</Button>
+                                <Button shape="round" size='lage' style={{ background: '#17b933', color: 'white', display: 'block', margin: '0 auto', marginBottom: '2em', marginTop: '2em' }} color="success" className="m-auto" onClick={e => agreeWithNovaPay()} >{t("CartPage.agree")}</Button>
                             </Card>
                         </Col> : null
                     }
@@ -532,8 +542,8 @@ function Cart({ t }) {
                                     </div>
                                 </Col>
                                 <Col span={24}>
-                                    <Button style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => saveDataHendler()}>{t("next")}</Button>
-                                    <Button style={{ margin: '2em auto', display: 'block' }} onClick={e => setCurrentStep(0)}>{t("previous")}</Button>
+                                    <Button shape="round" size={'lage'} icon={<RightCircleOutlined />} style={{ margin: '2em auto', display: 'block', color: 'white', background: '#04c704' }} onClick={e => saveDataHendler()}>{t("next")}</Button>
+                                    <Button shape="round" size={'lage'} icon={<LeftCircleOutlined />} style={{ margin: '2em auto', display: 'block' }} onClick={e => setCurrentStep(0)}>{t("previous")}</Button>
                                 </Col>
                             </Row>
                         </FormStyle>

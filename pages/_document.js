@@ -28,6 +28,7 @@ export default class MyDocument extends Document {
                 <body >
                     <Main />
                     <NextScript />
+                    <script src="//static.liqpay.ua/libjs/checkout.js" async></script>
                 </body>
             </html>
         );

@@ -28,7 +28,6 @@ const Footer = ({ t }) => {
   return (
     <StylesFooter>
     <Row>
-      
       <Col sm={24} md={20} className='footerNav'>
         <nav>
           <a href='/' >{t("navLinks.index")}</a>

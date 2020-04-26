@@ -25,6 +25,10 @@ const MainLayout = ({ children, t, meta }) => {
             body {
               background-image: url('/images/bg.jpg');
             }
+            @font-face {
+              font-family: Lobster;
+              src: url('/static/fonts/Lobster-Regular.ttf');
+            }
           `}</style>
     </Layout>
 

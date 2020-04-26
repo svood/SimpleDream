@@ -111,6 +111,18 @@ const CartStyle = styled.div`
     }
 `
 
+const Sort = styled.div`
+width:100%;
+@media (max-width: 768px) {
+    flex-direction: column;
+  }
+    @media (max-width: 900px) {
+        button {
+            width:100%;
+        }
+       }
+`;
+
 function HomePage({ t, star }) {
     const dispatch = useDispatch();
     const mainPageStore = () => {
@@ -182,11 +194,13 @@ function HomePage({ t, star }) {
             <Advantages isMobile={isMobile} t={t} />
             <MainBlock t={t} />
             <Row gutter={{ xs: 2, sm: 2, md: 28, lg: 48 }} justify="center" >
-                <Col >
-                    <Button outline color="info" onClick={e => SetType(4)}>{t("sort.all")}</Button>
-                    <Button outline color="info" onClick={e => SetType(1)}>{t("sort.man")}</Button>
-                    <Button outline color="info" onClick={e => SetType(0)}>{t("sort.woman")}</Button>
-                    <Button outline color="info" onClick={e => SetType(3)}>{t("sort.unyversal")}</Button>
+                <Col>
+                    <Sort>
+                        <Button outline onClick={e => SetType(4)}>{t("sort.all")}</Button>
+                        <Button outline onClick={e => SetType(1)}>{t("sort.man")}</Button>
+                        <Button outline onClick={e => SetType(0)}>{t("sort.woman")}</Button>
+                        <Button outline onClick={e => SetType(3)}>{t("sort.unyversal")}</Button>
+                    </Sort>
                 </Col>
             </Row>
             <Row gutter={{ xs: 2, sm: 2, md: 16, lg: 16 }} justify="center" style={{ marginTop: '3em' }}>

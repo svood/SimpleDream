@@ -21,30 +21,37 @@ const MainBlock = styled.div`
 text-align: center;
 span:before {left: 0;}
 span:after {right: 0;}
-p {
-  color: #eb7663;
+
+h1 {
+  font-family: Lobster;
+  font-weight: 100;
+  color: #f63a5d;
+  font-size: 18pt;
 }
 p {
-    width: 100%;
-    padding: 1em;
-    font-family: 'Righteous', cursive;
-    position: relative;
-    color: #8642b9; 
-    display: inline-block;
-    border-bottom: 2px solid;
-    font-size: 2.2em;
-    margin: 0; 
-    line-height: 1;
-    border-color: #8642b933;
+  width: 100%;
+  padding: 0em 1px 2em 1px;
+  position: relative;
+  color: #8642b9;
+  display: inline-block;
+  border-bottom: 2px solid;
+  font-size: 2em;
+  margin: 0;
+  line-height: 1;
+  border-color: #8642b933;
+  font-family: Lobster;
+  font-weight: 100;
     h1,h2,h3 {
         color: #443281; 
         font-size: 0.7em;
     }
     @media (max-width: 768px) {
-     p {
-      font-size: 18pt;
+      p {
+       font-size: 2em;
+      }
      }
-    }
+  }
+
 `;
 
 const Timer = styled.div`
