@@ -28,7 +28,6 @@ const Footer = ({ t }) => {
   return (
     <StylesFooter>
     <Row>
-      
       <Col sm={24} md={20} className='footerNav'>
         <nav>
           <a href='/' >{t("navLinks.index")}</a>
@@ -37,6 +36,7 @@ const Footer = ({ t }) => {
           <a href='/offerta'>{t("navLinks.offerta")}</a>
           <a href='/about'>{t("navLinks.about")}</a>
           <a href='/card'>{t("navLinks.card")}</a>
+          <a href='/contacts'>{t("navLinks.contacts")}</a>
         </nav>
       </Col>
       <Col sm={24} md={4} className='footerNav'>

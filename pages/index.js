@@ -12,7 +12,7 @@ import { addToCard } from '../actions/mainPage'
 import { Select, Button, Collapse, Row, Col, Card } from 'antd';
 import LazyLoad from 'react-lazyload';
 import ReactGA from 'react-ga';
-import { withTranslation } from '../i18n'
+import { withTranslation, i18n } from '../i18n'
 import MainLayout from '../componenst/layouts/main'
 import {
     isMobile,
@@ -88,8 +88,8 @@ const CartStyle = styled.div`
     img {
         width: 100px;
         position: fixed;
-        bottom: 9%;
-        right: 4%;
+        bottom: 5%;
+        right: 3%;
         z-index: 9;
         background: white;
         border: 1px solid #1ba52c;
@@ -110,6 +110,18 @@ const CartStyle = styled.div`
         text-align: center;
     }
 `
+
+const Sort = styled.div`
+width:100%;
+@media (max-width: 768px) {
+    flex-direction: column;
+  }
+    @media (max-width: 900px) {
+        button {
+            width:100%;
+        }
+       }
+`;
 
 function HomePage({ t, star }) {
     const dispatch = useDispatch();
@@ -147,7 +159,6 @@ function HomePage({ t, star }) {
         return { imagePath: imagePath, imageType: imageType }
     }
 
-
     const addToCart = (item) => {
         ReactGA.event({
             category: 'Cart',
@@ -158,7 +169,7 @@ function HomePage({ t, star }) {
         let SizeInfo = attributes.getAttribute('selectedSize');
         let productPrice = attributes.getAttribute('price')
         store.card[store.card.length] = {
-            title: item.title,
+            title: i18n.language === "ru" ? item.title : item.titleUA,
             price: Number(parseInt(productPrice)),
             id: item.id,
             idOnCard: store.card.length + 1,
@@ -182,11 +193,13 @@ function HomePage({ t, star }) {
             <Advantages isMobile={isMobile} t={t} />
             <MainBlock t={t} />
             <Row gutter={{ xs: 2, sm: 2, md: 28, lg: 48 }} justify="center" >
-                <Col >
-                    <Button outline color="info" onClick={e => SetType(4)}>{t("sort.all")}</Button>
-                    <Button outline color="info" onClick={e => SetType(1)}>{t("sort.man")}</Button>
-                    <Button outline color="info" onClick={e => SetType(0)}>{t("sort.woman")}</Button>
-                    <Button outline color="info" onClick={e => SetType(3)}>{t("sort.unyversal")}</Button>
+                <Col>
+                    <Sort>
+                        <Button outline onClick={e => SetType(4)}>{t("sort.all")}</Button>
+                        <Button outline onClick={e => SetType(1)}>{t("sort.man")}</Button>
+                        <Button outline onClick={e => SetType(0)}>{t("sort.woman")}</Button>
+                        <Button outline onClick={e => SetType(3)}>{t("sort.unyversal")}</Button>
+                    </Sort>
                 </Col>
             </Row>
             <Row gutter={{ xs: 2, sm: 2, md: 16, lg: 16 }} justify="center" style={{ marginTop: '3em' }}>
@@ -199,13 +212,15 @@ function HomePage({ t, star }) {
                                         <Product>
                                             {item.hot ? <span className="hot">{t("hotLable")}</span> : false}
                                             {item.super ? <span className="super">{t("designLable")}</span> : false}
-                                            <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
-                                                <LazyLoad height={400} once>
-                                                    <img key={item.article} src={mobile().imagePath + item.img[0].src + mobile().imageType} alt={item.title} />
-                                                </LazyLoad>
-                                            </ProductModal>
+                                         
+                                                <ProductModal title={item.title} imagePath={mobile().imagePath} imageType={mobile().imageType}>
+                                                    <LazyLoad height={400} once>
+                                                        <img key={item.article} src={mobile().imagePath + item.img[0].src + mobile().imageType} alt={item.title} />
+                                                    </LazyLoad>
+                                                </ProductModal>
+                                           
                                             <input id={item.id} value={item.price + " грн"} disabled />
-                                            <p>{item.title + ", " + t("material") + ": " + item.material} </p>
+                                            <p>{i18n.language === "ru" ? item.title : item.titleUA + ", " + t("material") + ": " + item.material} </p>
                                             <Row >
                                                 <Col span={12} id={item.id + "_size"} >
                                                     <Select defaultValue={item.sizes[0].size} onChange={(value) => changePrice(item, value)}>
@@ -222,7 +237,7 @@ function HomePage({ t, star }) {
                                             </Row>
                                             <Collapse >
                                                 <Panel header={t("showProductDesk")} >
-                                                    <p>{item.text}</p>
+                                                    <p>{i18n.language === "ru" ? item.text : item.textUA}</p>
                                                 </Panel>
                                             </Collapse>
                                         </Product>
