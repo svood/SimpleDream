@@ -99,7 +99,7 @@ function Contacts({ t, lng }) {
             }
         }
 
-        await axios.post('http://simple-dreams.com.ua/api/sendforminfo', qs.stringify(requestBody), config)
+        await axios.post('https://simple-dreams.com.ua/api/sendforminfo', qs.stringify(requestBody), config)
             .then((result) => {
                 console.log(result.data)
             })

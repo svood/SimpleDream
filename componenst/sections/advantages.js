@@ -45,7 +45,7 @@ p {
         color: #443281; 
         font-size: 0.7em;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 850px) {
       p {
        font-size: 2em;
       }
