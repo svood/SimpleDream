@@ -365,7 +365,7 @@ function Cart({ t }) {
                     }
                 </Row>
                 <Row>
-                    <Col sm={24} md={9} className='liqBlock' style={{ margin: '2em auto',display:'block' }}>
+                    <Col sm={24} md={9} className='liqBlock' style={{ margin: '2em auto', display: 'block' }}>
                         <div id="liqpayBlock" ref={liqBlock} ></div>
                     </Col>
                 </Row>
@@ -407,7 +407,7 @@ function Cart({ t }) {
         <MainLayout t={t} meta={{ title: t("title"), description: t("description") }}>
             <div className="main">
                 {!isMobile ?
-                    <Row>
+                    <Row >
                         <Col sm={24} md={12} style={{ margin: '2em auto' }}>
                             <Steps>
                                 <Step status={currentStep === 0 ? "process" : "finish"} title={t("CartPage.steps.cart")} icon={currentStep === 0 ? <SettingFilled spin /> : <ShoppingCartOutlined />} />
@@ -419,7 +419,11 @@ function Cart({ t }) {
                     </Row> : null}
 
 
-                {currentStep === 0 ? <Row>
+                {currentStep === 0 ? <Row style={{
+                    background: 'url(https://wow-journal.ru/wp-content/uploads/2019/04/mozhno-li-perelyubit-rebenka-posledstviya-vo-vzrosloj-zhizni1.png)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: '97% 30%',
+                }}>
                     <Col sm={24} md={16} style={{ margin: '2em auto' }}>
                         {currentStep === 0 ? <CardStep1 /> : null}
                     </Col>
@@ -434,7 +438,11 @@ function Cart({ t }) {
                         borderBottomStyle: 'groove',
                         borderColor: '#d3ffdd',
                     }}>
-                        <FormStyle>
+                        <FormStyle style={{
+                        background: 'url(https://lh3.googleusercontent.com/proxy/t91i5Sc8yeMVMehPx1H2L-Z6KN3JU2HD5yszAblWv7tolh8W92JP8OTHUbdixx9unegRSTLVIIz4JJJhblFiVQDljtW50o5oe1mot8KFpCfC)',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: '0% 30%',
+                    }}>
                             <Row gutter={{ sm: 0, md: 16 }} >
                                 <Col sm={24} md={12} className="formContainer" style={{ margin: '4em auto' }} >
                                     <h1 style={{

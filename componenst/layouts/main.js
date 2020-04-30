@@ -37,7 +37,11 @@ const MainLayout = ({ children, t, meta }) => {
             }  
             .ant-carousel .slick-dots li.slick-active button {
               background: red;
-            } 
+            }
+            .ant-modal-mask {
+              background: url(https://upload.wikimedia.org/wikipedia/ru/9/9d/Maggie_Simpson.png) 26% 100% no-repeat;
+              background-color: #0000004d;
+          }
           `}</style>
     </Layout>
 

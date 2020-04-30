@@ -8,6 +8,7 @@ const StylesDiv = styled.div`
 
 button {
     display:none !important;
+  
 }`
 const ProductModal = (props) => {
     const {
@@ -18,15 +19,15 @@ const ProductModal = (props) => {
     const toggle = () => setModal(!modal);
 
     const itemData = data.find(item => item.title == title);
-   
+
     return (
-        <StylesDiv>
+        <StylesDiv >
             <a color="danger" onClick={toggle}>{props.children}</a>
-          
-                <Modal title={title} visible={modal} onCancel={e => setModal(false)} footer={null} okButtonProps={{ style: { display: 'none' } }} cancelButtonProps={{ style: { display: 'none' } }} centered>
-                    <Slider itemImages={itemData.img} imagePath={props.imagePath} imageType={props.imageType} />
-                </Modal>
-           
+
+            <Modal  title={title} visible={modal} onCancel={e => setModal(false)} footer={null} okButtonProps={{ style: { display: 'none' } }} cancelButtonProps={{ style: { display: 'none' } }} centered>
+                <Slider itemImages={itemData.img} imagePath={props.imagePath} imageType={props.imageType} />
+            </Modal>
+
         </StylesDiv>
     );
 }
