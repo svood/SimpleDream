@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 const LogoImage = styled.div`
        img {
-           width:42%;
+            width: 27%;
            margin: 0 auto;
            display: block;
            margin-bottom: 28px

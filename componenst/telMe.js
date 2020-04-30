@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
 import { Modal, Card } from 'antd';
+import { PhoneOutlined } from '@ant-design/icons';
 
 const StylesDiv = styled.div`
     @media (max-width: 850px) {
@@ -31,6 +32,13 @@ font-weight: 100;
         a {
             text-align: center;
         }
+        strong {
+            text-align: center;
+            display: inline-flex;
+        }
+        p {
+            text-align: center;
+        }
        }
 `;
 const HrefStyle = styled.a`
@@ -55,14 +63,13 @@ const TellMe = ({ t }) => {
 
     return (
         <StylesDiv>
-            <HrefStyle color="danger" onClick={toggle}>Наши контакты</HrefStyle>
+            <HrefStyle color="danger" onClick={toggle}><PhoneOutlined /> {t('ContactsPage.contacts')} </HrefStyle>
 
-            <Modal title={"Контакты"} visible={modal} onCancel={e => setModal(false)} footer={null} okButtonProps={{ style: { display: 'none' } }} cancelButtonProps={{ style: { display: 'none' } }} centered>
+            <Modal title={t('ContactsPage.contacts')} visible={modal} onCancel={e => setModal(false)} footer={null} okButtonProps={{ style: { display: 'none' } }} cancelButtonProps={{ style: { display: 'none' } }} centered>
                 <Card>
                     <InfoStyles>
                         <p><strong>{t('ContactsPage.mainNumber')}:</strong> <br /><a href="tel:+380953140133">+(380) 95 31 40 133</a></p>
                         <p><strong>{t('ContactsPage.dopNumber')}:</strong> <br /><a href="tel:+380976581954">+(380) 97 65 81 954</a></p>
-                        <p><strong>{t('ContactsPage.mail')}:</strong> <br /><a href="mailto:info.simpledreams@gmail.com">info.simpledreams@gmail.com</a></p>
                     </InfoStyles>
                 </Card>
             </Modal>
