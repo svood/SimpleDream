@@ -21,7 +21,7 @@ import { withTranslation } from '../i18n'
 import { Steps, Button, Row, Col, Card, Alert } from 'antd';
 import MainLayout from '../componenst/layouts/main'
 import styled from 'styled-components'
-
+import TellMe from '../componenst/telMe'
 
 const FormStyle = styled.div`
     width: 100%;
@@ -58,7 +58,7 @@ function Cart({ t }) {
 
 
     useEffect(() => {
-        ReactGA.initialize('UA-163962797-1');
+        ReactGA.initialize('UA-165216978-1');
         if (store.userCity != '') setUserCityValid(true);
         if (store.userFio != '') setFioValid(true);
         if (store.userMailNumber != '') setUserMailNumberValid(true);
@@ -572,7 +572,7 @@ function Cart({ t }) {
 
                 <Dilivery t={t} />
                 <CallMe t={t} />
-
+                <TellMe t={t}/>
             </div>
         </MainLayout>
     )

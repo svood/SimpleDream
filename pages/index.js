@@ -138,7 +138,7 @@ function HomePage({ t, star }) {
     const { Panel } = Collapse;
     const [type, SetType] = useState(4)
     useEffect(() => {
-        ReactGA.initialize('UA-163962797-1');
+        ReactGA.initialize('UA-165216978-1');
     });
 
     const goToCart = () => {
