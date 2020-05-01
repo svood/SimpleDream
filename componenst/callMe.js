@@ -20,17 +20,15 @@ const callMe = ({ t }) => {
                 <Paragraph style={{ textAlign: 'center', fontSize: '19pt', color: '#163a5b' }}>
                     <Text className="fbText">{t("callMe.text")}</Text>
                     <div>
-                        <Tag color="magenta">Комплекты</Tag>
-                        <Tag color="red">Конверты</Tag>
-                        <Tag color="volcano">Пеленки</Tag>
-                        <Tag color="orange">Бортики</Tag>
-                        <Tag color="gold">Понче</Tag>
-                        <Tag color="lime">Полотенца</Tag>
-                        <Tag color="green">Покрывала</Tag>
-                        <Tag color="cyan">Пледы</Tag>
-                        <Tag color="blue">Подушки</Tag>
-                        <Tag color="geekblue">geekblue</Tag>
-                        <Tag color="purple">purple</Tag>
+                        <Tag color="magenta">{t('tags.kits')}</Tag>
+                        <Tag color="red">{t('tags.envelopes')}</Tag>
+                        <Tag color="volcano">{t('tags.diapers')}</Tag>
+                        <Tag color="orange">{t('tags.beads')}</Tag>
+                        <Tag color="gold">{t('tags.ponce')}</Tag>
+                        <Tag color="lime">{t('tags.towels')}</Tag>
+                        <Tag color="green">{t('tags.bedspreads')}</Tag>
+                        <Tag color="cyan">{t('tags.blankets')}</Tag>
+                        <Tag color="blue">{t('tags.pillows')}</Tag>
                     </div>
                 </Paragraph>
                 <Button style={{ margin: '0 auto', display: 'block' }} type="primary" shape="round" icon={<FacebookOutlined />} size={'large'} onClick={e => goToFb()}> {t("callMe.button")} </Button>

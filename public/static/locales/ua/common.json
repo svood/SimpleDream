@@ -128,5 +128,16 @@
         "dopcontacts": "Додаткові контакти",
         "finPhone":"Фінансовый номер",
         "contacts":"Наші контакты"
+    },
+    "tags": {
+        "kits": "Комплекти",
+        "envelopes": "Конверти",
+        "diapers": "Пелюшки",
+        "beads": "Борти",
+        "ponce": "Пончо",
+        "towels": "Рушники",
+        "bedspreads": "Покривала",
+        "blankets": "Пледи",
+        "pillows": "Подушки"
     }
 }

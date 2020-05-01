@@ -121,13 +121,24 @@
         "addressTitle": "Адрес",
         "company": "Компания",
         "dopcontacts": "Дополнительные Контакты",
-        "finPhone":"Финансовый номер",
-        "contacts":"Наши контакты"
+        "finPhone": "Финансовый номер",
+        "contacts": "Наши контакты"
     },
     "sort": {
         "all": "Все",
         "man": "Мальчикам",
         "woman": "Девочкам",
         "unyversal": "Универсальные"
+    },
+    "tags": {
+        "kits": "Комплекты",
+        "envelopes": "Конверты",
+        "diapers": "Пеленки",
+        "beads": "Бортики",
+        "ponce": "Понче",
+        "towels": "Полотенца",
+        "bedspreads": "Покрывала",
+        "blankets": "Пледы",
+        "pillows": "Подушки"
     }
 }
