@@ -307,7 +307,8 @@ function Cart({ t }) {
                     textAlign: 'right',
                     display: 'block',
                     background: 'white',
-                    padding: '2%'
+                    padding: '2%',
+                    borderRadius: '50px',
                 }}> <strong> {t("total")}: {totlalPrice()} {t("uah")} </strong> </Col>
 
                 <div>
@@ -357,7 +358,7 @@ function Cart({ t }) {
                 <Row>
                     {store.payType === 2 ?
                         <Col sm={12} style={{ margin: '0 auto', marginBottom: '2em', marginTop: '2em' }}>
-                            <Card>
+                            <Card style={{borderRadius: '50px'}}>
                                 <p className='mb-5' style={{ color: '#214d7b', fontSize: '13pt', fontWeight: '500', textAlign: 'center' }}>{t("CartPage.novaText")}</p>
                                 <Button shape="round" size='lage' style={{ background: '#17b933', color: 'white', display: 'block', margin: '0 auto', marginBottom: '2em', marginTop: '2em' }} color="success" className="m-auto" onClick={e => agreeWithNovaPay()} >{t("CartPage.agree")}</Button>
                             </Card>
@@ -420,7 +421,7 @@ function Cart({ t }) {
 
 
                 {currentStep === 0 ? <Row style={{
-                    background: 'url(https://wow-journal.ru/wp-content/uploads/2019/04/mozhno-li-perelyubit-rebenka-posledstviya-vo-vzrosloj-zhizni1.png)',
+                    background: 'url(/images/mozhno.png)',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: '97% 30%',
                 }}>
@@ -439,12 +440,19 @@ function Cart({ t }) {
                         borderColor: '#d3ffdd',
                     }}>
                         <FormStyle style={{
-                        background: 'url(https://lh3.googleusercontent.com/proxy/t91i5Sc8yeMVMehPx1H2L-Z6KN3JU2HD5yszAblWv7tolh8W92JP8OTHUbdixx9unegRSTLVIIz4JJJhblFiVQDljtW50o5oe1mot8KFpCfC)',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: '0% 30%',
-                    }}>
+                            background: 'url(/images/mozhno.png)',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: '0% 30%',
+                        }}>
                             <Row gutter={{ sm: 0, md: 16 }} >
-                                <Col sm={24} md={12} className="formContainer" style={{ margin: '4em auto' }} >
+                                <Col sm={24} md={12} className="formContainer" style={{
+
+                                    margin: '4em auto 0 auto',
+                                    background: 'white',
+                                    borderRadius: '53px',
+                                    padding: '1em',
+
+                                }} >
                                     <h1 style={{
                                         fontSize: '19px',
                                         textAlign: 'center',
